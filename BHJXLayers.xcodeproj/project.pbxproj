@@ -16,6 +16,9 @@
 		81A80D7C19EB251700E18FBC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A80D7B19EB251700E18FBC /* Images.xcassets */; };
 		81A80D7F19EB251700E18FBC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A80D7D19EB251700E18FBC /* LaunchScreen.xib */; };
 		81A80D8B19EB251700E18FBC /* BHJXLayersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A80D8A19EB251700E18FBC /* BHJXLayersTests.m */; };
+		E8DE89F119EB2BB200700061 /* Boulder.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DE89EE19EB2BB200700061 /* Boulder.png */; };
+		E8DE89F219EB2BB200700061 /* LavaBoulder.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DE89EF19EB2BB200700061 /* LavaBoulder.png */; };
+		E8DE89F519EB2CA600700061 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DE89F419EB2CA600700061 /* Player.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		81A80D8419EB251700E18FBC /* BHJXLayersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BHJXLayersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A80D8919EB251700E18FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81A80D8A19EB251700E18FBC /* BHJXLayersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHJXLayersTests.m; sourceTree = "<group>"; };
+		E8DE89EE19EB2BB200700061 /* Boulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Boulder.png; sourceTree = "<group>"; };
+		E8DE89EF19EB2BB200700061 /* LavaBoulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LavaBoulder.png; sourceTree = "<group>"; };
+		E8DE89F419EB2CA600700061 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,7 @@
 				81A80D7519EB251700E18FBC /* GameViewController.h */,
 				81A80D7619EB251700E18FBC /* GameViewController.m */,
 				81A80D7819EB251700E18FBC /* Main.storyboard */,
+				E8DE89ED19EB2BB200700061 /* Images */,
 				81A80D7B19EB251700E18FBC /* Images.xcassets */,
 				81A80D7D19EB251700E18FBC /* LaunchScreen.xib */,
 				81A80D6919EB251700E18FBC /* Supporting Files */,
@@ -125,6 +132,16 @@
 				81A80D8919EB251700E18FBC /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E8DE89ED19EB2BB200700061 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E8DE89EE19EB2BB200700061 /* Boulder.png */,
+				E8DE89EF19EB2BB200700061 /* LavaBoulder.png */,
+				E8DE89F419EB2CA600700061 /* Player.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,7 +225,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				81A80D7F19EB251700E18FBC /* LaunchScreen.xib in Resources */,
+				E8DE89F219EB2BB200700061 /* LavaBoulder.png in Resources */,
+				E8DE89F519EB2CA600700061 /* Player.png in Resources */,
 				81A80D7C19EB251700E18FBC /* Images.xcassets in Resources */,
+				E8DE89F119EB2BB200700061 /* Boulder.png in Resources */,
 				81A80D7419EB251700E18FBC /* GameScene.sks in Resources */,
 				81A80D7A19EB251700E18FBC /* Main.storyboard in Resources */,
 			);
@@ -424,6 +444,7 @@
 				81A80D9019EB251700E18FBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		81A80D9119EB251700E18FBC /* Build configuration list for PBXNativeTarget "BHJXLayersTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +453,7 @@
 				81A80D9319EB251700E18FBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
