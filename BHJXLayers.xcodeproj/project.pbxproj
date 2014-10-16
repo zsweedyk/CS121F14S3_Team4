@@ -6,21 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		81A80D6C19EB251700E18FBC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A80D6B19EB251700E18FBC /* main.m */; };
-		81A80D6F19EB251700E18FBC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A80D6E19EB251700E18FBC /* AppDelegate.m */; };
-		81A80D7219EB251700E18FBC /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A80D7119EB251700E18FBC /* GameScene.m */; };
-		81A80D7419EB251700E18FBC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 81A80D7319EB251700E18FBC /* GameScene.sks */; };
-		81A80D7719EB251700E18FBC /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A80D7619EB251700E18FBC /* GameViewController.m */; };
-		81A80D7A19EB251700E18FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A80D7819EB251700E18FBC /* Main.storyboard */; };
-		81A80D7C19EB251700E18FBC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A80D7B19EB251700E18FBC /* Images.xcassets */; };
-		81A80D7F19EB251700E18FBC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A80D7D19EB251700E18FBC /* LaunchScreen.xib */; };
-		81A80D8B19EB251700E18FBC /* BHJXLayersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A80D8A19EB251700E18FBC /* BHJXLayersTests.m */; };
-		E8DE89F119EB2BB200700061 /* Boulder.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DE89EE19EB2BB200700061 /* Boulder.png */; };
-		E8DE89F219EB2BB200700061 /* LavaBoulder.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DE89EF19EB2BB200700061 /* LavaBoulder.png */; };
-		E8DE89F519EB2CA600700061 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DE89F419EB2CA600700061 /* Player.png */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		81A80D8519EB251700E18FBC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -32,25 +17,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		81A80D6619EB251700E18FBC /* BHJXLayers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BHJXLayers.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		81A80D6A19EB251700E18FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		81A80D6B19EB251700E18FBC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		81A80D6D19EB251700E18FBC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		81A80D6E19EB251700E18FBC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		81A80D7019EB251700E18FBC /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		81A80D7119EB251700E18FBC /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
-		81A80D7319EB251700E18FBC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		81A80D7519EB251700E18FBC /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		81A80D7619EB251700E18FBC /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		81A80D7919EB251700E18FBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		81A80D7B19EB251700E18FBC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		81A80D7E19EB251700E18FBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		81A80D8419EB251700E18FBC /* BHJXLayersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BHJXLayersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		81A80D8919EB251700E18FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		81A80D8A19EB251700E18FBC /* BHJXLayersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHJXLayersTests.m; sourceTree = "<group>"; };
-		E8DE89EE19EB2BB200700061 /* Boulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Boulder.png; sourceTree = "<group>"; };
-		E8DE89EF19EB2BB200700061 /* LavaBoulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LavaBoulder.png; sourceTree = "<group>"; };
-		E8DE89F419EB2CA600700061 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
+		81A80D6619EB251700E18FBC /* BHJXLayers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BHJXLayers.app; path = "/Users/benleader/Desktop/Desktop/School/Software Development/Game/BHJXLayers/build/Debug-iphoneos/BHJXLayers.app"; sourceTree = "<absolute>"; };
+		81A80D8419EB251700E18FBC /* BHJXLayersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = BHJXLayersTests.xctest; path = "/Users/benleader/Desktop/Desktop/School/Software Development/Game/BHJXLayers/build/Debug-iphoneos/BHJXLayersTests.xctest"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,74 +42,7 @@
 		81A80D5D19EB251700E18FBC = {
 			isa = PBXGroup;
 			children = (
-				81A80D6819EB251700E18FBC /* BHJXLayers */,
-				81A80D8719EB251700E18FBC /* BHJXLayersTests */,
-				81A80D6719EB251700E18FBC /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		81A80D6719EB251700E18FBC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				81A80D6619EB251700E18FBC /* BHJXLayers.app */,
-				81A80D8419EB251700E18FBC /* BHJXLayersTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		81A80D6819EB251700E18FBC /* BHJXLayers */ = {
-			isa = PBXGroup;
-			children = (
-				81A80D6D19EB251700E18FBC /* AppDelegate.h */,
-				81A80D6E19EB251700E18FBC /* AppDelegate.m */,
-				81A80D7019EB251700E18FBC /* GameScene.h */,
-				81A80D7119EB251700E18FBC /* GameScene.m */,
-				81A80D7319EB251700E18FBC /* GameScene.sks */,
-				81A80D7519EB251700E18FBC /* GameViewController.h */,
-				81A80D7619EB251700E18FBC /* GameViewController.m */,
-				81A80D7819EB251700E18FBC /* Main.storyboard */,
-				E8DE89ED19EB2BB200700061 /* Images */,
-				81A80D7B19EB251700E18FBC /* Images.xcassets */,
-				81A80D7D19EB251700E18FBC /* LaunchScreen.xib */,
-				81A80D6919EB251700E18FBC /* Supporting Files */,
-			);
-			path = BHJXLayers;
-			sourceTree = "<group>";
-		};
-		81A80D6919EB251700E18FBC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				81A80D6A19EB251700E18FBC /* Info.plist */,
-				81A80D6B19EB251700E18FBC /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		81A80D8719EB251700E18FBC /* BHJXLayersTests */ = {
-			isa = PBXGroup;
-			children = (
-				81A80D8A19EB251700E18FBC /* BHJXLayersTests.m */,
-				81A80D8819EB251700E18FBC /* Supporting Files */,
-			);
-			path = BHJXLayersTests;
-			sourceTree = "<group>";
-		};
-		81A80D8819EB251700E18FBC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				81A80D8919EB251700E18FBC /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E8DE89ED19EB2BB200700061 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				E8DE89EE19EB2BB200700061 /* Boulder.png */,
-				E8DE89EF19EB2BB200700061 /* LavaBoulder.png */,
-				E8DE89F419EB2CA600700061 /* Player.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,7 +110,7 @@
 				Base,
 			);
 			mainGroup = 81A80D5D19EB251700E18FBC;
-			productRefGroup = 81A80D6719EB251700E18FBC /* Products */;
+			productRefGroup = 81A80D5D19EB251700E18FBC;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -224,13 +125,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81A80D7F19EB251700E18FBC /* LaunchScreen.xib in Resources */,
-				E8DE89F219EB2BB200700061 /* LavaBoulder.png in Resources */,
-				E8DE89F519EB2CA600700061 /* Player.png in Resources */,
-				81A80D7C19EB251700E18FBC /* Images.xcassets in Resources */,
-				E8DE89F119EB2BB200700061 /* Boulder.png in Resources */,
-				81A80D7419EB251700E18FBC /* GameScene.sks in Resources */,
-				81A80D7A19EB251700E18FBC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,10 +142,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81A80D7719EB251700E18FBC /* GameViewController.m in Sources */,
-				81A80D6F19EB251700E18FBC /* AppDelegate.m in Sources */,
-				81A80D7219EB251700E18FBC /* GameScene.m in Sources */,
-				81A80D6C19EB251700E18FBC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +149,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81A80D8B19EB251700E18FBC /* BHJXLayersTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,25 +161,6 @@
 			targetProxy = 81A80D8519EB251700E18FBC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		81A80D7819EB251700E18FBC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				81A80D7919EB251700E18FBC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		81A80D7D19EB251700E18FBC /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				81A80D7E19EB251700E18FBC /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		81A80D8C19EB251700E18FBC /* Debug */ = {
