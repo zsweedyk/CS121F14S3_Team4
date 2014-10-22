@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */; };
 		E89C501319EB2E7800FF75A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501219EB2E7800FF75A1 /* Foundation.framework */; };
 		E89C501519EB2E7800FF75A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501419EB2E7800FF75A1 /* CoreGraphics.framework */; };
 		E89C501719EB2E7800FF75A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501619EB2E7800FF75A1 /* UIKit.framework */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuViewController.h; sourceTree = "<group>"; };
+		E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuViewController.m; sourceTree = "<group>"; };
 		E89C500F19EB2E7800FF75A1 /* Layers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Layers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C501219EB2E7800FF75A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E89C501419EB2E7800FF75A1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,6 +139,8 @@
 				E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */,
 				E89C502C19EB2E7800FF75A1 /* BHJXMyScene.h */,
 				E89C502D19EB2E7800FF75A1 /* BHJXMyScene.m */,
+				E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */,
+				E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */,
 				E89C502F19EB2E7800FF75A1 /* Spaceship.png */,
 				E89C504E19EB2E9F00FF75A1 /* Images */,
 				E89C503119EB2E7800FF75A1 /* Images.xcassets */,
@@ -290,6 +295,7 @@
 				E89C502E19EB2E7800FF75A1 /* BHJXMyScene.m in Sources */,
 				E89C502519EB2E7800FF75A1 /* BHJXAppDelegate.m in Sources */,
 				E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */,
+				E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */,
 				E89C502119EB2E7800FF75A1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
