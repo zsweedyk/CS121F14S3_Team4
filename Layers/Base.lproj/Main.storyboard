@@ -7,6 +7,7 @@
         <!--Start Menu View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
                 <viewController id="BV1-FR-VrT" customClass="BHJXStartMenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TvN-0d-DFh"/>
@@ -16,14 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZK-z6-gC7">
-                                <rect key="frame" x="351" y="462" width="149" height="99"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugH-Up-a9z">
+                                <rect key="frame" x="361" y="497" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Survival!">
+                                <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2XM-hf-LYY" kind="modal" id="B6H-c6-xHT"/>
+                                    <segue destination="2XM-hf-LYY" kind="modal" id="vMc-ai-WhK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -31,7 +32,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="7Eq-JF-hbH"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="802" y="-247"/>
         </scene>
@@ -43,7 +43,7 @@
                         <viewControllerLayoutGuide type="top" id="9hD-cT-8N6"/>
                         <viewControllerLayoutGuide type="bottom" id="ZbW-Qx-5iz"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Gki-hJ-g7d">
+                    <view key="view" contentMode="scaleToFill" id="Gki-hJ-g7d" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

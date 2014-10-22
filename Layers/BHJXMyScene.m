@@ -11,8 +11,6 @@
 #define kNumBoulders 10
 #define kNumLavaBoulders 10
 
-
-
 typedef enum {
     kEndReasonLose
 } EndReason;
