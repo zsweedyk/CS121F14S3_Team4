@@ -24,7 +24,8 @@ static NSString* playerCategoryName = @"player";
     SKSpriteNode *_lava;
     SKSpriteNode *_background1;
     SKSpriteNode *_background2;
-    
+    SKLabelNode *_livesLabel;
+  
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
@@ -88,6 +89,15 @@ static NSString* playerCategoryName = @"player";
         for (SKSpriteNode *boulder in _boulders) {
             boulder.hidden = YES;
         }
+        
+//Setup the lives label
+        _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+        _livesLabel.name = @"livesLabel";
+        _livesLabel.text = [NSString stringWithFormat:@"%d", _lives];
+        _livesLabel.scale = 0.9;
+        _livesLabel.position = CGPointMake(self.frame.size.width/9, self.frame.size.height * 0.9);
+        _livesLabel.fontColor = [SKColor redColor];
+        [self addChild:_livesLabel];
         
 #pragma mark - TBD - Start the actual game
         [self startTheGame];
@@ -177,25 +187,31 @@ static NSString* playerCategoryName = @"player";
         SKAction *moveBoulderActionWithDone = [SKAction sequence:@[moveAction, doneAction ]];
         [boulder runAction:moveBoulderActionWithDone withKey:@"boulderMoving"];
     }
-    //collision detection
-    for (SKSpriteNode *boulder in _boulders) {
-        if (boulder.hidden) {
-            continue;
-        }
-        if ([_player intersectsNode:boulder]) {
-            boulder.hidden = YES;
-            SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
-                                                   [SKAction fadeInWithDuration:0.1]]];
-            SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
-            [_player runAction:blinkForTime];
-            NSLog(@"a hit!");
-            _lives--;
-        }
-    }
     
-    if (_lives <= 0) {
-        NSLog(@"you lose");
-        [self endTheScene:kEndReasonLose];
+    //Update lives label
+    _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
+    
+    //collision detection
+    if (!_gameOver) {
+        for (SKSpriteNode *boulder in _boulders) {
+            if (boulder.hidden) {
+                continue;
+            }
+            if ([_player intersectsNode:boulder]) {
+                boulder.hidden = YES;
+                SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
+                                                       [SKAction fadeInWithDuration:0.1]]];
+                SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
+                [_player runAction:blinkForTime];
+                NSLog(@"a hit!");
+                _lives--;
+            }
+        }
+        
+        if (_lives <= 0) {
+            NSLog(@"you lose");
+            [self endTheScene:kEndReasonLose];
+        }
     }
 }
 
