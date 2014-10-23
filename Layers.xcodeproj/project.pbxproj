@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */; };
+		E84A26C119F98FFB00040D6E /* Startmenubackground.png in Resources */ = {isa = PBXBuildFile; fileRef = E84A26C019F98FFB00040D6E /* Startmenubackground.png */; };
 		E89C501319EB2E7800FF75A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501219EB2E7800FF75A1 /* Foundation.framework */; };
 		E89C501519EB2E7800FF75A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501419EB2E7800FF75A1 /* CoreGraphics.framework */; };
 		E89C501719EB2E7800FF75A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501619EB2E7800FF75A1 /* UIKit.framework */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuViewController.h; sourceTree = "<group>"; };
 		E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuViewController.m; sourceTree = "<group>"; };
+		E84A26C019F98FFB00040D6E /* Startmenubackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Startmenubackground.png; sourceTree = "<group>"; };
 		E89C500F19EB2E7800FF75A1 /* Layers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Layers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C501219EB2E7800FF75A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E89C501419EB2E7800FF75A1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -182,9 +184,10 @@
 			isa = PBXGroup;
 			children = (
 				E89C504F19EB2E9F00FF75A1 /* Boulder.png */,
+				E84A26C019F98FFB00040D6E /* Startmenubackground.png */,
 				E89C505019EB2E9F00FF75A1 /* LavaBoulder.png */,
-				E89C505919EB334B00FF75A1 /* Volcanobackground.png */,
 				E89C505219EB2E9F00FF75A1 /* Player.png */,
+				E89C505919EB334B00FF75A1 /* Volcanobackground.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				E89C503019EB2E7800FF75A1 /* Spaceship.png in Resources */,
 				E89C505A19EB334B00FF75A1 /* Volcanobackground.png in Resources */,
 				E89C502819EB2E7800FF75A1 /* Main.storyboard in Resources */,
+				E84A26C119F98FFB00040D6E /* Startmenubackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
