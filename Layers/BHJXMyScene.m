@@ -25,12 +25,14 @@ static NSString* playerCategoryName = @"player";
     SKSpriteNode *_background1;
     SKSpriteNode *_background2;
     SKLabelNode *_livesLabel;
+    SKLabelNode *_scoreLabel;
   
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
     
     int _lives;
+    int _score;
     
     bool _gameOver;
 }
@@ -58,11 +60,8 @@ static NSString* playerCategoryName = @"player";
         //3
         self.backgroundColor = [SKColor blackColor];
         
-#pragma mark - TBD - Game Backgrounds
         
-#pragma mark - Setup Sprite for the ship
-        //Create space sprite, setup position on left edge centered on the screen, and add to Scene
-        //4
+        //Create player and place at bottom of screen
         _player = [[SKSpriteNode alloc] initWithImageNamed:@"Player.png"];
         _player.name = playerCategoryName;
         _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
@@ -73,7 +72,7 @@ static NSString* playerCategoryName = @"player";
         // make physicsBody static
         _player.physicsBody.dynamic = NO;
         
-#pragma mark - TBD - Setup the boulders
+        //Setup the boulders
         _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
             SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder.png"];
@@ -90,7 +89,7 @@ static NSString* playerCategoryName = @"player";
             boulder.hidden = YES;
         }
         
-//Setup the lives label
+        //Setup the lives label
         _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
         _livesLabel.name = @"livesLabel";
         _livesLabel.text = [NSString stringWithFormat:@"%d", _lives];
@@ -99,7 +98,16 @@ static NSString* playerCategoryName = @"player";
         _livesLabel.fontColor = [SKColor redColor];
         [self addChild:_livesLabel];
         
-#pragma mark - TBD - Start the actual game
+        //Setup the score label
+        _scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+        _scoreLabel.name = @"scoreLabel";
+        _scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
+        _scoreLabel.scale = 0.9;
+        _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
+        _scoreLabel.fontColor = [SKColor redColor];
+        [self addChild:_scoreLabel];
+        
+        //Start the game
         [self startTheGame];
     }
     return self;
@@ -108,6 +116,7 @@ static NSString* playerCategoryName = @"player";
 - (void)startTheGame
 {
     _lives = 5;
+    _score = 0;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
 }
@@ -188,11 +197,14 @@ static NSString* playerCategoryName = @"player";
         [boulder runAction:moveBoulderActionWithDone withKey:@"boulderMoving"];
     }
     
-    //Update lives label
+    //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
+    _scoreLabel.text = [NSString stringWithFormat:@"Score: %d", _score];
     
     //collision detection
     if (!_gameOver) {
+        //increment score
+        _score++;
         for (SKSpriteNode *boulder in _boulders) {
             if (boulder.hidden) {
                 continue;
