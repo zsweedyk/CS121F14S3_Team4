@@ -8,6 +8,7 @@
 
 #import "BHJXViewController.h"
 #import "BHJXMyScene.h"
+#import "BHJXStartMenuScene.h"
 
 @implementation BHJXViewController
 
@@ -29,7 +30,7 @@
         skView.showsNodeCount = YES;
         
         // Create and configure the scene.
-        BHJXMyScene *theScene = [BHJXMyScene sceneWithSize:skView.bounds.size];
+        BHJXStartMenuScene *theScene = [BHJXStartMenuScene sceneWithSize:skView.bounds.size];
         theScene.scaleMode = SKSceneScaleModeAspectFill;
         
         // Present the scene.

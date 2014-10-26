@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */; };
 		E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A619FD830400529044 /* BHJXGameOverScene.m */; };
+		E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */; };
 		E84A26C119F98FFB00040D6E /* Startmenubackground.png in Resources */ = {isa = PBXBuildFile; fileRef = E84A26C019F98FFB00040D6E /* Startmenubackground.png */; };
 		E89C501319EB2E7800FF75A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501219EB2E7800FF75A1 /* Foundation.framework */; };
 		E89C501519EB2E7800FF75A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501419EB2E7800FF75A1 /* CoreGraphics.framework */; };
@@ -48,6 +49,8 @@
 		E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuViewController.m; sourceTree = "<group>"; };
 		E804E6A519FD830400529044 /* BHJXGameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXGameOverScene.h; sourceTree = "<group>"; };
 		E804E6A619FD830400529044 /* BHJXGameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXGameOverScene.m; sourceTree = "<group>"; };
+		E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuScene.h; sourceTree = "<group>"; };
+		E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuScene.m; sourceTree = "<group>"; };
 		E84A26C019F98FFB00040D6E /* Startmenubackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Startmenubackground.png; sourceTree = "<group>"; };
 		E89C500F19EB2E7800FF75A1 /* Layers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Layers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C501219EB2E7800FF75A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -140,6 +143,8 @@
 				E89C502319EB2E7800FF75A1 /* BHJXAppDelegate.h */,
 				E89C502419EB2E7800FF75A1 /* BHJXAppDelegate.m */,
 				E89C502619EB2E7800FF75A1 /* Main.storyboard */,
+				E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */,
+				E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */,
 				E89C502919EB2E7800FF75A1 /* BHJXViewController.h */,
 				E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */,
 				E89C502C19EB2E7800FF75A1 /* BHJXMyScene.h */,
@@ -306,6 +311,7 @@
 				E89C502519EB2E7800FF75A1 /* BHJXAppDelegate.m in Sources */,
 				E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */,
 				E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */,
+				E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */,
 				E89C502119EB2E7800FF75A1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
