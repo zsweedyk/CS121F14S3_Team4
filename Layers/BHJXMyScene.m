@@ -7,6 +7,8 @@
 //
 
 #import "BHJXMyScene.h"
+#import "BHJXStartMenuViewController.h"
+#import "BHJXGameOverScene.h"
 
 #define kNumBoulders 10
 #define kNumLavaBoulders 10
@@ -35,6 +37,8 @@ static NSString* playerCategoryName = @"player";
     int _score;
     
     bool _gameOver;
+    
+    SKScene *_gameOverScene;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -236,24 +240,11 @@ static NSString* playerCategoryName = @"player";
     _player.hidden = YES;
     _gameOver = YES;
     
-    NSString *message;
     if (endReason == kEndReasonLose)
     {
-        message = @"You lost!";
+        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
+        [self.view presentScene:_gameOverScene];
     }
-    
-    SKLabelNode *loseLabel;
-    loseLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
-    loseLabel.name = @"loseLabel";
-    loseLabel.text = @"YOU LOST.";
-    loseLabel.scale = 0.9;
-    loseLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.4);
-    loseLabel.fontColor = [SKColor redColor];
-    [self addChild:loseLabel];
-    
-    SKAction *labelScaleAction = [SKAction scaleTo:1.0 duration:0.5];
-    
-    [loseLabel runAction:labelScaleAction];
 }
 
 
