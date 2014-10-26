@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB319FD9DE10032EBEE /* Layer.caf */; };
+		A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */; };
 		E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */; };
 		E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A619FD830400529044 /* BHJXGameOverScene.m */; };
 		E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A48A9FB319FD9DE10032EBEE /* Layer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Layer.caf; sourceTree = "<group>"; };
+		A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_small.caf; sourceTree = "<group>"; };
 		E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuViewController.h; sourceTree = "<group>"; };
 		E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuViewController.m; sourceTree = "<group>"; };
 		E804E6A519FD830400529044 /* BHJXGameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXGameOverScene.h; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 		E89C501B19EB2E7800FF75A1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */,
+				A48A9FB319FD9DE10032EBEE /* Layer.caf */,
 				E89C501C19EB2E7800FF75A1 /* Layers-Info.plist */,
 				E89C501D19EB2E7800FF75A1 /* InfoPlist.strings */,
 				E89C502019EB2E7800FF75A1 /* main.m */,
@@ -282,8 +288,10 @@
 				E89C501F19EB2E7800FF75A1 /* InfoPlist.strings in Resources */,
 				E89C505419EB2E9F00FF75A1 /* LavaBoulder.png in Resources */,
 				E89C505619EB2E9F00FF75A1 /* Player.png in Resources */,
+				A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */,
 				E89C503219EB2E7800FF75A1 /* Images.xcassets in Resources */,
 				E89C505319EB2E9F00FF75A1 /* Boulder.png in Resources */,
+				A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */,
 				E89C503019EB2E7800FF75A1 /* Spaceship.png in Resources */,
 				E89C505A19EB334B00FF75A1 /* Volcanobackground.png in Resources */,
 				E89C502819EB2E7800FF75A1 /* Main.storyboard in Resources */,

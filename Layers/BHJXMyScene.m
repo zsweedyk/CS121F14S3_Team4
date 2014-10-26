@@ -9,6 +9,7 @@
 #import "BHJXMyScene.h"
 #import "BHJXStartMenuViewController.h"
 #import "BHJXGameOverScene.h"
+@import AVFoundation;
 
 #define kNumBoulders 10
 #define kNumLavaBoulders 10
@@ -39,6 +40,7 @@ static NSString* playerCategoryName = @"player";
     bool _gameOver;
     
     SKScene *_gameOverScene;
+    AVAudioPlayer *_backgroundAudioPlayer;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -110,6 +112,9 @@ static NSString* playerCategoryName = @"player";
         _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
         _scoreLabel.fontColor = [SKColor redColor];
         [self addChild:_scoreLabel];
+      
+        //Play the background music
+        [self startBackgroundMusic];
         
         //Start the game
         [self startTheGame];
@@ -219,6 +224,9 @@ static NSString* playerCategoryName = @"player";
                                                        [SKAction fadeInWithDuration:0.1]]];
                 SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
                 [_player runAction:blinkForTime];
+                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:NO];
+                SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+                [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
                 NSLog(@"a hit!");
                 _lives--;
             }
@@ -245,6 +253,23 @@ static NSString* playerCategoryName = @"player";
         _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
         [self.view presentScene:_gameOverScene];
     }
+}
+
+- (void)startBackgroundMusic
+{
+  NSError *err;
+  NSURL *file = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Layer.caf" ofType:nil]];
+  _backgroundAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:&err];
+  if (err) {
+    NSLog(@"error in audio play %@",[err userInfo]);
+    return;
+  }
+  [_backgroundAudioPlayer prepareToPlay];
+  
+  // this will play the music infinitely
+  _backgroundAudioPlayer.numberOfLoops = -1;
+  [_backgroundAudioPlayer setVolume:1.0];
+  [_backgroundAudioPlayer play];
 }
 
 
