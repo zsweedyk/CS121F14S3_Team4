@@ -7,6 +7,7 @@
 //
 
 #import "BHJXGameOverScene.h"
+#import "BHJXStartMenuScene.h"
 
 @implementation BHJXGameOverScene
 
@@ -27,24 +28,34 @@
         scoreLabel.fontSize = 50;
         scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2);
         [self addChild:scoreLabel];
-        
-        SKLabelNode *startMenuLabel;
-        startMenuLabel = [SKLabelNode labelNodeWithFontNamed:@"TimeNewRomanPSMT"];
-        startMenuLabel.text = @"Back to Menu";
-        startMenuLabel.fontSize = 50;
-        startMenuLabel.position = CGPointMake(self.size.width/2, self.size.height/1.6);
-        [self addChild:startMenuLabel];
+      
+        //Button for getting back to menu
+        NSString * retrymessage;
+        retrymessage = @"Back to Menu";
+        SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"TimeNewRomanPSMT"];
+        retryButton.text = retrymessage;
+        retryButton.fontSize = 50;
+        retryButton.position = CGPointMake(self.size.width/2, self.size.height/1.6);
+         retryButton.name = @"Back to Menu";
+        [self addChild:retryButton];
+
     }
     return self;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *touch in touches) {
-        SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
-        if (n != self && [n.name isEqual: @"startMenuLabel"]) {
-            
-        }
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+
+    if ([node.name isEqualToString:@"Back to Menu"]) {
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+    
+        BHJXStartMenuScene * scene = [BHJXStartMenuScene sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene transition: reveal];
     }
 }
+
 
 @end
