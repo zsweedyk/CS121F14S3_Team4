@@ -7,9 +7,16 @@
 //
 
 #import "BHJXMyScene.h"
+#import "BHJXStartMenuViewController.h"
+#import "BHJXGameOverScene.h"
+@import AVFoundation;
 
 #define kNumBoulders 10
 #define kNumLavaBoulders 10
+
+typedef enum {
+    kEndReasonLose
+} EndReason;
 
 static NSString* playerCategoryName = @"player";
 
@@ -20,10 +27,20 @@ static NSString* playerCategoryName = @"player";
     SKSpriteNode *_lava;
     SKSpriteNode *_background1;
     SKSpriteNode *_background2;
-    
+    SKLabelNode *_livesLabel;
+    SKLabelNode *_scoreLabel;
+  
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
+    
+    int _lives;
+    int _score;
+    
+    bool _gameOver;
+    
+    SKScene *_gameOverScene;
+    AVAudioPlayer *_backgroundAudioPlayer;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -49,11 +66,8 @@ static NSString* playerCategoryName = @"player";
         //3
         self.backgroundColor = [SKColor blackColor];
         
-#pragma mark - TBD - Game Backgrounds
         
-#pragma mark - Setup Sprite for the ship
-        //Create space sprite, setup position on left edge centered on the screen, and add to Scene
-        //4
+        //Create player and place at bottom of screen
         _player = [[SKSpriteNode alloc] initWithImageNamed:@"Player.png"];
         _player.name = playerCategoryName;
         _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
@@ -64,7 +78,7 @@ static NSString* playerCategoryName = @"player";
         // make physicsBody static
         _player.physicsBody.dynamic = NO;
         
-#pragma mark - TBD - Setup the boulders
+        //Setup the boulders
         _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
             SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder.png"];
@@ -81,14 +95,39 @@ static NSString* playerCategoryName = @"player";
             boulder.hidden = YES;
         }
         
-#pragma mark - TBD - Setup the lava boulders
+        //Setup the lives label
+        _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+        _livesLabel.name = @"livesLabel";
+        _livesLabel.text = [NSString stringWithFormat:@"%d", _lives];
+        _livesLabel.scale = 0.9;
+        _livesLabel.position = CGPointMake(self.frame.size.width/9, self.frame.size.height * 0.9);
+        _livesLabel.fontColor = [SKColor redColor];
+        [self addChild:_livesLabel];
         
-#pragma mark - TBD - Setup the stars to appear as particles
+        //Setup the score label
+        _scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+        _scoreLabel.name = @"scoreLabel";
+        _scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
+        _scoreLabel.scale = 0.9;
+        _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
+        _scoreLabel.fontColor = [SKColor redColor];
+        [self addChild:_scoreLabel];
+      
+        //Play the background music
+        [self startBackgroundMusic];
         
-#pragma mark - TBD - Start the actual game
-        
+        //Start the game
+        [self startTheGame];
     }
     return self;
+}
+
+- (void)startTheGame
+{
+    _lives = 5;
+    _score = 0;
+    _player.hidden = NO;
+    _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
 }
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -107,12 +146,12 @@ static NSString* playerCategoryName = @"player";
         // 3 Get node for paddle
         SKSpriteNode* duck = (SKSpriteNode*)[self childNodeWithName: playerCategoryName];
         // 4 Calculate new position along x for paddle
-        int paddleX = duck.position.x + (touchLocation.x - previousLocation.x);
+        int playerX = duck.position.x + (touchLocation.x - previousLocation.x);
         // 5 Limit x so that the paddle will not leave the screen to left or right
-        paddleX = MAX(paddleX, duck.size.width/2);
-        paddleX = MIN(paddleX, self.size.width - duck.size.width/2);
+        playerX = MAX(playerX, duck.size.width/2);
+        playerX = MIN(playerX, self.size.width - duck.size.width/2);
         // 6 Update position of paddle
-        duck.position = CGPointMake(paddleX, duck.position.y);
+        duck.position = CGPointMake(playerX, duck.position.y);
     }
 }
 
@@ -144,28 +183,94 @@ static NSString* playerCategoryName = @"player";
         float randX = [self randomValueBetween:0.0 andValue:self.frame.size.width];
         float randDuration = [self randomValueBetween:2.0 andValue:10.0];
         
-        SKSpriteNode *asteroid = [_boulders objectAtIndex:_nextBoulder];
+        SKSpriteNode *boulder = [_boulders objectAtIndex:_nextBoulder];
         _nextBoulder++;
         
         if (_nextBoulder >= _boulders.count) {
             _nextBoulder = 0;
         }
         
-        [asteroid removeAllActions];
-        asteroid.position = CGPointMake(randX, self.frame.size.height+asteroid.size.height/2);
-        asteroid.hidden = NO;
+        [boulder removeAllActions];
+        boulder.position = CGPointMake(randX, self.frame.size.height+boulder.size.height/2);
+        boulder.hidden = NO;
         
-        CGPoint location = CGPointMake(randX, -self.frame.size.height-asteroid.size.height);
+        CGPoint location = CGPointMake(randX, -self.frame.size.height-boulder.size.height);
         
         SKAction *moveAction = [SKAction moveTo:location duration:randDuration];
         SKAction *doneAction = [SKAction runBlock:(dispatch_block_t)^() {
             //NSLog(@"Animation Completed");
-            asteroid.hidden = YES;
+            boulder.hidden = YES;
         }];
         
-        SKAction *moveAsteroidActionWithDone = [SKAction sequence:@[moveAction, doneAction ]];
-        [asteroid runAction:moveAsteroidActionWithDone withKey:@"asteroidMoving"];
+        SKAction *moveBoulderActionWithDone = [SKAction sequence:@[moveAction, doneAction ]];
+        [boulder runAction:moveBoulderActionWithDone withKey:@"boulderMoving"];
+    }
+    
+    //Update lives and score labels
+    _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
+    _scoreLabel.text = [NSString stringWithFormat:@"Score: %d", _score];
+    
+    //collision detection
+    if (!_gameOver) {
+        //increment score
+        _score++;
+        for (SKSpriteNode *boulder in _boulders) {
+            if (boulder.hidden) {
+                continue;
+            }
+            if ([_player intersectsNode:boulder]) {
+                boulder.hidden = YES;
+                SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
+                                                       [SKAction fadeInWithDuration:0.1]]];
+                SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
+                [_player runAction:blinkForTime];
+                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:NO];
+                SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+                [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
+                NSLog(@"a hit!");
+                _lives--;
+            }
+        }
+        
+        if (_lives <= 0) {
+            NSLog(@"you lose");
+            [self endTheScene:kEndReasonLose];
+        }
     }
 }
+
+- (void)endTheScene:(EndReason)endReason {
+    if (_gameOver) {
+        return;
+    }
+    
+    [self removeAllActions];
+    _player.hidden = YES;
+    _gameOver = YES;
+    
+    if (endReason == kEndReasonLose)
+    {
+        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
+        [self.view presentScene:_gameOverScene];
+    }
+}
+
+- (void)startBackgroundMusic
+{
+  NSError *err;
+  NSURL *file = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Layer.caf" ofType:nil]];
+  _backgroundAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:&err];
+  if (err) {
+    NSLog(@"error in audio play %@",[err userInfo]);
+    return;
+  }
+  [_backgroundAudioPlayer prepareToPlay];
+  
+  // this will play the music infinitely
+  _backgroundAudioPlayer.numberOfLoops = -1;
+  [_backgroundAudioPlayer setVolume:1.0];
+  [_backgroundAudioPlayer play];
+}
+
 
 @end
