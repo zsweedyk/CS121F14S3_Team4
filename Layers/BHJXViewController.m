@@ -7,7 +7,7 @@
 //
 
 #import "BHJXViewController.h"
-#import "BHJXMyScene.h"
+#import "BHJXLevel1Scene.h"
 #import "BHJXStartMenuScene.h"
 
 @implementation BHJXViewController

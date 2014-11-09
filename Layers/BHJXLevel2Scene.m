@@ -1,18 +1,16 @@
 //
-//  BHJXMyScene.m
+//  BHJXLevel2Scene.m
 //  Layers
 //
-//  Created by Jun Hong Park on 10/12/14.
+//  Created by Jun Hong Park on 11/9/14.
 //  Copyright (c) 2014 BHJX. All rights reserved.
 //
 
-#import "BHJXMyScene.h"
-#import "BHJXStartMenuViewController.h"
+#import "BHJXLevel2Scene.h"
 #import "BHJXGameOverScene.h"
 @import AVFoundation;
 
 #define kNumBoulders 10
-#define kNumLavaBoulders 10
 
 typedef enum {
     kEndReasonLose
@@ -20,16 +18,15 @@ typedef enum {
 
 static NSString* playerCategoryName = @"player";
 
-@implementation BHJXMyScene
+@implementation BHJXLevel2Scene
 {
     SKSpriteNode *_player;
     SKSpriteNode *_boudler;
-    SKSpriteNode *_lava;
     SKSpriteNode *_background1;
     SKSpriteNode *_background2;
     SKLabelNode *_livesLabel;
     SKLabelNode *_scoreLabel;
-  
+    
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
@@ -58,8 +55,6 @@ static NSString* playerCategoryName = @"player";
         _background2.position = CGPointMake(0, _background2.size.height-1);
         [self addChild:_background2];
         
-        
-        
         //2
         NSLog(@"SKScene:initWithSize %f x %f",size.width,size.height);
         
@@ -70,7 +65,7 @@ static NSString* playerCategoryName = @"player";
         //Create player and place at bottom of screen
         _player = [[SKSpriteNode alloc] initWithImageNamed:@"Player.png"];
         _player.name = playerCategoryName;
-        _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
+        _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.9);
         [self addChild:_player];
         _player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_player.frame.size];
         _player.physicsBody.restitution = 0.1f;
@@ -100,7 +95,7 @@ static NSString* playerCategoryName = @"player";
         _livesLabel.name = @"livesLabel";
         _livesLabel.text = [NSString stringWithFormat:@"%d", _lives];
         _livesLabel.scale = 0.9;
-        _livesLabel.position = CGPointMake(self.frame.size.width/9, self.frame.size.height * 0.9);
+        _livesLabel.position = CGPointMake(self.frame.size.width/9, self.frame.size.height * 0.05);
         _livesLabel.fontColor = [SKColor redColor];
         [self addChild:_livesLabel];
         
@@ -109,10 +104,10 @@ static NSString* playerCategoryName = @"player";
         _scoreLabel.name = @"scoreLabel";
         _scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
         _scoreLabel.scale = 0.9;
-        _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
+        _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.05);
         _scoreLabel.fontColor = [SKColor redColor];
         [self addChild:_scoreLabel];
-      
+        
         //Play the background music
         [self startBackgroundMusic];
         
@@ -127,7 +122,7 @@ static NSString* playerCategoryName = @"player";
     _lives = 5;
     _score = 0;
     _player.hidden = NO;
-    _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
+    _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.9);
 }
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -165,13 +160,13 @@ static NSString* playerCategoryName = @"player";
 
 -(void)update:(NSTimeInterval)currentTime {
     //Set the background to be scrolling
-    _background1.position = CGPointMake(_background1.position.x, _background1.position.y-4);
-    _background2.position = CGPointMake(_background2.position.x, _background2.position.y-4);
-    if (_background1.position.y < -_background1.size.height){
-        _background1.position = CGPointMake(_background1.position.x, _background2.position.y + _background2.size.height);
+    _background1.position = CGPointMake(_background1.position.x, _background1.position.y+4);
+    _background2.position = CGPointMake(_background2.position.x, _background2.position.y+4);
+    if (_background1.position.y > _background1.size.height){
+        _background1.position = CGPointMake(_background1.position.x, _background2.position.y - _background2.size.height);
     }
-    if (_background2.position.y < -_background2.size.height) {
-        _background2.position = CGPointMake(_background2.position.x, _background1.position.y + _background1.size.height);
+    if (_background2.position.y > _background2.size.height) {
+        _background2.position = CGPointMake(_background2.position.x, _background1.position.y - _background1.size.height);
     }
     
     //Falling boulders
@@ -191,10 +186,10 @@ static NSString* playerCategoryName = @"player";
         }
         
         [boulder removeAllActions];
-        boulder.position = CGPointMake(randX, self.frame.size.height+boulder.size.height/2);
+        boulder.position = CGPointMake(randX, -self.frame.size.height-boulder.size.height/2);
         boulder.hidden = NO;
         
-        CGPoint location = CGPointMake(randX, -self.frame.size.height-boulder.size.height);
+        CGPoint location = CGPointMake(randX, self.frame.size.height-boulder.size.height);
         
         SKAction *moveAction = [SKAction moveTo:location duration:randDuration];
         SKAction *doneAction = [SKAction runBlock:(dispatch_block_t)^() {
@@ -230,10 +225,10 @@ static NSString* playerCategoryName = @"player";
                 NSLog(@"a hit!");
                 _lives--;
             }
-          
+            
             if (_lives <= 0) {
-              NSLog(@"you lose");
-              [self endTheScene:kEndReasonLose];
+                NSLog(@"you lose");
+                [self endTheScene:kEndReasonLose];
             }
         }
     }
@@ -257,20 +252,22 @@ static NSString* playerCategoryName = @"player";
 
 - (void)startBackgroundMusic
 {
-  NSError *err;
-  NSURL *file = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Layer.caf" ofType:nil]];
-  _backgroundAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:&err];
-  if (err) {
-    NSLog(@"error in audio play %@",[err userInfo]);
-    return;
-  }
-  [_backgroundAudioPlayer prepareToPlay];
-  
-  // this will play the music infinitely
-  _backgroundAudioPlayer.numberOfLoops = -1;
-  [_backgroundAudioPlayer setVolume:1.0];
-  [_backgroundAudioPlayer play];
+    NSError *err;
+    NSURL *file = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Layer.caf" ofType:nil]];
+    _backgroundAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:&err];
+    if (err) {
+        NSLog(@"error in audio play %@",[err userInfo]);
+        return;
+    }
+    [_backgroundAudioPlayer prepareToPlay];
+    
+    // this will play the music infinitely
+    _backgroundAudioPlayer.numberOfLoops = -1;
+    [_backgroundAudioPlayer setVolume:1.0];
+    [_backgroundAudioPlayer play];
 }
+
+
 
 
 @end
