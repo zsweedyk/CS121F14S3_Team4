@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */; };
+		81BFAEBB1A10142200058249 /* Intro1Scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBA1A10142200058249 /* Intro1Scene1.png */; };
 		A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB319FD9DE10032EBEE /* Layer.caf */; };
 		A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */; };
 		E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */; };
@@ -47,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81BFAEB71A1005D300058249 /* BHJXIntroLevel1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BHJXIntroLevel1.h; path = ../BHJXIntroLevel1.h; sourceTree = "<group>"; };
+		81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BHJXIntroLevel1.m; path = ../BHJXIntroLevel1.m; sourceTree = "<group>"; };
+		81BFAEBA1A10142200058249 /* Intro1Scene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Intro1Scene1.png; path = ../Intro1Scene1.png; sourceTree = "<group>"; };
 		A48A9FB319FD9DE10032EBEE /* Layer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Layer.caf; sourceTree = "<group>"; };
 		A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_small.caf; sourceTree = "<group>"; };
 		E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuViewController.h; sourceTree = "<group>"; };
@@ -157,6 +162,8 @@
 				E804E6A619FD830400529044 /* BHJXGameOverScene.m */,
 				E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */,
 				E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */,
+				81BFAEB71A1005D300058249 /* BHJXIntroLevel1.h */,
+				81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */,
 				E89C502F19EB2E7800FF75A1 /* Spaceship.png */,
 				E89C504E19EB2E9F00FF75A1 /* Images */,
 				E89C503119EB2E7800FF75A1 /* Images.xcassets */,
@@ -199,6 +206,7 @@
 		E89C504E19EB2E9F00FF75A1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				81BFAEBA1A10142200058249 /* Intro1Scene1.png */,
 				E89C504F19EB2E9F00FF75A1 /* Boulder.png */,
 				E84A26C019F98FFB00040D6E /* Startmenubackground.png */,
 				E89C505019EB2E9F00FF75A1 /* LavaBoulder.png */,
@@ -296,6 +304,7 @@
 				E89C505A19EB334B00FF75A1 /* Volcanobackground.png in Resources */,
 				E89C502819EB2E7800FF75A1 /* Main.storyboard in Resources */,
 				E84A26C119F98FFB00040D6E /* Startmenubackground.png in Resources */,
+				81BFAEBB1A10142200058249 /* Intro1Scene1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +328,7 @@
 				E89C502519EB2E7800FF75A1 /* BHJXAppDelegate.m in Sources */,
 				E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */,
 				E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */,
+				81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */,
 				E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */,
 				E89C502119EB2E7800FF75A1 /* main.m in Sources */,
 			);
