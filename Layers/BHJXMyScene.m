@@ -224,17 +224,17 @@ static NSString* playerCategoryName = @"player";
                                                        [SKAction fadeInWithDuration:0.1]]];
                 SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
                 [_player runAction:blinkForTime];
-                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:NO];
+                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
                 [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
                 NSLog(@"a hit!");
                 _lives--;
             }
-        }
-        
-        if (_lives <= 0) {
-            NSLog(@"you lose");
-            [self endTheScene:kEndReasonLose];
+          
+            if (_lives <= 0) {
+              NSLog(@"you lose");
+              [self endTheScene:kEndReasonLose];
+            }
         }
     }
 }
