@@ -8,6 +8,7 @@
 
 #import "BHJXViewController.h"
 #import "BHJXMyScene.h"
+#import "BHJXStartMenuScene.h"
 
 @implementation BHJXViewController
 
@@ -22,12 +23,14 @@
     // Configure the view.
     // Configure the view after it has been sized for the correct orientation.
     SKView *skView = (SKView *)self.view;
+    
+    
     if (!skView.scene) {
         skView.showsFPS = YES;
         skView.showsNodeCount = YES;
         
         // Create and configure the scene.
-        BHJXMyScene *theScene = [BHJXMyScene sceneWithSize:skView.bounds.size];
+        BHJXStartMenuScene *theScene = [BHJXStartMenuScene sceneWithSize:skView.bounds.size];
         theScene.scaleMode = SKSceneScaleModeAspectFill;
         
         // Present the scene.
