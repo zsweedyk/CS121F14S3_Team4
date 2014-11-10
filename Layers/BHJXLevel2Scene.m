@@ -65,7 +65,7 @@ static NSString* playerCategoryName = @"player";
         //Create player and place at bottom of screen
         _player = [[SKSpriteNode alloc] initWithImageNamed:@"Player.png"];
         _player.name = playerCategoryName;
-        _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.9);
+        _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.84);
         [self addChild:_player];
         _player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_player.frame.size];
         _player.physicsBody.restitution = 0.1f;
@@ -122,7 +122,7 @@ static NSString* playerCategoryName = @"player";
     _lives = 5;
     _score = 0;
     _player.hidden = NO;
-    _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.9);
+    _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.84);
 }
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -176,7 +176,7 @@ static NSString* playerCategoryName = @"player";
         _nextBoulderSpawn = randSecs + curTime;
         
         float randX = [self randomValueBetween:0.0 andValue:self.frame.size.width];
-        float randDuration = [self randomValueBetween:2.0 andValue:10.0];
+        float randDuration = [self randomValueBetween:1.0 andValue:6.0];
         
         SKSpriteNode *boulder = [_boulders objectAtIndex:_nextBoulder];
         _nextBoulder++;
