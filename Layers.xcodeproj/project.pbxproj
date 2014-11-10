@@ -20,6 +20,7 @@
 		E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */; };
 		E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A619FD830400529044 /* BHJXGameOverScene.m */; };
 		E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */; };
+		E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */; };
 		E84A26C119F98FFB00040D6E /* Startmenubackground.png in Resources */ = {isa = PBXBuildFile; fileRef = E84A26C019F98FFB00040D6E /* Startmenubackground.png */; };
 		E89C501319EB2E7800FF75A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501219EB2E7800FF75A1 /* Foundation.framework */; };
 		E89C501519EB2E7800FF75A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501419EB2E7800FF75A1 /* CoreGraphics.framework */; };
@@ -30,7 +31,7 @@
 		E89C502519EB2E7800FF75A1 /* BHJXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E89C502419EB2E7800FF75A1 /* BHJXAppDelegate.m */; };
 		E89C502819EB2E7800FF75A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E89C502619EB2E7800FF75A1 /* Main.storyboard */; };
 		E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */; };
-		E89C502E19EB2E7800FF75A1 /* BHJXMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E89C502D19EB2E7800FF75A1 /* BHJXMyScene.m */; };
+		E89C502E19EB2E7800FF75A1 /* BHJXLevel1Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = E89C502D19EB2E7800FF75A1 /* BHJXLevel1Scene.m */; };
 		E89C503019EB2E7800FF75A1 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = E89C502F19EB2E7800FF75A1 /* Spaceship.png */; };
 		E89C503219EB2E7800FF75A1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E89C503119EB2E7800FF75A1 /* Images.xcassets */; };
 		E89C503919EB2E7800FF75A1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C503819EB2E7800FF75A1 /* XCTest.framework */; };
@@ -72,6 +73,8 @@
 		E804E6A619FD830400529044 /* BHJXGameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXGameOverScene.m; sourceTree = "<group>"; };
 		E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuScene.h; sourceTree = "<group>"; };
 		E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuScene.m; sourceTree = "<group>"; };
+		E81E2ADB1A102B0600733BC2 /* BHJXLevel2Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXLevel2Scene.h; sourceTree = "<group>"; };
+		E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXLevel2Scene.m; sourceTree = "<group>"; };
 		E84A26C019F98FFB00040D6E /* Startmenubackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Startmenubackground.png; sourceTree = "<group>"; };
 		E89C500F19EB2E7800FF75A1 /* Layers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Layers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C501219EB2E7800FF75A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,8 +90,8 @@
 		E89C502719EB2E7800FF75A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E89C502919EB2E7800FF75A1 /* BHJXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHJXViewController.h; sourceTree = "<group>"; };
 		E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHJXViewController.m; sourceTree = "<group>"; };
-		E89C502C19EB2E7800FF75A1 /* BHJXMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHJXMyScene.h; sourceTree = "<group>"; };
-		E89C502D19EB2E7800FF75A1 /* BHJXMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHJXMyScene.m; sourceTree = "<group>"; };
+		E89C502C19EB2E7800FF75A1 /* BHJXLevel1Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHJXLevel1Scene.h; sourceTree = "<group>"; };
+		E89C502D19EB2E7800FF75A1 /* BHJXLevel1Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHJXLevel1Scene.m; sourceTree = "<group>"; };
 		E89C502F19EB2E7800FF75A1 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		E89C503119EB2E7800FF75A1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E89C503719EB2E7800FF75A1 /* LayersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LayersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,8 +171,10 @@
 				E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */,
 				E89C502919EB2E7800FF75A1 /* BHJXViewController.h */,
 				E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */,
-				E89C502C19EB2E7800FF75A1 /* BHJXMyScene.h */,
-				E89C502D19EB2E7800FF75A1 /* BHJXMyScene.m */,
+				E89C502C19EB2E7800FF75A1 /* BHJXLevel1Scene.h */,
+				E89C502D19EB2E7800FF75A1 /* BHJXLevel1Scene.m */,
+				E81E2ADB1A102B0600733BC2 /* BHJXLevel2Scene.h */,
+				E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */,
 				E804E6A519FD830400529044 /* BHJXGameOverScene.h */,
 				E804E6A619FD830400529044 /* BHJXGameOverScene.m */,
 				E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */,
@@ -348,10 +353,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */,
-				E89C502E19EB2E7800FF75A1 /* BHJXMyScene.m in Sources */,
+				E89C502E19EB2E7800FF75A1 /* BHJXLevel1Scene.m in Sources */,
 				E89C502519EB2E7800FF75A1 /* BHJXAppDelegate.m in Sources */,
 				E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */,
 				E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */,
+				E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */,
 				81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */,
 				E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */,
 				E89C502119EB2E7800FF75A1 /* main.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "BHJXIntroLevel1.h"
-#import "BHJXMyScene.h"
+#import "BHJXLevel2Scene.h"
 
 @implementation BHJXIntroLevel1
 
@@ -108,7 +108,7 @@ int _countTouches;
         } else {
             SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
             
-            BHJXMyScene * scene = [BHJXMyScene sceneWithSize:self.view.bounds.size];
+            BHJXLevel2Scene * scene = [BHJXLevel2Scene sceneWithSize:self.view.bounds.size];
             scene.scaleMode = SKSceneScaleModeAspectFill;
             [self.view presentScene:scene transition: reveal];
         }
