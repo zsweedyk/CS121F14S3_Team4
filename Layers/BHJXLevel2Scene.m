@@ -189,7 +189,7 @@ static NSString* playerCategoryName = @"player";
         boulder.position = CGPointMake(randX, -self.frame.size.height-boulder.size.height/2);
         boulder.hidden = NO;
         
-        CGPoint location = CGPointMake(randX, self.frame.size.height-boulder.size.height);
+        CGPoint location = CGPointMake(randX, self.frame.size.height);
         
         SKAction *moveAction = [SKAction moveTo:location duration:randDuration];
         SKAction *doneAction = [SKAction runBlock:(dispatch_block_t)^() {
