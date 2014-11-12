@@ -12,6 +12,7 @@
 @import AVFoundation;
 
 #define kNumBoulders 10
+#define kNumImages 2
 
 typedef enum {
     kEndReasonLose
@@ -22,13 +23,14 @@ static NSString* playerCategoryName = @"player";
 @implementation BHJXLevel1Scene
 {
     SKSpriteNode *_player;
-    SKSpriteNode *_boudler;
     SKSpriteNode *_background1;
     SKSpriteNode *_background2;
     SKLabelNode *_livesLabel;
     SKLabelNode *_scoreLabel;
   
     NSArray *_playerFlickerFrames;
+    NSArray *_backgroundFlickerFrames;
+    NSArray *_boulderFlickerFrames;
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
@@ -44,15 +46,43 @@ static NSString* playerCategoryName = @"player";
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        /* Setup your scene here */
+        
+        //Setup flickering
+        NSMutableArray *bgFlickerFrames = [NSMutableArray array];
+        SKTextureAtlas *bgAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Volcano"];
+        
+        NSMutableArray *boulderFlickerFrames = [NSMutableArray array];
+        SKTextureAtlas *boulderAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Boulder"];
+        
+        NSMutableArray *playerFlickerFrames = [NSMutableArray array];
+        SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
+        
+        for (int i=1; i <= kNumImages; i++){
+            NSString *textureName = [NSString stringWithFormat:@"VolcanoBackground%d", i];
+            SKTexture *temp = [bgAnimatedAtlas textureNamed:textureName];
+            [bgFlickerFrames addObject:temp];
+            textureName = [NSString stringWithFormat:@"Player%d", i];
+            temp = [playerAnimatedAtlas textureNamed:textureName];
+            [playerFlickerFrames addObject:temp];
+            textureName = [NSString stringWithFormat:@"Boulder%d", i];
+            temp = [boulderAnimatedAtlas textureNamed:textureName];
+            [boulderFlickerFrames addObject:temp];
+        }
+        _playerFlickerFrames = playerFlickerFrames;
+        _backgroundFlickerFrames = bgFlickerFrames;
+        _boulderFlickerFrames = boulderFlickerFrames;
+        
+        SKTexture *temp = _backgroundFlickerFrames[0];
+        
+        
         
         //Initialize scrolling background
-        _background1 = [SKSpriteNode spriteNodeWithImageNamed:@"Volcanobackground.png"];
+        _background1 = [SKSpriteNode spriteNodeWithTexture:temp];
         _background1.anchorPoint = CGPointZero;
         _background1.position = CGPointMake(0, 0);
         [self addChild:_background1];
         
-        _background2 = [SKSpriteNode spriteNodeWithImageNamed:@"Volcanobackground.png"];
+        _background2 = [SKSpriteNode spriteNodeWithTexture:temp];
         _background2.anchorPoint = CGPointZero;
         _background2.position = CGPointMake(0, _background2.size.height-1);
         [self addChild:_background2];
@@ -67,18 +97,8 @@ static NSString* playerCategoryName = @"player";
         
         
         //Create player and place at bottom of screen
-        
-        NSMutableArray *flickerFrames = [NSMutableArray array];
-        SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
-        
-        int numImages = playerAnimatedAtlas.textureNames.count;
-        for (int i=1; i <= numImages; i++){
-            NSString *textureName = [NSString stringWithFormat:@"Player%d", i];
-            SKTexture *temp = [playerAnimatedAtlas textureNamed:textureName];
-            [flickerFrames addObject:temp];
-        }
-        _playerFlickerFrames = flickerFrames;
-        SKTexture *temp = _playerFlickerFrames[0];
+
+        temp = _playerFlickerFrames[0];
         
         _player = [SKSpriteNode spriteNodeWithTexture:temp];
         _player.name = playerCategoryName;
@@ -92,9 +112,11 @@ static NSString* playerCategoryName = @"player";
         _player.physicsBody.dynamic = NO;
         
         //Setup the boulders
+        temp = _boulderFlickerFrames[0];
+        
         _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
-            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder.png"];
+            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithTexture:temp];
             boulder.hidden = YES;
             [boulder setXScale:0.5];
             [boulder setYScale:0.5];
@@ -141,7 +163,7 @@ static NSString* playerCategoryName = @"player";
     _score = 0;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
-    [self flickeringPlayer];
+    [self flickering];
 }
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -286,7 +308,7 @@ static NSString* playerCategoryName = @"player";
   [_backgroundAudioPlayer play];
 }
 
--(void)flickeringPlayer
+-(void)flickering
 {
     //This is our general runAction method to make our player flicker.
     [_player runAction:[SKAction repeatActionForever:
@@ -294,6 +316,25 @@ static NSString* playerCategoryName = @"player";
                                        timePerFrame:0.1f
                                              resize:NO
                                             restore:YES]] withKey:@"flickeringInPlacePlayer"];
+    [_background1 runAction:[SKAction repeatActionForever:
+                        [SKAction animateWithTextures:_backgroundFlickerFrames
+                                         timePerFrame:0.1f
+                                               resize:NO
+                                              restore:YES]] withKey:@"flickeringInPlaceBackground"];
+    [_background2 runAction:[SKAction repeatActionForever:
+                             [SKAction animateWithTextures:_backgroundFlickerFrames
+                                              timePerFrame:0.1f
+                                                    resize:NO
+                                                   restore:YES]] withKey:@"flickeringInPlaceBackground"];
+    
+    for (int i=0; i<kNumBoulders; i++) {
+        [_boulders[i] runAction:[SKAction repeatActionForever:
+                                 [SKAction animateWithTextures:_boulderFlickerFrames
+                                                  timePerFrame:0.1f
+                                                        resize:NO
+                                                       restore:YES]] withKey:@"flickeringInPlaceBoulders"];
+    }
+    
     return;
 }
 
