@@ -28,6 +28,7 @@ static NSString* playerCategoryName = @"player";
     SKLabelNode *_livesLabel;
     SKLabelNode *_scoreLabel;
   
+    NSArray *_playerFlickerFrames;
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
@@ -66,10 +67,24 @@ static NSString* playerCategoryName = @"player";
         
         
         //Create player and place at bottom of screen
-        _player = [[SKSpriteNode alloc] initWithImageNamed:@"Player.png"];
+        
+        NSMutableArray *flickerFrames = [NSMutableArray array];
+        SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
+        
+        int numImages = playerAnimatedAtlas.textureNames.count;
+        for (int i=1; i <= numImages; i++){
+            NSString *textureName = [NSString stringWithFormat:@"Player%d", i];
+            SKTexture *temp = [playerAnimatedAtlas textureNamed:textureName];
+            [flickerFrames addObject:temp];
+        }
+        _playerFlickerFrames = flickerFrames;
+        SKTexture *temp = _playerFlickerFrames[0];
+        
+        _player = [SKSpriteNode spriteNodeWithTexture:temp];
         _player.name = playerCategoryName;
         _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
         [self addChild:_player];
+        
         _player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_player.frame.size];
         _player.physicsBody.restitution = 0.1f;
         _player.physicsBody.friction = 0.4f;
@@ -126,6 +141,7 @@ static NSString* playerCategoryName = @"player";
     _score = 0;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
+    [self flickeringPlayer];
 }
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -270,5 +286,15 @@ static NSString* playerCategoryName = @"player";
   [_backgroundAudioPlayer play];
 }
 
+-(void)flickeringPlayer
+{
+    //This is our general runAction method to make our player flicker.
+    [_player runAction:[SKAction repeatActionForever:
+                      [SKAction animateWithTextures:_playerFlickerFrames
+                                       timePerFrame:0.1f
+                                             resize:NO
+                                            restore:YES]] withKey:@"flickeringInPlacePlayer"];
+    return;
+}
 
 @end
