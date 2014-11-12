@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8105C7E51A12E76D006C811C /* Player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8105C7E41A12E76D006C811C /* Player.atlas */; };
+		8105C7E91A1313C2006C811C /* Volcanobackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8105C7E81A1313C2006C811C /* Volcanobackground.png */; };
+		8105C7EB1A1325E7006C811C /* Volcano.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8105C7EA1A1325E7006C811C /* Volcano.atlas */; };
+		8105C7ED1A132F47006C811C /* Boulder.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8105C7EC1A132F47006C811C /* Boulder.atlas */; };
 		81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */; };
 		81BFAEBD1A10208C00058249 /* Intro1Scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBC1A10208C00058249 /* Intro1Scene1.png */; };
 		81BFAEC01A102B0100058249 /* Intro1Scene3.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBE1A102B0100058249 /* Intro1Scene3.png */; };
@@ -44,7 +47,6 @@
 		E89C505319EB2E9F00FF75A1 /* Boulder.png in Resources */ = {isa = PBXBuildFile; fileRef = E89C504F19EB2E9F00FF75A1 /* Boulder.png */; };
 		E89C505419EB2E9F00FF75A1 /* LavaBoulder.png in Resources */ = {isa = PBXBuildFile; fileRef = E89C505019EB2E9F00FF75A1 /* LavaBoulder.png */; };
 		E89C505619EB2E9F00FF75A1 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = E89C505219EB2E9F00FF75A1 /* Player.png */; };
-		E89C505A19EB334B00FF75A1 /* Volcanobackground.png in Resources */ = {isa = PBXBuildFile; fileRef = E89C505919EB334B00FF75A1 /* Volcanobackground.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,9 @@
 
 /* Begin PBXFileReference section */
 		8105C7E41A12E76D006C811C /* Player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = Player.atlas; path = ../Player.atlas; sourceTree = "<group>"; };
+		8105C7E81A1313C2006C811C /* Volcanobackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Volcanobackground.png; sourceTree = "<group>"; };
+		8105C7EA1A1325E7006C811C /* Volcano.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Volcano.atlas; sourceTree = "<group>"; };
+		8105C7EC1A132F47006C811C /* Boulder.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Boulder.atlas; sourceTree = "<group>"; };
 		81BFAEB71A1005D300058249 /* BHJXIntroLevel1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BHJXIntroLevel1.h; path = ../BHJXIntroLevel1.h; sourceTree = "<group>"; };
 		81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BHJXIntroLevel1.m; path = ../BHJXIntroLevel1.m; sourceTree = "<group>"; };
 		81BFAEBC1A10208C00058249 /* Intro1Scene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Intro1Scene1.png; sourceTree = "<group>"; };
@@ -107,7 +112,6 @@
 		E89C504F19EB2E9F00FF75A1 /* Boulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Boulder.png; sourceTree = "<group>"; };
 		E89C505019EB2E9F00FF75A1 /* LavaBoulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LavaBoulder.png; sourceTree = "<group>"; };
 		E89C505219EB2E9F00FF75A1 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
-		E89C505919EB334B00FF75A1 /* Volcanobackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Volcanobackground.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +234,9 @@
 		E89C504E19EB2E9F00FF75A1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8105C7EC1A132F47006C811C /* Boulder.atlas */,
+				8105C7EA1A1325E7006C811C /* Volcano.atlas */,
+				8105C7E81A1313C2006C811C /* Volcanobackground.png */,
 				8105C7E41A12E76D006C811C /* Player.atlas */,
 				81BFAEC21A10326500058249 /* Intro1Scene2.png */,
 				81BFAEC31A10326500058249 /* Intro1Scene7.png */,
@@ -242,7 +249,6 @@
 				E84A26C019F98FFB00040D6E /* Startmenubackground.png */,
 				E89C505019EB2E9F00FF75A1 /* LavaBoulder.png */,
 				E89C505219EB2E9F00FF75A1 /* Player.png */,
-				E89C505919EB334B00FF75A1 /* Volcanobackground.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E89C501F19EB2E7800FF75A1 /* InfoPlist.strings in Resources */,
+				8105C7ED1A132F47006C811C /* Boulder.atlas in Resources */,
 				81BFAEC01A102B0100058249 /* Intro1Scene3.png in Resources */,
 				81BFAEC81A10326500058249 /* Intro1Scene7.png in Resources */,
 				E89C505419EB2E9F00FF75A1 /* LavaBoulder.png in Resources */,
@@ -332,12 +339,13 @@
 				E89C505619EB2E9F00FF75A1 /* Player.png in Resources */,
 				81BFAECA1A10326500058249 /* Intro1Scene5.png in Resources */,
 				8105C7E51A12E76D006C811C /* Player.atlas in Resources */,
+				8105C7E91A1313C2006C811C /* Volcanobackground.png in Resources */,
 				A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */,
+				8105C7EB1A1325E7006C811C /* Volcano.atlas in Resources */,
 				E89C503219EB2E7800FF75A1 /* Images.xcassets in Resources */,
 				E89C505319EB2E9F00FF75A1 /* Boulder.png in Resources */,
 				A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */,
 				E89C503019EB2E7800FF75A1 /* Spaceship.png in Resources */,
-				E89C505A19EB334B00FF75A1 /* Volcanobackground.png in Resources */,
 				E89C502819EB2E7800FF75A1 /* Main.storyboard in Resources */,
 				81BFAECB1A10326500058249 /* Intro1Scene4.png in Resources */,
 				81BFAEBD1A10208C00058249 /* Intro1Scene1.png in Resources */,
