@@ -98,6 +98,7 @@ static NSString* playerCategoryName = @"player";
         [self addChild:_player];
         
         _player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_player.frame.size];
+        //_player.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:_player.frame]
         _player.physicsBody.restitution = 0.1f;
         _player.physicsBody.friction = 0.4f;
         // make physicsBody static
