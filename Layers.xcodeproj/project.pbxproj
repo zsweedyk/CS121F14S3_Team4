@@ -11,6 +11,7 @@
 		8105C7E91A1313C2006C811C /* Volcanobackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8105C7E81A1313C2006C811C /* Volcanobackground.png */; };
 		8105C7EB1A1325E7006C811C /* Volcano.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8105C7EA1A1325E7006C811C /* Volcano.atlas */; };
 		8105C7ED1A132F47006C811C /* Boulder.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8105C7EC1A132F47006C811C /* Boulder.atlas */; };
+		8138D3E81A168AED00EE0BFD /* Boulder1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8138D3E71A168AED00EE0BFD /* Boulder1.png */; };
 		81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */; };
 		81BFAEBD1A10208C00058249 /* Intro1Scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBC1A10208C00058249 /* Intro1Scene1.png */; };
 		81BFAEC01A102B0100058249 /* Intro1Scene3.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBE1A102B0100058249 /* Intro1Scene3.png */; };
@@ -64,6 +65,7 @@
 		8105C7E81A1313C2006C811C /* Volcanobackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Volcanobackground.png; sourceTree = "<group>"; };
 		8105C7EA1A1325E7006C811C /* Volcano.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Volcano.atlas; sourceTree = "<group>"; };
 		8105C7EC1A132F47006C811C /* Boulder.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Boulder.atlas; sourceTree = "<group>"; };
+		8138D3E71A168AED00EE0BFD /* Boulder1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Boulder1.png; path = Boulder.atlas/Boulder1.png; sourceTree = "<group>"; };
 		81BFAEB71A1005D300058249 /* BHJXIntroLevel1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BHJXIntroLevel1.h; path = ../BHJXIntroLevel1.h; sourceTree = "<group>"; };
 		81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BHJXIntroLevel1.m; path = ../BHJXIntroLevel1.m; sourceTree = "<group>"; };
 		81BFAEBC1A10208C00058249 /* Intro1Scene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Intro1Scene1.png; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				8105C7E81A1313C2006C811C /* Volcanobackground.png */,
 				8105C7E41A12E76D006C811C /* Player.atlas */,
 				81BFAEC21A10326500058249 /* Intro1Scene2.png */,
+				8138D3E71A168AED00EE0BFD /* Boulder1.png */,
 				81BFAEC31A10326500058249 /* Intro1Scene7.png */,
 				81BFAEC41A10326500058249 /* Intro1Scene6.png */,
 				81BFAEC51A10326500058249 /* Intro1Scene5.png */,
@@ -351,6 +354,7 @@
 				81BFAEBD1A10208C00058249 /* Intro1Scene1.png in Resources */,
 				81BFAEC71A10326500058249 /* Intro1Scene2.png in Resources */,
 				E84A26C119F98FFB00040D6E /* Startmenubackground.png in Resources */,
+				8138D3E81A168AED00EE0BFD /* Boulder1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

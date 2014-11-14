@@ -30,7 +30,6 @@ static NSString* playerCategoryName = @"player";
   
     NSArray *_playerFlickerFrames;
     NSArray *_backgroundFlickerFrames;
-    NSArray *_boulderFlickerFrames;
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
@@ -51,9 +50,6 @@ static NSString* playerCategoryName = @"player";
         NSMutableArray *bgFlickerFrames = [NSMutableArray array];
         SKTextureAtlas *bgAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Volcano"];
         
-        NSMutableArray *boulderFlickerFrames = [NSMutableArray array];
-        SKTextureAtlas *boulderAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Boulder"];
-        
         NSMutableArray *playerFlickerFrames = [NSMutableArray array];
         SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
         
@@ -64,13 +60,9 @@ static NSString* playerCategoryName = @"player";
             textureName = [NSString stringWithFormat:@"Player%d", i];
             temp = [playerAnimatedAtlas textureNamed:textureName];
             [playerFlickerFrames addObject:temp];
-            textureName = [NSString stringWithFormat:@"Boulder%d", i];
-            temp = [boulderAnimatedAtlas textureNamed:textureName];
-            [boulderFlickerFrames addObject:temp];
         }
         _playerFlickerFrames = playerFlickerFrames;
         _backgroundFlickerFrames = bgFlickerFrames;
-        _boulderFlickerFrames = boulderFlickerFrames;
         
         SKTexture *temp = _backgroundFlickerFrames[0];
         
@@ -112,11 +104,10 @@ static NSString* playerCategoryName = @"player";
         _player.physicsBody.dynamic = NO;
         
         //Setup the boulders
-        temp = _boulderFlickerFrames[0];
         
         _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
-            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithTexture:temp];
+            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder1.png"];
             boulder.hidden = YES;
             [boulder setXScale:0.5];
             [boulder setYScale:0.5];
@@ -308,6 +299,8 @@ static NSString* playerCategoryName = @"player";
   [_backgroundAudioPlayer play];
 }
 
+
+// Make the 
 -(void)flickering
 {
     //This is our general runAction method to make our player flicker.
@@ -326,14 +319,6 @@ static NSString* playerCategoryName = @"player";
                                               timePerFrame:0.1f
                                                     resize:NO
                                                    restore:YES]] withKey:@"flickeringInPlaceBackground"];
-    
-    for (int i=0; i<kNumBoulders; i++) {
-        [_boulders[i] runAction:[SKAction repeatActionForever:
-                                 [SKAction animateWithTextures:_boulderFlickerFrames
-                                                  timePerFrame:0.1f
-                                                        resize:NO
-                                                       restore:YES]] withKey:@"flickeringInPlaceBoulders"];
-    }
     
     return;
 }
