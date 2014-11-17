@@ -369,13 +369,10 @@ static NSString* playerCategoryName = @"player";
     _player.hidden = YES;
     _gameOver = YES;
   
-    if (endReason == kEndReasonLose)
-    {
+    if (endReason == kEndReasonLose) {
         _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
         [self.view presentScene:_gameOverScene];
-    }
-    else if (endReason == kEndReasonWin)
-    {
+    } else if (endReason == kEndReasonWin){
         _victoryScene = [[BHJXVictoryScene alloc] initWithSize:self.size score:_score];
         [self.view presentScene:_victoryScene];
     }

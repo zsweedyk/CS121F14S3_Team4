@@ -275,8 +275,7 @@ static NSString* playerCategoryName = @"player";
     _player.hidden = YES;
     _gameOver = YES;
     
-    if (didLose)
-    {
+    if (didLose) {
         _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_distance];
         [self.view presentScene:_gameOverScene];
     } else {
