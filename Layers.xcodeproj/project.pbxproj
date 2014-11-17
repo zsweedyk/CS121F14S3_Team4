@@ -28,6 +28,8 @@
 		819C41B81A19D20E00A0D65C /* EndScene1.png in Resources */ = {isa = PBXBuildFile; fileRef = 819C41B51A19D20E00A0D65C /* EndScene1.png */; };
 		819C41BB1A19D2BF00A0D65C /* BHJXIntroLevel3.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C41BA1A19D2BF00A0D65C /* BHJXIntroLevel3.m */; };
 		819C41C01A19D3EB00A0D65C /* BHJXEndingCutscene.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C41BF1A19D3EB00A0D65C /* BHJXEndingCutscene.m */; };
+		819C41C21A19D7D100A0D65C /* Current.png in Resources */ = {isa = PBXBuildFile; fileRef = 819C41C11A19D7D100A0D65C /* Current.png */; };
+		819C41C41A19D7E100A0D65C /* Mantle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 819C41C31A19D7E100A0D65C /* Mantle.atlas */; };
 		81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */; };
 		81BFAEBD1A10208C00058249 /* Intro1Scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBC1A10208C00058249 /* Intro1Scene1.png */; };
 		81BFAEC01A102B0100058249 /* Intro1Scene3.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBE1A102B0100058249 /* Intro1Scene3.png */; };
@@ -102,6 +104,8 @@
 		819C41BA1A19D2BF00A0D65C /* BHJXIntroLevel3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXIntroLevel3.m; sourceTree = "<group>"; };
 		819C41BE1A19D3EB00A0D65C /* BHJXEndingCutscene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXEndingCutscene.h; sourceTree = "<group>"; };
 		819C41BF1A19D3EB00A0D65C /* BHJXEndingCutscene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXEndingCutscene.m; sourceTree = "<group>"; };
+		819C41C11A19D7D100A0D65C /* Current.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Current.png; sourceTree = "<group>"; };
+		819C41C31A19D7E100A0D65C /* Mantle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Mantle.atlas; sourceTree = "<group>"; };
 		81BFAEB71A1005D300058249 /* BHJXIntroLevel1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BHJXIntroLevel1.h; path = ../BHJXIntroLevel1.h; sourceTree = "<group>"; };
 		81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BHJXIntroLevel1.m; path = ../BHJXIntroLevel1.m; sourceTree = "<group>"; };
 		81BFAEBC1A10208C00058249 /* Intro1Scene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Intro1Scene1.png; sourceTree = "<group>"; };
@@ -356,6 +360,8 @@
 		E89C504E19EB2E9F00FF75A1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				819C41C31A19D7E100A0D65C /* Mantle.atlas */,
+				819C41C11A19D7D100A0D65C /* Current.png */,
 				819C419C1A19D18300A0D65C /* CutSceneImages */,
 				8138D3E91A168F8D00EE0BFD /* EvilDuck.png */,
 				8105C7EC1A132F47006C811C /* Boulder.atlas */,
@@ -453,6 +459,7 @@
 				819C41B61A19D20E00A0D65C /* EndScene3.png in Resources */,
 				819C41B01A19D1EC00A0D65C /* Intro3Scene2.png in Resources */,
 				8105C7ED1A132F47006C811C /* Boulder.atlas in Resources */,
+				819C41C21A19D7D100A0D65C /* Current.png in Resources */,
 				81BFAEC01A102B0100058249 /* Intro1Scene3.png in Resources */,
 				81BFAEC81A10326500058249 /* Intro1Scene7.png in Resources */,
 				8138D3EA1A168F8D00EE0BFD /* EvilDuck.png in Resources */,
@@ -467,6 +474,7 @@
 				A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */,
 				8105C7EB1A1325E7006C811C /* Volcano.atlas in Resources */,
 				819C41AF1A19D1EC00A0D65C /* Intro3Scene3.png in Resources */,
+				819C41C41A19D7E100A0D65C /* Mantle.atlas in Resources */,
 				E89C503219EB2E7800FF75A1 /* Images.xcassets in Resources */,
 				819C41A81A19D1DA00A0D65C /* Intro2Scene1.png in Resources */,
 				E89C505319EB2E9F00FF75A1 /* Boulder.png in Resources */,
