@@ -8,14 +8,10 @@
 
 #import "BHJXLevel2Scene.h"
 #import "BHJXGameOverScene.h"
+#import "BHJXIntroLevel3.h"
 @import AVFoundation;
 
 #define kNumBoulders 10
-
-typedef enum {
-    kEndReasonLose,
-    kEndReasonWin
-} EndReason;
 
 static NSString* playerCategoryName = @"player";
 
@@ -33,7 +29,7 @@ static NSString* playerCategoryName = @"player";
     double _nextBoulderSpawn;
     
     int _lives;
-    int _score;
+    int _distance;
     
     bool _gameOver;
     
@@ -46,12 +42,12 @@ static NSString* playerCategoryName = @"player";
         /* Setup your scene here */
         
         //Initialize scrolling background
-        _background1 = [SKSpriteNode spriteNodeWithImageNamed:@"Volcanobackground.png"];
+        _background1 = [SKSpriteNode spriteNodeWithImageNamed:@"mantleBackground1.png"];
         _background1.anchorPoint = CGPointZero;
         _background1.position = CGPointMake(0, 0);
         [self addChild:_background1];
         
-        _background2 = [SKSpriteNode spriteNodeWithImageNamed:@"Volcanobackground.png"];
+        _background2 = [SKSpriteNode spriteNodeWithImageNamed:@"mantleBackground2.png"];
         _background2.anchorPoint = CGPointZero;
         _background2.position = CGPointMake(0, _background2.size.height-1);
         [self addChild:_background2];
@@ -77,7 +73,7 @@ static NSString* playerCategoryName = @"player";
         //Setup the boulders
         _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
-            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder.png"];
+            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder2.png"];
             boulder.hidden = YES;
             [boulder setXScale:0.5];
             [boulder setYScale:0.5];
@@ -103,7 +99,7 @@ static NSString* playerCategoryName = @"player";
         //Setup the score label
         _scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
         _scoreLabel.name = @"scoreLabel";
-        _scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
+        _scoreLabel.text = [NSString stringWithFormat:@"Distance to Baron von Quack: %d", _distance];
         _scoreLabel.scale = 0.9;
         _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.05);
         _scoreLabel.fontColor = [SKColor redColor];
@@ -121,7 +117,7 @@ static NSString* playerCategoryName = @"player";
 - (void)startTheGame
 {
     _lives = 5;
-    _score = 0;
+    _distance = 500;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.84);
 }
@@ -204,12 +200,12 @@ static NSString* playerCategoryName = @"player";
     
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
-    _scoreLabel.text = [NSString stringWithFormat:@"Score: %d", _score];
+    _scoreLabel.text = [NSString stringWithFormat:@"Distance to Top: %d", _distance];
     
     //collision detection
     if (!_gameOver) {
         //increment score
-        _score++;
+        _distance--;
         for (SKSpriteNode *boulder in _boulders) {
             if (boulder.hidden) {
                 continue;
@@ -229,17 +225,16 @@ static NSString* playerCategoryName = @"player";
             
             if (_lives <= 0) {
                 NSLog(@"you lose");
-                [self endTheScene:kEndReasonLose];
+                [self endTheScene:YES];
+            }
+            else if (_distance <= 0) {
+                [self endTheScene:NO];
             }
         }
     }
-    if (_score >= 200) {
-        NSLog(@"you win");
-        [self endTheScene:kEndReasonWin];
-    }
 }
 
-- (void)endTheScene:(EndReason)endReason {
+- (void)endTheScene:(BOOL)didLose {
     if (_gameOver) {
         return;
     }
@@ -248,17 +243,14 @@ static NSString* playerCategoryName = @"player";
     _player.hidden = YES;
     _gameOver = YES;
     
-    if (endReason == kEndReasonLose) {
-        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
+    if (didLose)
+    {
+        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_distance];
         [self.view presentScene:_gameOverScene];
-    }
-    if (endReason == kEndReasonWin) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete!"
-                                                        message:@"Continue to next level?"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Continue"
-                                              otherButtonTitles:@"Exit", nil];
-        [alert show];
+    } else {
+        BHJXIntroLevel3 * scene = [BHJXIntroLevel3 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene];
     }
 }
 

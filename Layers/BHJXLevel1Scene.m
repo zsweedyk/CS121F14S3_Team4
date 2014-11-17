@@ -149,7 +149,7 @@ static NSString* playerCategoryName = @"player";
 - (void)startTheGame
 {
     _lives = 5;
-    _distance = 2000;
+    _distance = 500;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
     [self flickering];
