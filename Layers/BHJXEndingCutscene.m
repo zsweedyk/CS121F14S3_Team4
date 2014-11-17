@@ -23,15 +23,15 @@ int _countTouches;
         _countTouches = 0;
         
         //Present first slide
-        _slide1 = [SKSpriteNode spriteNodeWithImageNamed:@"Intro1Scene1.png"];
+        _slide1 = [SKSpriteNode spriteNodeWithImageNamed:@"EndScene1.png"];
         _slide1.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
         [self addChild:_slide1];
         
         //Create subsequent slides, but keep them hidden
-        _slide2 = [SKSpriteNode spriteNodeWithImageNamed:@"Intro1Scene2.png"];
+        _slide2 = [SKSpriteNode spriteNodeWithImageNamed:@"EndScene2.png"];
         _slide2.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
         [self addChild:_slide2];
-        _slide3 = [SKSpriteNode spriteNodeWithImageNamed:@"Intro1Scene3.png"];
+        _slide3 = [SKSpriteNode spriteNodeWithImageNamed:@"EndScene3.png"];
         _slide3.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
         [self addChild:_slide3];
         
