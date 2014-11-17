@@ -27,6 +27,7 @@
 		819C41B71A19D20E00A0D65C /* EndScene2.png in Resources */ = {isa = PBXBuildFile; fileRef = 819C41B41A19D20E00A0D65C /* EndScene2.png */; };
 		819C41B81A19D20E00A0D65C /* EndScene1.png in Resources */ = {isa = PBXBuildFile; fileRef = 819C41B51A19D20E00A0D65C /* EndScene1.png */; };
 		819C41BB1A19D2BF00A0D65C /* BHJXIntroLevel3.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C41BA1A19D2BF00A0D65C /* BHJXIntroLevel3.m */; };
+		819C41C01A19D3EB00A0D65C /* BHJXEndingCutscene.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C41BF1A19D3EB00A0D65C /* BHJXEndingCutscene.m */; };
 		81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */; };
 		81BFAEBD1A10208C00058249 /* Intro1Scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBC1A10208C00058249 /* Intro1Scene1.png */; };
 		81BFAEC01A102B0100058249 /* Intro1Scene3.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BFAEBE1A102B0100058249 /* Intro1Scene3.png */; };
@@ -99,6 +100,8 @@
 		819C41B51A19D20E00A0D65C /* EndScene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EndScene1.png; sourceTree = "<group>"; };
 		819C41B91A19D2BF00A0D65C /* BHJXIntroLevel3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXIntroLevel3.h; sourceTree = "<group>"; };
 		819C41BA1A19D2BF00A0D65C /* BHJXIntroLevel3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXIntroLevel3.m; sourceTree = "<group>"; };
+		819C41BE1A19D3EB00A0D65C /* BHJXEndingCutscene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXEndingCutscene.h; sourceTree = "<group>"; };
+		819C41BF1A19D3EB00A0D65C /* BHJXEndingCutscene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXEndingCutscene.m; sourceTree = "<group>"; };
 		81BFAEB71A1005D300058249 /* BHJXIntroLevel1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BHJXIntroLevel1.h; path = ../BHJXIntroLevel1.h; sourceTree = "<group>"; };
 		81BFAEB81A1005D300058249 /* BHJXIntroLevel1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BHJXIntroLevel1.m; path = ../BHJXIntroLevel1.m; sourceTree = "<group>"; };
 		81BFAEBC1A10208C00058249 /* Intro1Scene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Intro1Scene1.png; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 		819C41BC1A19D2C500A0D65C /* CutScenes */ = {
 			isa = PBXGroup;
 			children = (
+				819C41BE1A19D3EB00A0D65C /* BHJXEndingCutscene.h */,
+				819C41BF1A19D3EB00A0D65C /* BHJXEndingCutscene.m */,
 				819C41B91A19D2BF00A0D65C /* BHJXIntroLevel3.h */,
 				819C41BA1A19D2BF00A0D65C /* BHJXIntroLevel3.m */,
 				81BFAEB71A1005D300058249 /* BHJXIntroLevel1.h */,
@@ -498,6 +503,7 @@
 			files = (
 				E892CC071A196D3500C52332 /* BHJXVictoryScene.m in Sources */,
 				819C41BB1A19D2BF00A0D65C /* BHJXIntroLevel3.m in Sources */,
+				819C41C01A19D3EB00A0D65C /* BHJXEndingCutscene.m in Sources */,
 				E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */,
 				E89C502E19EB2E7800FF75A1 /* BHJXLevel1Scene.m in Sources */,
 				E89C502519EB2E7800FF75A1 /* BHJXAppDelegate.m in Sources */,

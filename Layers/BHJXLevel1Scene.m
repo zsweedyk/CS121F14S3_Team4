@@ -9,14 +9,11 @@
 #import "BHJXLevel1Scene.h"
 #import "BHJXStartMenuViewController.h"
 #import "BHJXGameOverScene.h"
+#import "BHJXIntroLevel2.h"
 @import AVFoundation;
 
 #define kNumBoulders 10
 #define kNumImages 2
-
-typedef enum {
-    kEndReasonLose
-} EndReason;
 
 static NSString* playerCategoryName = @"player";
 
@@ -35,7 +32,7 @@ static NSString* playerCategoryName = @"player";
     double _nextBoulderSpawn;
     
     int _lives;
-    int _score;
+    int _distance;
     
     bool _gameOver;
     
@@ -134,7 +131,7 @@ static NSString* playerCategoryName = @"player";
         //Setup the score label
         _scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
         _scoreLabel.name = @"scoreLabel";
-        _scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
+        _scoreLabel.text = [NSString stringWithFormat:@"%d", _distance];
         _scoreLabel.scale = 0.9;
         _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
         _scoreLabel.fontColor = [SKColor redColor];
@@ -152,7 +149,7 @@ static NSString* playerCategoryName = @"player";
 - (void)startTheGame
 {
     _lives = 5;
-    _score = 0;
+    _distance = 2000;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
     [self flickering];
@@ -236,12 +233,12 @@ static NSString* playerCategoryName = @"player";
     
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
-    _scoreLabel.text = [NSString stringWithFormat:@"Score: %d", _score];
+    _scoreLabel.text = [NSString stringWithFormat:@"Distance to Top: %d", _distance];
     
     //collision detection
     if (!_gameOver) {
         //increment score
-        _score++;
+        _distance--;
         for (SKSpriteNode *boulder in _boulders) {
             if (boulder.hidden) {
                 continue;
@@ -261,13 +258,15 @@ static NSString* playerCategoryName = @"player";
           
             if (_lives <= 0) {
               NSLog(@"you lose");
-              [self endTheScene:kEndReasonLose];
+              [self endTheScene:YES];
+            } else if (_distance <= 0) {
+                [self endTheScene:NO];
             }
         }
     }
 }
 
-- (void)endTheScene:(EndReason)endReason {
+- (void)endTheScene:(BOOL)didLose {
     if (_gameOver) {
         return;
     }
@@ -276,10 +275,14 @@ static NSString* playerCategoryName = @"player";
     _player.hidden = YES;
     _gameOver = YES;
     
-    if (endReason == kEndReasonLose)
+    if (didLose)
     {
-        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
+        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_distance];
         [self.view presentScene:_gameOverScene];
+    } else {
+        BHJXIntroLevel2 * scene = [BHJXIntroLevel2 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene];
     }
 }
 

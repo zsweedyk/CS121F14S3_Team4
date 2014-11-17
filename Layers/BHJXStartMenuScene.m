@@ -7,7 +7,7 @@
 //
 
 #import "BHJXStartMenuScene.h"
-#import "BHJXLevel3Scene.h"
+#import "BHJXLevel1Scene.h"
 
 @implementation BHJXStartMenuScene {
     SKSpriteNode *_background;
@@ -53,7 +53,7 @@
     if ([node.name isEqualToString:@"AdventureLabel"]) {
         SKTransition *reveal = [SKTransition fadeWithDuration:3];
         
-        BHJXLevel3Scene *scene = [BHJXLevel3Scene sceneWithSize:self.view.bounds.size];
+        BHJXLevel1Scene *scene = [BHJXLevel1Scene sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition:reveal];
                           
