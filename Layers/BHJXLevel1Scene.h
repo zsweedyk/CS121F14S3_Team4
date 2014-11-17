@@ -8,7 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface BHJXLevel1Scene : SKScene
+@interface BHJXLevel1Scene : SKScene<UIAlertViewDelegate>
 
 @property (nonatomic) BOOL isFingerOnDuck;
 

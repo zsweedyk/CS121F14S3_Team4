@@ -13,7 +13,8 @@
 #define kNumBoulders 10
 
 typedef enum {
-    kEndReasonLose
+    kEndReasonLose,
+    kEndReasonWin
 } EndReason;
 
 static NSString* playerCategoryName = @"player";
@@ -132,20 +133,20 @@ static NSString* playerCategoryName = @"player";
 
 
 -(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-    // 1 Check whether user tapped paddle
+    
     if (self.isFingerOnDuck) {
-        // 2 Get touch location
+        //Get touch location
         UITouch* touch = [touches anyObject];
         CGPoint touchLocation = [touch locationInNode:self];
         CGPoint previousLocation = [touch previousLocationInNode:self];
-        // 3 Get node for paddle
+        //Get node for player
         SKSpriteNode* duck = (SKSpriteNode*)[self childNodeWithName: playerCategoryName];
-        // 4 Calculate new position along x for paddle
+        //Calculate new position along x for player
         int playerX = duck.position.x + (touchLocation.x - previousLocation.x);
-        // 5 Limit x so that the paddle will not leave the screen to left or right
+        //Limit x so that the player will not leave the screen to left or right
         playerX = MAX(playerX, duck.size.width/2);
         playerX = MIN(playerX, self.size.width - duck.size.width/2);
-        // 6 Update position of paddle
+        //Update position of player
         duck.position = CGPointMake(playerX, duck.position.y);
     }
 }
@@ -232,6 +233,10 @@ static NSString* playerCategoryName = @"player";
             }
         }
     }
+    if (_score >= 200) {
+        NSLog(@"you win");
+        [self endTheScene:kEndReasonWin];
+    }
 }
 
 - (void)endTheScene:(EndReason)endReason {
@@ -243,10 +248,17 @@ static NSString* playerCategoryName = @"player";
     _player.hidden = YES;
     _gameOver = YES;
     
-    if (endReason == kEndReasonLose)
-    {
+    if (endReason == kEndReasonLose) {
         _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
         [self.view presentScene:_gameOverScene];
+    }
+    if (endReason == kEndReasonWin) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete!"
+                                                        message:@"Continue to next level?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Continue"
+                                              otherButtonTitles:@"Exit", nil];
+        [alert show];
     }
 }
 
