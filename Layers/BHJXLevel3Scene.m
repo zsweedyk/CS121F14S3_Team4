@@ -49,8 +49,8 @@ static NSString* playerCategoryName = @"player";
     double _nextBoulderSpawn2;
 
     int _lives;
-    int _score;
     int _evilDuckLives;
+    int _invulnerability;
 
     bool _gameOver;
 
@@ -154,15 +154,6 @@ static NSString* playerCategoryName = @"player";
         _livesLabel.fontColor = [SKColor redColor];
         [self addChild:_livesLabel];
         
-        //Setup the score label
-        _scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
-        _scoreLabel.name = @"scoreLabel";
-        _scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
-        _scoreLabel.scale = 0.9;
-        _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
-        _scoreLabel.fontColor = [SKColor redColor];
-        [self addChild:_scoreLabel];
-        
         //Play the background music
         [self startBackgroundMusic];
         
@@ -176,7 +167,7 @@ static NSString* playerCategoryName = @"player";
 {
     _lives = 5;
     _evilDuckLives = 10;
-    _score = 0;
+    _invulnerability = 0;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
     for (SKSpriteNode *laser in _playerLasers) {
@@ -321,29 +312,32 @@ static NSString* playerCategoryName = @"player";
   
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
-    _scoreLabel.text = [NSString stringWithFormat:@"Score: %d", _score];
   
     //collision detection
     if (!_gameOver) {
     //increment score
-    _score++;
-        for (SKSpriteNode *boulder1 in _boulders1) {
+        for (SKSpriteNode *boulder1 in _boulders) {
             if (boulder1.hidden) {
-            continue;
+                continue;
             }
-            if ([_player intersectsNode:boulder1]) {
-                boulder1.hidden = YES;
-                SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
-                                                       [SKAction fadeInWithDuration:0.1]]];
-                SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
-                [_player runAction:blinkForTime];
-                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
-                SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
-                [boulder1 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
-                _lives--;
+            if (_invulnerability == 0) {
+                if ([_player intersectsNode:boulder1]) {
+                    boulder1.hidden = YES;
+                    SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
+                                                           [SKAction fadeInWithDuration:0.1]]];
+                    SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
+                    [_player runAction:blinkForTime];
+                    SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
+                    SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+                    [boulder1 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
+                    NSLog(@"a hit!");
+                    _lives--;
+                    _invulnerability = 200;
+                }
             }
-        
+            if (_invulnerability > 0) {
+                _invulnerability--;
+            }
             if (_lives <= 0) {
                 NSLog(@"you lose");
                 [self endTheScene:kEndReasonLose];
@@ -354,19 +348,24 @@ static NSString* playerCategoryName = @"player";
             if (boulder2.hidden) {
                 continue;
             }
-            if ([_player intersectsNode:boulder2]) {
-                boulder2.hidden = YES;
-                SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
-                                                     [SKAction fadeInWithDuration:0.1]]];
-                SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
-                [_player runAction:blinkForTime];
-                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
-                SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
-                [boulder2 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
-                _lives--;
+            if (_invulnerability == 0) {
+                if ([_player intersectsNode:boulder2]) {
+                    boulder2.hidden = YES;
+                    SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
+                                                           [SKAction fadeInWithDuration:0.1]]];
+                    SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
+                    [_player runAction:blinkForTime];
+                    SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
+                    SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+                    [boulder2 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
+                    NSLog(@"a hit!");
+                    _lives--;
+                    _invulnerability = 200;
+                }
             }
-            
+            if (_invulnerability > 0) {
+                _invulnerability--;
+            }
             if (_lives <= 0) {
                 NSLog(@"you lose");
                 [self endTheScene:kEndReasonLose];
@@ -401,7 +400,7 @@ static NSString* playerCategoryName = @"player";
     _gameOver = YES;
   
     if (endReason == kEndReasonLose) {
-        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
+        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size];
         [self.view presentScene:_gameOverScene];
     } else if (endReason == kEndReasonWin){
         _victoryScene = [[BHJXEndingCutscene alloc] initWithSize:self.size];

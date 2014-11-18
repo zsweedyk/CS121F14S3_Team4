@@ -32,6 +32,7 @@ static NSString* playerCategoryName = @"player";
     
     int _lives;
     int _distance;
+    int _invulnerability;
     
     bool _gameOver;
     
@@ -128,7 +129,8 @@ static NSString* playerCategoryName = @"player";
 - (void)startTheGame
 {
     _lives = 5;
-    _distance = 200;
+    _distance = 500;
+    _invulnerability = 0;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.84);
     [self flickering];
@@ -222,19 +224,24 @@ static NSString* playerCategoryName = @"player";
             if (boulder.hidden) {
                 continue;
             }
-            if ([_player intersectsNode:boulder]) {
-                boulder.hidden = YES;
-                SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
-                                                       [SKAction fadeInWithDuration:0.1]]];
-                SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
-                [_player runAction:blinkForTime];
-                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
-                SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
-                [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
-                _lives--;
+            if (_invulnerability == 0) {
+                if ([_player intersectsNode:boulder]) {
+                    boulder.hidden = YES;
+                    SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
+                                                           [SKAction fadeInWithDuration:0.1]]];
+                    SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
+                    [_player runAction:blinkForTime];
+                    SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
+                    SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+                    [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
+                    NSLog(@"a hit!");
+                    _lives--;
+                    _invulnerability = 200;
+                }
             }
-            
+            if (_invulnerability > 0) {
+                _invulnerability--;
+            }
             if (_lives <= 0) {
                 NSLog(@"you lose");
                 [self endTheScene:YES];
