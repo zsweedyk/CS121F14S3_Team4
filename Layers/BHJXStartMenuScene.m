@@ -19,7 +19,7 @@
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        _background = [SKSpriteNode spriteNodeWithImageNamed:@"Startmenubackground.png"];
+        _background = [SKSpriteNode spriteNodeWithImageNamed:@"StartScreen.png"];
         _background.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
         [self addChild:_background];
         
