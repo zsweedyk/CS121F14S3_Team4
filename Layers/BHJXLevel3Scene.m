@@ -39,6 +39,7 @@ static NSString* playerCategoryName = @"player";
     int _nextBoulder1;
     int _nextBoulder2;
     int _nextPlayerLaser;
+    int fireAtZero;
 
     double _nextBoulderSpawn1;
     double _nextBoulderSpawn2;
@@ -61,11 +62,6 @@ static NSString* playerCategoryName = @"player";
         _background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:_background];
     
-        //2
-        NSLog(@"SKScene:initWithSize %f x %f",size.width,size.height);
-
-        //3
-        self.backgroundColor = [SKColor blackColor];
 
 
         //Create player and place at bottom of screen
@@ -123,7 +119,7 @@ static NSString* playerCategoryName = @"player";
         //Setup the lasers
         _playerLasers = [[NSMutableArray alloc] initWithCapacity:kNumLasers];
         for (int i = 0; i < kNumLasers; ++i) {
-            SKSpriteNode *playerLaser = [SKSpriteNode spriteNodeWithImageNamed:@"insert laser image"];
+            SKSpriteNode *playerLaser = [SKSpriteNode spriteNodeWithImageNamed:@"laser.png"];
             playerLaser.hidden = YES;
             [_playerLasers addObject:playerLaser];
             [self addChild:playerLaser];
@@ -172,30 +168,36 @@ static NSString* playerCategoryName = @"player";
     /* Called when a touch begins */
     self.isFingerOnDuck = YES;
   
-    SKSpriteNode *playerLaser = [_playerLasers objectAtIndex:_nextPlayerLaser];
-    _nextPlayerLaser++;
-    if (_nextPlayerLaser >= _playerLasers.count) {
-        _nextPlayerLaser = 0;
+    if (fireAtZero == 0){
+        SKSpriteNode *playerLaser = [_playerLasers objectAtIndex:_nextPlayerLaser];
+        _nextPlayerLaser++;
+        if (_nextPlayerLaser >= _playerLasers.count) {
+            _nextPlayerLaser = 0;
+        }
+        
+        //2
+        playerLaser.position = CGPointMake(_player.position.x,_player.position.y);
+        playerLaser.hidden = NO;
+        [playerLaser removeAllActions];
+        
+        //3
+        CGPoint location = CGPointMake(_player.position.x, self.frame.size.height);
+        SKAction *laserMoveAction = [SKAction moveTo:location duration:0.5];
+        //4
+        SKAction *laserDoneAction = [SKAction runBlock:(dispatch_block_t)^() {
+            //NSLog(@"Animation Completed");
+            playerLaser.hidden = YES;
+        }];
+        
+        //5
+        SKAction *moveLaserActionWithDone = [SKAction sequence:@[laserMoveAction,laserDoneAction]];
+        //6
+        [playerLaser runAction:moveLaserActionWithDone withKey:@"laserFired"];
+        
+        //Player can't fire for 20 updates
+        fireAtZero = 20;
     }
     
-    //2
-    playerLaser.position = CGPointMake(_player.position.x,_player.position.y);
-    playerLaser.hidden = NO;
-    [playerLaser removeAllActions];
-    
-    //3
-    CGPoint location = CGPointMake(_player.position.x, self.frame.size.height);
-    SKAction *laserMoveAction = [SKAction moveTo:location duration:0.5];
-    //4
-    SKAction *laserDoneAction = [SKAction runBlock:(dispatch_block_t)^() {
-        //NSLog(@"Animation Completed");
-        playerLaser.hidden = YES;
-    }];
-    
-    //5
-    SKAction *moveLaserActionWithDone = [SKAction sequence:@[laserMoveAction,laserDoneAction]];
-    //6
-    [playerLaser runAction:moveLaserActionWithDone withKey:@"laserFired"];
 }
 
 
@@ -233,6 +235,8 @@ static NSString* playerCategoryName = @"player";
     double curTime = CACurrentMediaTime();
     
     if (curTime > _nextBoulderSpawn1) {
+        
+        //Decrement fireAtZero if greater than zero so duck is closer to being able to fire
         
         float randSecs1 = [self randomValueBetween:1.0 andValue:1.8];
         _nextBoulderSpawn1 = randSecs1 + curTime;
@@ -275,6 +279,12 @@ static NSString* playerCategoryName = @"player";
         SKAction *moveBoulderActionWithDone2 = [SKAction sequence:@[moveAction2, doneAction2 ]];
         [boulder2 runAction:moveBoulderActionWithDone2 withKey:@"boulderMoving"];
     }
+    
+    // Duck will get closer to being able to fire if it can't
+    if (fireAtZero > 0){
+        fireAtZero--;
+    }
+
     
     //update the position of evilDuck to follow the player
     if (_player.position.x - 6 < _evilDuck.position.x || _player.position.x + 6 > _evilDuck.position.x) {

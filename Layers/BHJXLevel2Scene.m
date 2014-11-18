@@ -12,6 +12,7 @@
 @import AVFoundation;
 
 #define kNumBoulders 10
+#define kNumImages 2
 
 static NSString* playerCategoryName = @"player";
 
@@ -24,6 +25,9 @@ static NSString* playerCategoryName = @"player";
     SKLabelNode *_livesLabel;
     SKLabelNode *_scoreLabel;
     
+    
+    NSArray *_playerFlickerFrames;
+//    NSArray *_backgroundFlickerFrames;
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
@@ -39,28 +43,45 @@ static NSString* playerCategoryName = @"player";
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        /* Setup your scene here */
+        //Setup flickering
+//        NSMutableArray *bgFlickerFrames = [NSMutableArray array];
+//        SKTextureAtlas *bgAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Mantle"];
+        
+        NSMutableArray *playerFlickerFrames = [NSMutableArray array];
+        SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
+
+        for (int i=1; i <= kNumImages; i++){
+//            NSString *textureName = [NSString stringWithFormat:@"mantleBackground%d", i];
+//            SKTexture *temp = [bgAnimatedAtlas textureNamed:textureName];
+//            [bgFlickerFrames addObject:temp];
+            NSString *textureName = [NSString stringWithFormat:@"Player%d", i];
+            SKTexture *temp = [playerAnimatedAtlas textureNamed:textureName];
+            [playerFlickerFrames addObject:temp];
+        }
+        _playerFlickerFrames = playerFlickerFrames;
+//        _backgroundFlickerFrames = bgFlickerFrames;
+//        
+//        SKTexture *temp = _backgroundFlickerFrames[0];
+
         
         //Initialize scrolling background
-        _background1 = [SKSpriteNode spriteNodeWithImageNamed:@"mantleBackground1.png"];
+        _background1 = [SKSpriteNode spriteNodeWithImageNamed:@"mantleBackground.png"];
         _background1.anchorPoint = CGPointZero;
         _background1.position = CGPointMake(0, 0);
         [self addChild:_background1];
         
-        _background2 = [SKSpriteNode spriteNodeWithImageNamed:@"mantleBackground2.png"];
+        _background2 = [SKSpriteNode spriteNodeWithImageNamed:@"mantleBackground.png"];
         _background2.anchorPoint = CGPointZero;
         _background2.position = CGPointMake(0, _background2.size.height-1);
         [self addChild:_background2];
         
-        //2
-        NSLog(@"SKScene:initWithSize %f x %f",size.width,size.height);
-        
-        //3
-        self.backgroundColor = [SKColor blackColor];
         
         
         //Create player and place at bottom of screen
-        _player = [[SKSpriteNode alloc] initWithImageNamed:@"Player.png"];
+        
+        SKTexture *temp = _playerFlickerFrames[0];
+        
+        _player = [SKSpriteNode spriteNodeWithTexture:temp];
         _player.name = playerCategoryName;
         _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.84);
         [self addChild:_player];
@@ -73,7 +94,7 @@ static NSString* playerCategoryName = @"player";
         //Setup the boulders
         _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
-            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder2.png"];
+            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Current.png"];
             boulder.hidden = YES;
             [boulder setXScale:0.5];
             [boulder setYScale:0.5];
@@ -117,9 +138,10 @@ static NSString* playerCategoryName = @"player";
 - (void)startTheGame
 {
     _lives = 5;
-    _distance = 500;
+    _distance = 1500;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.84);
+    [self flickering];
 }
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -200,7 +222,7 @@ static NSString* playerCategoryName = @"player";
     
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
-    _scoreLabel.text = [NSString stringWithFormat:@"Distance to Top: %d", _distance];
+    _scoreLabel.text = [NSString stringWithFormat:@"Distance to Core: %d", _distance];
     
     //collision detection
     if (!_gameOver) {
@@ -271,7 +293,27 @@ static NSString* playerCategoryName = @"player";
     [_backgroundAudioPlayer play];
 }
 
-
+-(void)flickering
+{
+    //This is our general runAction method to make our player flicker.
+    [_player runAction:[SKAction repeatActionForever:
+                        [SKAction animateWithTextures:_playerFlickerFrames
+                                         timePerFrame:0.1f
+                                               resize:NO
+                                              restore:YES]] withKey:@"flickeringInPlacePlayer"];
+//    [_background1 runAction:[SKAction repeatActionForever:
+//                             [SKAction animateWithTextures:_backgroundFlickerFrames
+//                                              timePerFrame:0.1f
+//                                                    resize:NO
+//                                                   restore:YES]] withKey:@"flickeringInPlaceBackground"];
+//    [_background2 runAction:[SKAction repeatActionForever:
+//                             [SKAction animateWithTextures:_backgroundFlickerFrames
+//                                              timePerFrame:0.1f
+//                                                    resize:NO
+//                                                   restore:YES]] withKey:@"flickeringInPlaceBackground"];
+//    
+    return;
+}
 
 
 @end
