@@ -50,7 +50,6 @@
 		E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A619FD830400529044 /* BHJXGameOverScene.m */; };
 		E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */; };
 		E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */; };
-		E84A26C119F98FFB00040D6E /* Startmenubackground.png in Resources */ = {isa = PBXBuildFile; fileRef = E84A26C019F98FFB00040D6E /* Startmenubackground.png */; };
 		E892CC071A196D3500C52332 /* BHJXVictoryScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E892CC061A196D3500C52332 /* BHJXVictoryScene.m */; };
 		E89C501319EB2E7800FF75A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501219EB2E7800FF75A1 /* Foundation.framework */; };
 		E89C501519EB2E7800FF75A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501419EB2E7800FF75A1 /* CoreGraphics.framework */; };
@@ -62,7 +61,6 @@
 		E89C502819EB2E7800FF75A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E89C502619EB2E7800FF75A1 /* Main.storyboard */; };
 		E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */; };
 		E89C502E19EB2E7800FF75A1 /* BHJXLevel1Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = E89C502D19EB2E7800FF75A1 /* BHJXLevel1Scene.m */; };
-		E89C503019EB2E7800FF75A1 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = E89C502F19EB2E7800FF75A1 /* Spaceship.png */; };
 		E89C503219EB2E7800FF75A1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E89C503119EB2E7800FF75A1 /* Images.xcassets */; };
 		E89C503919EB2E7800FF75A1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C503819EB2E7800FF75A1 /* XCTest.framework */; };
 		E89C503A19EB2E7800FF75A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89C501219EB2E7800FF75A1 /* Foundation.framework */; };
@@ -135,7 +133,6 @@
 		E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuScene.m; sourceTree = "<group>"; };
 		E81E2ADB1A102B0600733BC2 /* BHJXLevel2Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXLevel2Scene.h; sourceTree = "<group>"; };
 		E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXLevel2Scene.m; sourceTree = "<group>"; };
-		E84A26C019F98FFB00040D6E /* Startmenubackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Startmenubackground.png; sourceTree = "<group>"; };
 		E892CC051A196D3500C52332 /* BHJXVictoryScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXVictoryScene.h; sourceTree = "<group>"; };
 		E892CC061A196D3500C52332 /* BHJXVictoryScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXVictoryScene.m; sourceTree = "<group>"; };
 		E89C500F19EB2E7800FF75A1 /* Layers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Layers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,7 +151,6 @@
 		E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHJXViewController.m; sourceTree = "<group>"; };
 		E89C502C19EB2E7800FF75A1 /* BHJXLevel1Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHJXLevel1Scene.h; sourceTree = "<group>"; };
 		E89C502D19EB2E7800FF75A1 /* BHJXLevel1Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHJXLevel1Scene.m; sourceTree = "<group>"; };
-		E89C502F19EB2E7800FF75A1 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		E89C503119EB2E7800FF75A1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E89C503719EB2E7800FF75A1 /* LayersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LayersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C503819EB2E7800FF75A1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -324,7 +320,6 @@
 				E892CC061A196D3500C52332 /* BHJXVictoryScene.m */,
 				E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */,
 				E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */,
-				E89C502F19EB2E7800FF75A1 /* Spaceship.png */,
 				E89C504E19EB2E9F00FF75A1 /* Images */,
 				E89C503119EB2E7800FF75A1 /* Images.xcassets */,
 				E89C501B19EB2E7800FF75A1 /* Supporting Files */,
@@ -380,7 +375,6 @@
 				81E941501A1AD564004BFF0C /* mantleBackground.png */,
 				8105C7E41A12E76D006C811C /* Player.atlas */,
 				8138D3E71A168AED00EE0BFD /* Boulder1.png */,
-				E84A26C019F98FFB00040D6E /* Startmenubackground.png */,
 				E89C505219EB2E9F00FF75A1 /* Player.png */,
 			);
 			path = Images;
@@ -492,14 +486,12 @@
 				819C41A81A19D1DA00A0D65C /* Intro2Scene1.png in Resources */,
 				81E9414F1A1AD17A004BFF0C /* laser.png in Resources */,
 				A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */,
-				E89C503019EB2E7800FF75A1 /* Spaceship.png in Resources */,
 				E89C502819EB2E7800FF75A1 /* Main.storyboard in Resources */,
 				81BFAECB1A10326500058249 /* Intro1Scene4.png in Resources */,
 				81BFAEBD1A10208C00058249 /* Intro1Scene1.png in Resources */,
 				819C41A41A19D1DA00A0D65C /* Intro2Scene5.png in Resources */,
 				81BFAEC71A10326500058249 /* Intro1Scene2.png in Resources */,
 				8135B9151A1AFC3200566C45 /* Intro3Scene1.png in Resources */,
-				E84A26C119F98FFB00040D6E /* Startmenubackground.png in Resources */,
 				819C41B71A19D20E00A0D65C /* EndScene2.png in Resources */,
 				8135B9141A1AFC3200566C45 /* Intro3Scene3.png in Resources */,
 				8138D3E81A168AED00EE0BFD /* Boulder1.png in Resources */,

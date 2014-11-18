@@ -79,11 +79,6 @@ static NSString* playerCategoryName = @"player";
         
         
         
-        //2
-        NSLog(@"SKScene:initWithSize %f x %f",size.width,size.height);
-        
-        //3
-        self.backgroundColor = [SKColor blackColor];
         
         
         //Create player and place at bottom of screen
