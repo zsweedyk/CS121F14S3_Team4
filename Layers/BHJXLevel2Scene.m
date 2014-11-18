@@ -19,7 +19,6 @@ static NSString* playerCategoryName = @"player";
 @implementation BHJXLevel2Scene
 {
     SKSpriteNode *_player;
-    SKSpriteNode *_boudler;
     SKSpriteNode *_background1;
     SKSpriteNode *_background2;
     SKLabelNode *_livesLabel;
@@ -27,7 +26,6 @@ static NSString* playerCategoryName = @"player";
     
     
     NSArray *_playerFlickerFrames;
-//    NSArray *_backgroundFlickerFrames;
     NSMutableArray *_boulders;
     int _nextBoulder;
     double _nextBoulderSpawn;
@@ -44,24 +42,16 @@ static NSString* playerCategoryName = @"player";
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //Setup flickering
-//        NSMutableArray *bgFlickerFrames = [NSMutableArray array];
-//        SKTextureAtlas *bgAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Mantle"];
         
         NSMutableArray *playerFlickerFrames = [NSMutableArray array];
         SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
 
         for (int i=1; i <= kNumImages; i++){
-//            NSString *textureName = [NSString stringWithFormat:@"mantleBackground%d", i];
-//            SKTexture *temp = [bgAnimatedAtlas textureNamed:textureName];
-//            [bgFlickerFrames addObject:temp];
             NSString *textureName = [NSString stringWithFormat:@"Player%d", i];
             SKTexture *temp = [playerAnimatedAtlas textureNamed:textureName];
             [playerFlickerFrames addObject:temp];
         }
         _playerFlickerFrames = playerFlickerFrames;
-//        _backgroundFlickerFrames = bgFlickerFrames;
-//        
-//        SKTexture *temp = _backgroundFlickerFrames[0];
 
         
         //Initialize scrolling background
@@ -301,17 +291,6 @@ static NSString* playerCategoryName = @"player";
                                          timePerFrame:0.1f
                                                resize:NO
                                               restore:YES]] withKey:@"flickeringInPlacePlayer"];
-//    [_background1 runAction:[SKAction repeatActionForever:
-//                             [SKAction animateWithTextures:_backgroundFlickerFrames
-//                                              timePerFrame:0.1f
-//                                                    resize:NO
-//                                                   restore:YES]] withKey:@"flickeringInPlaceBackground"];
-//    [_background2 runAction:[SKAction repeatActionForever:
-//                             [SKAction animateWithTextures:_backgroundFlickerFrames
-//                                              timePerFrame:0.1f
-//                                                    resize:NO
-//                                                   restore:YES]] withKey:@"flickeringInPlaceBackground"];
-//    
     return;
 }
 

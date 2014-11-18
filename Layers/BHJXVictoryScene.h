@@ -10,6 +10,6 @@
 
 @interface BHJXVictoryScene : SKScene
 
--(id)initWithSize:(CGSize)size score:(int)score;
+-(id)initWithSize:(CGSize)size;
 
 @end

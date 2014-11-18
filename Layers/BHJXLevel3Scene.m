@@ -8,11 +8,12 @@
 
 #import "BHJXLevel3Scene.h"
 #import "BHJXGameOverScene.h"
-#import "BHJXVictoryScene.h"
+#import "BHJXEndingCutscene.h"
 @import AVFoundation;
 
 #define kNumBoulders 10
 #define kNumLasers 5
+#define kNumImages 2
 
 typedef enum {
   kEndReasonLose,
@@ -31,6 +32,9 @@ static NSString* playerCategoryName = @"player";
     
     SKLabelNode *_livesLabel;
     SKLabelNode *_scoreLabel;
+    
+    NSArray *_playerFlickerFrames;
+    NSMutableArray *_boulders;
 
     NSMutableArray *_boulders1;
     NSMutableArray *_boulders2;
@@ -57,15 +61,31 @@ static NSString* playerCategoryName = @"player";
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        
+        //Setup flickering
+        
+        NSMutableArray *playerFlickerFrames = [NSMutableArray array];
+        SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
+        
+        for (int i=1; i <= kNumImages; i++){
+            NSString *textureName = [NSString stringWithFormat:@"Player%d", i];
+            SKTexture *temp = [playerAnimatedAtlas textureNamed:textureName];
+            [playerFlickerFrames addObject:temp];
+        }
+        _playerFlickerFrames = playerFlickerFrames;
+
         //Initialize background
-        _background = [SKSpriteNode spriteNodeWithImageNamed:@"Volcanobackground.png"];
+        _background = [SKSpriteNode spriteNodeWithImageNamed:@"coreBackground.png"];
         _background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:_background];
     
 
 
         //Create player and place at bottom of screen
-        _player = [[SKSpriteNode alloc] initWithImageNamed:@"Player.png"];
+        
+        SKTexture *temp = _playerFlickerFrames[0];
+        
+        _player = [SKSpriteNode spriteNodeWithTexture:temp];
         _player.name = playerCategoryName;
         _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
         [self addChild:_player];
@@ -88,7 +108,7 @@ static NSString* playerCategoryName = @"player";
         //Setup the boulders
         _boulders1 = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
-            SKSpriteNode *boulder1 = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder.png"];
+            SKSpriteNode *boulder1 = [SKSpriteNode spriteNodeWithImageNamed:@"coreChunk.png"];
             boulder1.hidden = YES;
             [boulder1 setXScale:0.5];
             [boulder1 setYScale:0.5];
@@ -98,7 +118,7 @@ static NSString* playerCategoryName = @"player";
       
         _boulders2 = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
-            SKSpriteNode *boulder2 = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder.png"];
+            SKSpriteNode *boulder2 = [SKSpriteNode spriteNodeWithImageNamed:@"coreChunk.png"];
             boulder2.hidden = YES;
             [boulder2 setXScale:0.5];
             [boulder2 setYScale:0.5];
@@ -162,6 +182,7 @@ static NSString* playerCategoryName = @"player";
     for (SKSpriteNode *laser in _playerLasers) {
         laser.hidden = YES;
     }
+    [self flickering];
 }
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -383,7 +404,7 @@ static NSString* playerCategoryName = @"player";
         _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_score];
         [self.view presentScene:_gameOverScene];
     } else if (endReason == kEndReasonWin){
-        _victoryScene = [[BHJXVictoryScene alloc] initWithSize:self.size score:_score];
+        _victoryScene = [[BHJXEndingCutscene alloc] initWithSize:self.size];
         [self.view presentScene:_victoryScene];
     }
 }
@@ -404,6 +425,18 @@ static NSString* playerCategoryName = @"player";
     [_backgroundAudioPlayer setVolume:1.0];
     [_backgroundAudioPlayer play];
 }
+
+-(void)flickering
+{
+    //This is our general runAction method to make our player flicker.
+    [_player runAction:[SKAction repeatActionForever:
+                        [SKAction animateWithTextures:_playerFlickerFrames
+                                         timePerFrame:0.1f
+                                               resize:NO
+                                              restore:YES]] withKey:@"flickeringInPlacePlayer"];
+    return;
+}
+
 
 
 

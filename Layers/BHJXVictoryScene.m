@@ -11,7 +11,7 @@
 
 @implementation BHJXVictoryScene
 
--(id)initWithSize:(CGSize)size score:(int)score {
+-(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //You won!
         NSString *message = @"You Won!";
