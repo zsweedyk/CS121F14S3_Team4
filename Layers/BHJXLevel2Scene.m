@@ -236,7 +236,7 @@ static NSString* playerCategoryName = @"player";
                     [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
                     NSLog(@"a hit!");
                     _lives--;
-                    _invulnerability = 200;
+                    _invulnerability = 150;
                 }
             }
             if (_invulnerability > 0) {
