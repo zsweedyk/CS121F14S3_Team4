@@ -15,10 +15,6 @@
 #define kNumLasers 5
 #define kNumImages 2
 
-typedef enum {
-  kEndReasonLose,
-  kEndReasonWin
-} EndReason;
 
 static NSString* playerCategoryName = @"player";
 
@@ -34,7 +30,6 @@ static NSString* playerCategoryName = @"player";
     SKLabelNode *_scoreLabel;
     
     NSArray *_playerFlickerFrames;
-    NSMutableArray *_boulders;
 
     NSMutableArray *_boulders1;
     NSMutableArray *_boulders2;
@@ -316,7 +311,7 @@ static NSString* playerCategoryName = @"player";
     //collision detection
     if (!_gameOver) {
     //increment score
-        for (SKSpriteNode *boulder1 in _boulders) {
+        for (SKSpriteNode *boulder1 in _boulders1) {
             if (boulder1.hidden) {
                 continue;
             }
@@ -337,10 +332,6 @@ static NSString* playerCategoryName = @"player";
             }
             if (_invulnerability > 0) {
                 _invulnerability--;
-            }
-            if (_lives <= 0) {
-                NSLog(@"you lose");
-                [self endTheScene:kEndReasonLose];
             }
         }
             
@@ -366,11 +357,12 @@ static NSString* playerCategoryName = @"player";
             if (_invulnerability > 0) {
                 _invulnerability--;
             }
-            if (_lives <= 0) {
-                NSLog(@"you lose");
-                [self endTheScene:kEndReasonLose];
-            }
+            
         }
+    }
+    if (_lives <= 0) {
+        NSLog(@"you lose");
+        [self endTheScene:NO];
     }
     
     for (SKSpriteNode *playerLaser in _playerLasers) {
@@ -384,12 +376,12 @@ static NSString* playerCategoryName = @"player";
         }
         if (_evilDuckLives <= 0) {
             NSLog(@"you win");
-            [self endTheScene:kEndReasonWin];
+            [self endTheScene:NO];
         }
     }
 }
 
-- (void)endTheScene:(EndReason)endReason {
+- (void)endTheScene:(BOOL)didLose {
     
     if (_gameOver) {
         return;
@@ -399,10 +391,10 @@ static NSString* playerCategoryName = @"player";
     _player.hidden = YES;
     _gameOver = YES;
   
-    if (endReason == kEndReasonLose) {
+    if (!didLose) {
         _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size];
         [self.view presentScene:_gameOverScene];
-    } else if (endReason == kEndReasonWin){
+    } else {
         _victoryScene = [[BHJXEndingCutscene alloc] initWithSize:self.size];
         [self.view presentScene:_victoryScene];
     }
