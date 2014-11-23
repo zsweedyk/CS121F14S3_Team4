@@ -362,7 +362,7 @@ static NSString* playerCategoryName = @"player";
     }
     if (_lives <= 0) {
         NSLog(@"you lose");
-        [self endTheScene:NO];
+        [self endTheScene:YES];
     }
     
     for (SKSpriteNode *playerLaser in _playerLasers) {
