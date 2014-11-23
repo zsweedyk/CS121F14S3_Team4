@@ -19,10 +19,13 @@
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        
+        //Load the background
         _background = [SKSpriteNode spriteNodeWithImageNamed:@"StartScreen.png"];
         _background.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
         [self addChild:_background];
-                
+        
+        //Load the button to start the game
         _adventureLabel = [[SKLabelNode alloc] initWithFontNamed:@"Zapfino"];
         _adventureLabel.name = @"AdventureLabel";
         _adventureLabel.text = @"- Adventure Mode";
@@ -42,6 +45,7 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
+    //Start the game when the player presses the button
     if ([node.name isEqualToString:@"AdventureLabel"]) {
         SKTransition *reveal = [SKTransition fadeWithDuration:3];
         

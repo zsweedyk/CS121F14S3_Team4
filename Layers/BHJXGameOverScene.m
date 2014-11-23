@@ -19,7 +19,9 @@ int _level;
 -(id)initWithSize:(CGSize)size level:(int)level {
     if (self = [super initWithSize:size]) {
         
+        //Keep track of the level that you came from, so retry goes to the correct place
         _level = level;
+        
         //You Lost!
         NSString *message = @"You Lost!";
         SKLabelNode *loseLabel = [SKLabelNode labelNodeWithFontNamed:@"TimesNewRomanPSMT"];
@@ -58,28 +60,28 @@ int _level;
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
 
+    //On touch, return to menu if menu button is pressed, or last level if level button is pressed
     if ([node.name isEqualToString:@"Back to Menu"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    
         BHJXStartMenuScene * scene = [BHJXStartMenuScene sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
     } else if ([node.name isEqualToString:@"Retry Level?"]) {
-        [self retryLevel: _level];
+        [self retryLevel];
     }
 }
 
 // Retry level that you came from
-- (void)retryLevel: (int)level {
-    if (level == 1) {
+- (void)retryLevel {
+    if (_level == 1) {
         BHJXLevel1Scene * scene = [BHJXLevel1Scene sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene];
-    } else if (level == 2) {
+    } else if (_level == 2) {
         BHJXLevel2Scene * scene = [BHJXLevel2Scene sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene];
-    } else if (level == 3) {
+    } else if (_level == 3) {
         BHJXLevel3Scene * scene = [BHJXLevel3Scene sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene];

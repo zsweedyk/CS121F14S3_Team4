@@ -57,6 +57,7 @@ int _countTouches;
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
+    //Show and hide the slides in order
     if ([node.name isEqualToString:@"Continue"]) {
         
         if (_countTouches == 0) {

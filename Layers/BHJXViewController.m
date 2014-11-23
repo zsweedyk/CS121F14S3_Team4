@@ -20,13 +20,14 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    // Configure the view.
+    
     // Configure the view after it has been sized for the correct orientation.
     SKView *skView = (SKView *)self.view;
     
     
     if (!skView.scene) {
-        // Create and configure the scene.
+        
+        // Create and configure the start menu scene.
         BHJXStartMenuScene *theScene = [BHJXStartMenuScene sceneWithSize:skView.bounds.size];
         theScene.scaleMode = SKSceneScaleModeAspectFill;
         
@@ -53,7 +54,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (BOOL)prefersStatusBarHidden

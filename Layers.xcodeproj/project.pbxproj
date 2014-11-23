@@ -46,7 +46,6 @@
 		A460CE321A12C0CA006AD185 /* BHJXLevel3Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = A460CE311A12C0CA006AD185 /* BHJXLevel3Scene.m */; };
 		A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB319FD9DE10032EBEE /* Layer.caf */; };
 		A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */; };
-		E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */; };
 		E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A619FD830400529044 /* BHJXGameOverScene.m */; };
 		E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */; };
 		E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */; };
@@ -125,8 +124,6 @@
 		A460CE311A12C0CA006AD185 /* BHJXLevel3Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXLevel3Scene.m; sourceTree = "<group>"; };
 		A48A9FB319FD9DE10032EBEE /* Layer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Layer.caf; sourceTree = "<group>"; };
 		A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_small.caf; sourceTree = "<group>"; };
-		E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuViewController.h; sourceTree = "<group>"; };
-		E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuViewController.m; sourceTree = "<group>"; };
 		E804E6A519FD830400529044 /* BHJXGameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXGameOverScene.h; sourceTree = "<group>"; };
 		E804E6A619FD830400529044 /* BHJXGameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXGameOverScene.m; sourceTree = "<group>"; };
 		E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuScene.h; sourceTree = "<group>"; };
@@ -318,8 +315,6 @@
 				E804E6A619FD830400529044 /* BHJXGameOverScene.m */,
 				E892CC051A196D3500C52332 /* BHJXVictoryScene.h */,
 				E892CC061A196D3500C52332 /* BHJXVictoryScene.m */,
-				E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */,
-				E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */,
 				E89C504E19EB2E9F00FF75A1 /* Images */,
 				E89C503119EB2E7800FF75A1 /* Images.xcassets */,
 				E89C501B19EB2E7800FF75A1 /* Supporting Files */,
@@ -522,7 +517,6 @@
 				E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */,
 				A460CE321A12C0CA006AD185 /* BHJXLevel3Scene.m in Sources */,
 				819C419B1A19D16100A0D65C /* BHJXIntroLevel2.m in Sources */,
-				E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */,
 				E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */,
 				81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */,
 				E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */,

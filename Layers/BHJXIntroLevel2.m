@@ -70,6 +70,7 @@ int _countTouches;
     
     if ([node.name isEqualToString:@"Continue"]) {
         
+        //Show and hide the slides in order
         if (_countTouches == 0) {
             _slide1.hidden = YES;
             _slide2.hidden = NO;
@@ -86,9 +87,12 @@ int _countTouches;
             _slide4.hidden = YES;
             _slide5.hidden = NO;
             _countTouches++;
+            
+            //change position of continue button so players don't accidentally start next level
             _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
             _continueButton.text = @"Start Level?";
         } else {
+            //Start the next level
             SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
             
             BHJXLevel2Scene * scene = [BHJXLevel2Scene sceneWithSize:self.view.bounds.size];

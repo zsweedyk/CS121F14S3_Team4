@@ -40,6 +40,7 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
+    //Return to menu if menu button is pressed
     if ([node.name isEqualToString:@"Back to Menu"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         
