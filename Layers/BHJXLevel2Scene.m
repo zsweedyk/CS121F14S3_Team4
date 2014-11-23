@@ -6,16 +6,25 @@
 //  Copyright (c) 2014 BHJX. All rights reserved.
 //
 
+
+
 #import "BHJXLevel2Scene.h"
 #import "BHJXGameOverScene.h"
 #import "BHJXIntroLevel3.h"
 @import AVFoundation;
 
+
+
+//Number of boulders in array
 #define kNumBoulders 10
 #define kNumImages 2
 
+
+
 static NSString* playerCategoryName = @"player";
 static int initialDistance = 500;
+
+
 
 @implementation BHJXLevel2Scene
 {
@@ -24,7 +33,6 @@ static int initialDistance = 500;
     SKSpriteNode *_background2;
     SKLabelNode *_livesLabel;
     SKLabelNode *_distanceLabel;
-    
     
     NSArray *_playerFlickerFrames;
     NSMutableArray *_boulders;
@@ -41,10 +49,13 @@ static int initialDistance = 500;
     AVAudioPlayer *_backgroundAudioPlayer;
 }
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        //Setup flickering
         
+        
+        //Setup flickering
         NSMutableArray *playerFlickerFrames = [NSMutableArray array];
         SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
 
@@ -68,11 +79,8 @@ static int initialDistance = 500;
         [self addChild:_background2];
         
         
-        
         //Create player and place at bottom of screen
-        
         SKTexture *temp = _playerFlickerFrames[0];
-        
         _player = [SKSpriteNode spriteNodeWithTexture:temp];
         _player.name = playerCategoryName;
         _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.84);
@@ -82,6 +90,7 @@ static int initialDistance = 500;
         _player.physicsBody.friction = 0.4f;
         // make physicsBody static
         _player.physicsBody.dynamic = NO;
+        
         
         //Setup the boulders
         _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
@@ -93,12 +102,11 @@ static int initialDistance = 500;
             [_boulders addObject:boulder];
             [self addChild:boulder];
         }
-        
         _nextBoulderSpawn = 0;
-        
         for (SKSpriteNode *boulder in _boulders) {
             boulder.hidden = YES;
         }
+        
         
         //Setup the lives label
         _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
@@ -109,6 +117,7 @@ static int initialDistance = 500;
         _livesLabel.fontColor = [SKColor blueColor];
         [self addChild:_livesLabel];
         
+        
         //Setup the distance label
         _distanceLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
         _distanceLabel.name = @"scoreLabel";
@@ -118,8 +127,10 @@ static int initialDistance = 500;
         _distanceLabel.fontColor = [SKColor blueColor];
         [self addChild:_distanceLabel];
         
+        
         //Play the background music
         [self startBackgroundMusic];
+        
         
         //Start the game
         [self startTheGame];
@@ -127,8 +138,11 @@ static int initialDistance = 500;
     return self;
 }
 
+
+
 - (void)startTheGame
 {
+    //Initialize all values
     _lives = 5;
     _distance = initialDistance;
     _invulnerability = 0;
@@ -137,10 +151,13 @@ static int initialDistance = 500;
     [self flickering];
 }
 
+
+
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     /* Called when a touch begins */
     self.isFingerOnDuck = YES;
 }
+
 
 
 -(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {

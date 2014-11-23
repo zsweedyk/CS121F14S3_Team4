@@ -12,6 +12,4 @@
 
 @property (nonatomic) BOOL isFingerOnDuck;
 
-
-
 @end

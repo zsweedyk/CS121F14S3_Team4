@@ -6,17 +6,25 @@
 //  Copyright (c) 2014 BHJX. All rights reserved.
 //
 
+
+
 #import "BHJXLevel1Scene.h"
-#import "BHJXStartMenuViewController.h"
 #import "BHJXGameOverScene.h"
 #import "BHJXIntroLevel2.h"
 @import AVFoundation;
 
+
+
+//Number of boulders in array
 #define kNumBoulders 10
 #define kNumImages 2
 
+
+
 static NSString* playerCategoryName = @"player";
 static int initialDistance = 500;
+
+
 
 @implementation BHJXLevel1Scene
 {
@@ -42,13 +50,16 @@ static int initialDistance = 500;
     AVAudioPlayer *_backgroundAudioPlayer;
 }
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        
         
         //Setup flickering
         NSMutableArray *bgFlickerFrames = [NSMutableArray array];
         SKTextureAtlas *bgAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Volcano"];
-        
+    
         NSMutableArray *playerFlickerFrames = [NSMutableArray array];
         SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
         
@@ -66,7 +77,6 @@ static int initialDistance = 500;
         SKTexture *temp = _backgroundFlickerFrames[0];
         
         
-        
         //Initialize scrolling background
         _background1 = [SKSpriteNode spriteNodeWithTexture:temp];
         _background1.anchorPoint = CGPointZero;
@@ -79,13 +89,8 @@ static int initialDistance = 500;
         [self addChild:_background2];
         
         
-        
-        
-        
         //Create player and place at bottom of screen
-
         temp = _playerFlickerFrames[0];
-        
         _player = [SKSpriteNode spriteNodeWithTexture:temp];
         _player.name = playerCategoryName;
         _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
@@ -97,8 +102,8 @@ static int initialDistance = 500;
         // make physicsBody static
         _player.physicsBody.dynamic = NO;
         
-        //Setup the boulders
         
+        //Setup the boulders
         _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
             SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder1.png"];
@@ -108,12 +113,11 @@ static int initialDistance = 500;
             [_boulders addObject:boulder];
             [self addChild:boulder];
         }
-        
         _nextBoulderSpawn = 0;
-        
         for (SKSpriteNode *boulder in _boulders) {
             boulder.hidden = YES;
         }
+        
         
         //Setup the lives label
         _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
@@ -124,6 +128,7 @@ static int initialDistance = 500;
         _livesLabel.fontColor = [SKColor redColor];
         [self addChild:_livesLabel];
         
+        
         //Setup the score label
         _distanceLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
         _distanceLabel.name = @"scoreLabel";
@@ -133,8 +138,10 @@ static int initialDistance = 500;
         _distanceLabel.fontColor = [SKColor redColor];
         [self addChild:_distanceLabel];
       
+        
         //Play the background music
         [self startBackgroundMusic];
+        
         
         //Start the game
         [self startTheGame];
@@ -142,8 +149,11 @@ static int initialDistance = 500;
     return self;
 }
 
+
+
 - (void)startTheGame
 {
+    //Initialize all values
     _lives = 5;
     _distance = initialDistance;
     _invulnerability = 0;
@@ -152,38 +162,42 @@ static int initialDistance = 500;
     [self flickering];
 }
 
+
+
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
-    /* Called when a touch begins */
+    //Called when a touch begins
     self.isFingerOnDuck = YES;
 }
 
 
+
 -(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-    // 1 Check whether user tapped paddle
+    //Response to touch
     if (self.isFingerOnDuck) {
-        // 2 Get touch location
         UITouch* touch = [touches anyObject];
         CGPoint touchLocation = [touch locationInNode:self];
         CGPoint previousLocation = [touch previousLocationInNode:self];
-        // 3 Get node for paddle
         SKSpriteNode* duck = (SKSpriteNode*)[self childNodeWithName: playerCategoryName];
-        // 4 Calculate new position along x for paddle
         int playerX = duck.position.x + (touchLocation.x - previousLocation.x);
-        // 5 Limit x so that the paddle will not leave the screen to left or right
         playerX = MAX(playerX, duck.size.width/2);
         playerX = MIN(playerX, self.size.width - duck.size.width/2);
-        // 6 Update position of paddle
         duck.position = CGPointMake(playerX, duck.position.y);
     }
 }
+
+
 
 -(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
     self.isFingerOnDuck = NO;
 }
 
+
+
 - (float)randomValueBetween:(float)low andValue:(float)high {
     return (((float) arc4random() / 0xFFFFFFFFu) * (high - low)) + low;
 }
+
+
 
 -(void)update:(NSTimeInterval)currentTime {
     //Set the background to be scrolling
@@ -196,12 +210,13 @@ static int initialDistance = 500;
         _background2.position = CGPointMake(_background2.position.x, _background1.position.y + _background1.size.height);
     }
     
+    
     //Falling boulders
     double curTime = CACurrentMediaTime();
     if (curTime > _nextBoulderSpawn) {
         float randSecs = [self randomValueBetween:0.20 andValue:1.0];
         _nextBoulderSpawn = randSecs + curTime;
-        
+
         float randX = [self randomValueBetween:0.0 andValue:self.frame.size.width];
         float randDuration = [self randomValueBetween:2.0 andValue:10.0];
         
@@ -228,7 +243,8 @@ static int initialDistance = 500;
         [boulder runAction:moveBoulderActionWithDone withKey:@"boulderMoving"];
     }
     
-    //Update lives and score labels
+    
+    //Update lives and distance labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
     _distanceLabel.text = [NSString stringWithFormat:@"Distance to Top: %d", _distance];
     if (_distance <= initialDistance*0.2) {
@@ -236,9 +252,10 @@ static int initialDistance = 500;
         _distanceLabel.scale = 1.9;
     }
     
+    
     //collision detection
     if (!_gameOver) {
-        //increment score
+        //decrement distance
         _distance--;
         for (SKSpriteNode *boulder in _boulders) {
             if (boulder.hidden) {
@@ -259,6 +276,7 @@ static int initialDistance = 500;
                     _invulnerability = 150;
                 }
             }
+            //Ensure that for a short while after being hit, the player cannot be hit
             if (_invulnerability > 0) {
                 _invulnerability--;
             }
@@ -272,11 +290,12 @@ static int initialDistance = 500;
     }
 }
 
+
+
 - (void)endTheScene:(BOOL)didLose {
     if (_gameOver) {
         return;
     }
-    
     [self removeAllActions];
     _player.hidden = YES;
     _gameOver = YES;
@@ -291,25 +310,28 @@ static int initialDistance = 500;
     }
 }
 
+
+
 - (void)startBackgroundMusic
 {
-  NSError *err;
-  NSURL *file = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Layer.caf" ofType:nil]];
-  _backgroundAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:&err];
-  if (err) {
+    NSError *err;
+    NSURL *file = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Layer.caf" ofType:nil]];
+    _backgroundAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:&err];
+    if (err) {
     NSLog(@"error in audio play %@",[err userInfo]);
     return;
-  }
-  [_backgroundAudioPlayer prepareToPlay];
-  
-  // this will play the music infinitely
-  _backgroundAudioPlayer.numberOfLoops = -1;
-  [_backgroundAudioPlayer setVolume:1.0];
-  [_backgroundAudioPlayer play];
+    }
+    [_backgroundAudioPlayer prepareToPlay];
+
+    // this will play the music infinitely
+    _backgroundAudioPlayer.numberOfLoops = -1;
+    [_backgroundAudioPlayer setVolume:1.0];
+    [_backgroundAudioPlayer play];
 }
 
 
-// Make the 
+
+// Make the images flicker
 -(void)flickering
 {
     //This is our general runAction method to make our player flicker.
@@ -331,5 +353,7 @@ static int initialDistance = 500;
     
     return;
 }
+
+
 
 @end

@@ -11,6 +11,7 @@
 #import "BHJXEndingCutscene.h"
 @import AVFoundation;
 
+//Boulder and laser array sizes
 #define kNumBoulders 10
 #define kNumLasers 5
 #define kNumImages 2
