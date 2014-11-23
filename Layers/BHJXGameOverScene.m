@@ -16,6 +16,8 @@
 
 int _level;
 
+
+
 -(id)initWithSize:(CGSize)size level:(int)level {
     if (self = [super initWithSize:size]) {
         
@@ -55,6 +57,8 @@ int _level;
     return self;
 }
 
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
@@ -70,6 +74,8 @@ int _level;
         [self retryLevel];
     }
 }
+
+
 
 // Retry level that you came from
 - (void)retryLevel {

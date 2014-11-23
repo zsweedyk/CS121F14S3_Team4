@@ -17,6 +17,8 @@
     [super viewDidLoad];
 }
 
+
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
@@ -37,10 +39,14 @@
     
 }
 
+
+
 - (BOOL)shouldAutorotate
 {
     return YES;
 }
+
+
 
 - (NSUInteger)supportedInterfaceOrientations
 {
@@ -51,10 +57,14 @@
     }
 }
 
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
+
+
 
 - (BOOL)prefersStatusBarHidden
 {

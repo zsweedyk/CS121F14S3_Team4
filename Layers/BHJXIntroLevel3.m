@@ -18,6 +18,8 @@ SKSpriteNode *_slide3;
 SKSpriteNode *_slide4;
 int _countTouches;
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //Initialize touch counter to 0

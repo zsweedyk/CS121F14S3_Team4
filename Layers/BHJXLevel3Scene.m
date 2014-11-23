@@ -55,6 +55,8 @@ static NSString* playerCategoryName = @"player";
     AVAudioPlayer *_backgroundAudioPlayer;
 }
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
@@ -101,7 +103,7 @@ static NSString* playerCategoryName = @"player";
         // make physicsBody static
         _evilDuck.physicsBody.dynamic = NO;
     
-        //Setup the boulders
+        //Setup the boulders for left hand
         _boulders1 = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
             SKSpriteNode *boulder1 = [SKSpriteNode spriteNodeWithImageNamed:@"coreChunk.png"];
@@ -112,6 +114,7 @@ static NSString* playerCategoryName = @"player";
             [self addChild:boulder1];
         }
       
+        //Setup the boulder for right hand
         _boulders2 = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
         for (int i = 0; i < kNumBoulders; ++i) {
             SKSpriteNode *boulder2 = [SKSpriteNode spriteNodeWithImageNamed:@"coreChunk.png"];
@@ -122,9 +125,11 @@ static NSString* playerCategoryName = @"player";
             [self addChild:boulder2];
         }
     
+        //Set the boulders to begin spawning immediately
         _nextBoulderSpawn1 = 0;
         _nextBoulderSpawn2 = 0;
 
+        //Hide the boulders while they haven't yet been thrown
         for (SKSpriteNode *boulder1 in _boulders1) {
             boulder1.hidden = YES;
         }
@@ -159,8 +164,11 @@ static NSString* playerCategoryName = @"player";
       return self;
 }
 
+
+
 - (void)startTheGame
 {
+    //Initialize state of player and boss
     _lives = 5;
     _evilDuckLives = 10;
     _invulnerability = 0;
@@ -172,10 +180,13 @@ static NSString* playerCategoryName = @"player";
     [self flickering];
 }
 
+
+
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     /* Called when a touch begins */
     self.isFingerOnDuck = YES;
   
+    //Only fire a laser if the cooldown period is over
     if (fireAtZero == 0){
         SKSpriteNode *playerLaser = [_playerLasers objectAtIndex:_nextPlayerLaser];
         _nextPlayerLaser++;
@@ -183,30 +194,30 @@ static NSString* playerCategoryName = @"player";
             _nextPlayerLaser = 0;
         }
         
-        //2
+        //Fire the laser from the position the player is currently in
         playerLaser.position = CGPointMake(_player.position.x,_player.position.y);
         playerLaser.hidden = NO;
         [playerLaser removeAllActions];
         
-        //3
+        //Start laser moving upward
         CGPoint location = CGPointMake(_player.position.x, self.frame.size.height);
         SKAction *laserMoveAction = [SKAction moveTo:location duration:0.5];
-        //4
+        
+        //Hide the laser when it has reached the top
         SKAction *laserDoneAction = [SKAction runBlock:(dispatch_block_t)^() {
-            //NSLog(@"Animation Completed");
             playerLaser.hidden = YES;
         }];
         
-        //5
+        //Create and run the laser action
         SKAction *moveLaserActionWithDone = [SKAction sequence:@[laserMoveAction,laserDoneAction]];
-        //6
         [playerLaser runAction:moveLaserActionWithDone withKey:@"laserFired"];
         
-        //Player can't fire for 20 updates
+        //Player can't fire for 20 updates (cooldown period)
         fireAtZero = 20;
     }
     
 }
+
 
 
 -(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -228,13 +239,19 @@ static NSString* playerCategoryName = @"player";
     }
 }
 
+
+
 -(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
     self.isFingerOnDuck = NO;
 }
 
+
+//Generate a random value
 - (float)randomValueBetween:(float)low andValue:(float)high {
     return (((float) arc4random() / 0xFFFFFFFFu) * (high - low)) + low;
 }
+
+
 
 -(void)update:(NSTimeInterval)currentTime {
     
@@ -242,10 +259,10 @@ static NSString* playerCategoryName = @"player";
   //Falling boulders
     double curTime = CACurrentMediaTime();
     
+    //Deal with boulders from both hands
     if (curTime > _nextBoulderSpawn1) {
         
-        //Decrement fireAtZero if greater than zero so duck is closer to being able to fire
-        
+        //Get ready to fire the next boulder from the left hand if it is time for it to spawn
         float randSecs1 = [self randomValueBetween:1.0 andValue:1.8];
         _nextBoulderSpawn1 = randSecs1 + curTime;
         float randDuration1 = [self randomValueBetween:2.0 andValue:10.0];
@@ -254,6 +271,8 @@ static NSString* playerCategoryName = @"player";
         if (_nextBoulder1 >= _boulders1.count) {
             _nextBoulder1 = 0;
         }
+        
+        //Put the boulder in position to be thrown
         [boulder1 removeAllActions];
         boulder1.position = CGPointMake(_evilDuck.position.x - 220, _evilDuck.position.y + 120);
         boulder1.hidden = NO;
@@ -263,10 +282,11 @@ static NSString* playerCategoryName = @"player";
         SKAction *moveAction1 = [SKAction moveTo:location1 duration:randDuration1];
         SKAction *doneAction1 = [SKAction runBlock:(dispatch_block_t)^() {boulder1.hidden = YES;}];
         
+        //Throw the boulder
         SKAction *moveBoulderActionWithDone1 = [SKAction sequence:@[moveAction1, doneAction1]];
         [boulder1 runAction:moveBoulderActionWithDone1 withKey:@"boulderMoving"];
       
-      
+        //Get ready to fire the next boulder from the right hand if it is time for it to spawn
         float randSecs2 = [self randomValueBetween:1.0 andValue:1.8];
         _nextBoulderSpawn2 = randSecs2 + curTime;
         float randDuration2 = [self randomValueBetween:2.0 andValue:10.0];
@@ -275,6 +295,8 @@ static NSString* playerCategoryName = @"player";
         if (_nextBoulder2 >= _boulders2.count) {
             _nextBoulder2 = 0;
         }
+        
+        //Put the boulder in position to be thrown
         [boulder2 removeAllActions];
         boulder2.position = CGPointMake(_evilDuck.position.x + 220, _evilDuck.position.y + 120);
         boulder2.hidden = NO;
@@ -283,7 +305,8 @@ static NSString* playerCategoryName = @"player";
           
         SKAction *moveAction2 = [SKAction moveTo:location2 duration:randDuration2];
         SKAction *doneAction2 = [SKAction runBlock:(dispatch_block_t)^() {boulder2.hidden = YES;}];
-          
+        
+        //Throw the boulder
         SKAction *moveBoulderActionWithDone2 = [SKAction sequence:@[moveAction2, doneAction2 ]];
         [boulder2 runAction:moveBoulderActionWithDone2 withKey:@"boulderMoving"];
     }
@@ -311,11 +334,14 @@ static NSString* playerCategoryName = @"player";
   
     //collision detection
     if (!_gameOver) {
-    //increment score
+        
+        //Detect collisions for boulders thrown from the left hand
         for (SKSpriteNode *boulder1 in _boulders1) {
             if (boulder1.hidden) {
                 continue;
             }
+            
+            //Only hit player if it is not invulnerable
             if (_invulnerability == 0) {
                 if ([_player intersectsNode:boulder1]) {
                     boulder1.hidden = YES;
@@ -331,15 +357,20 @@ static NSString* playerCategoryName = @"player";
                     _invulnerability = 150;
                 }
             }
+            
+            //Player gets closer to being able to be hit if it is still cooling down from last hit
             if (_invulnerability > 0) {
                 _invulnerability--;
             }
         }
-            
+        
+        //Detect collisions for boulders thrown from the right hand
         for (SKSpriteNode *boulder2 in _boulders2) {
             if (boulder2.hidden) {
                 continue;
             }
+            
+            //Only hit player if it is not invulnerable
             if (_invulnerability == 0) {
                 if ([_player intersectsNode:boulder2]) {
                     boulder2.hidden = YES;
@@ -355,17 +386,22 @@ static NSString* playerCategoryName = @"player";
                     _invulnerability = 150;
                 }
             }
+            
+            
             if (_invulnerability > 0) {
                 _invulnerability--;
             }
             
         }
     }
+    
+    //Lose the game if player loses all lives
     if (_lives <= 0) {
         NSLog(@"you lose");
         [self endTheScene:YES];
     }
     
+    //Check collisions for lasers
     for (SKSpriteNode *playerLaser in _playerLasers) {
         if (playerLaser.hidden) {
             continue;
@@ -382,6 +418,8 @@ static NSString* playerCategoryName = @"player";
     }
 }
 
+
+
 - (void)endTheScene:(BOOL)didLose {
     
     if (_gameOver) {
@@ -392,6 +430,7 @@ static NSString* playerCategoryName = @"player";
     _player.hidden = YES;
     _gameOver = YES;
   
+    //Load game over scene if player lost, or ending cutscene if player won
     if (didLose) {
         _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size level:3];
         [self.view presentScene:_gameOverScene];
@@ -400,6 +439,8 @@ static NSString* playerCategoryName = @"player";
         [self.view presentScene:_victoryScene];
     }
 }
+
+
 
 - (void)startBackgroundMusic
 {
@@ -417,6 +458,8 @@ static NSString* playerCategoryName = @"player";
     [_backgroundAudioPlayer setVolume:1.0];
     [_backgroundAudioPlayer play];
 }
+
+
 
 -(void)flickering
 {

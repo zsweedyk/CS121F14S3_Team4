@@ -11,6 +11,8 @@
 
 @implementation BHJXVictoryScene
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //You won!
@@ -34,6 +36,8 @@
     }
     return self;
 }
+
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];

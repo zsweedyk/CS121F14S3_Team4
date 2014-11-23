@@ -17,6 +17,8 @@ SKSpriteNode *_slide2;
 SKSpriteNode *_slide3;
 int _countTouches;
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //Initialize touch counter to 0
@@ -51,6 +53,8 @@ int _countTouches;
     }
     return self;
 }
+
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
