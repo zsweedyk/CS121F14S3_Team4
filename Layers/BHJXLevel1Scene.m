@@ -16,6 +16,7 @@
 #define kNumImages 2
 
 static NSString* playerCategoryName = @"player";
+static int initialDistance = 500;
 
 @implementation BHJXLevel1Scene
 {
@@ -23,7 +24,7 @@ static NSString* playerCategoryName = @"player";
     SKSpriteNode *_background1;
     SKSpriteNode *_background2;
     SKLabelNode *_livesLabel;
-    SKLabelNode *_scoreLabel;
+    SKLabelNode *_distanceLabel;
   
     NSArray *_playerFlickerFrames;
     NSArray *_backgroundFlickerFrames;
@@ -124,13 +125,13 @@ static NSString* playerCategoryName = @"player";
         [self addChild:_livesLabel];
         
         //Setup the score label
-        _scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
-        _scoreLabel.name = @"scoreLabel";
-        _scoreLabel.text = [NSString stringWithFormat:@"%d", _distance];
-        _scoreLabel.scale = 0.9;
-        _scoreLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
-        _scoreLabel.fontColor = [SKColor redColor];
-        [self addChild:_scoreLabel];
+        _distanceLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+        _distanceLabel.name = @"scoreLabel";
+        _distanceLabel.text = [NSString stringWithFormat:@"%d", _distance];
+        _distanceLabel.scale = 0.9;
+        _distanceLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
+        _distanceLabel.fontColor = [SKColor redColor];
+        [self addChild:_distanceLabel];
       
         //Play the background music
         [self startBackgroundMusic];
@@ -144,7 +145,7 @@ static NSString* playerCategoryName = @"player";
 - (void)startTheGame
 {
     _lives = 5;
-    _distance = 500;
+    _distance = initialDistance;
     _invulnerability = 0;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
@@ -229,7 +230,11 @@ static NSString* playerCategoryName = @"player";
     
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
-    _scoreLabel.text = [NSString stringWithFormat:@"Distance to Top: %d", _distance];
+    _distanceLabel.text = [NSString stringWithFormat:@"Distance to Top: %d", _distance];
+    if (_distance <= initialDistance*0.2) {
+        _distanceLabel.fontColor = [SKColor yellowColor];
+        _distanceLabel.scale = 1.9;
+    }
     
     //collision detection
     if (!_gameOver) {
