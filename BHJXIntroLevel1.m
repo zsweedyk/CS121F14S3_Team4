@@ -72,6 +72,8 @@ int _countTouches;
     return self;
 }
 
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
