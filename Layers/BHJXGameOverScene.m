@@ -36,7 +36,7 @@ int _level;
         retryLevelButton.text = retryLevelmessage;
         retryLevelButton.fontSize = 50;
         retryLevelButton.position = CGPointMake(self.size.width/2, self.size.height/2);
-        retryLevelButton.name = @"Back to Menu";
+        retryLevelButton.name = @"Retry Level?";
         [self addChild:retryLevelButton];
         
         //Button for getting back to menu

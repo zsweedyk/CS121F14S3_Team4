@@ -22,15 +22,7 @@
         _background = [SKSpriteNode spriteNodeWithImageNamed:@"StartScreen.png"];
         _background.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
         [self addChild:_background];
-        
-        _titleLabel = [[SKLabelNode alloc] initWithFontNamed:@"Zapfino"];
-        _titleLabel.name = @"titleLabel";
-        _titleLabel.text = @"LAYERS";
-        _titleLabel.fontColor = [SKColor redColor];
-        _titleLabel.fontSize = 40;
-        _titleLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.8);
-        [self addChild:_titleLabel];
-        
+                
         _adventureLabel = [[SKLabelNode alloc] initWithFontNamed:@"Zapfino"];
         _adventureLabel.name = @"AdventureLabel";
         _adventureLabel.text = @"- Adventure Mode";

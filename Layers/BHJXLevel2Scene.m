@@ -269,7 +269,7 @@ static int initialDistance = 500;
     
     if (didLose)
     {
-        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:_distance];
+        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size level:2];
         [self.view presentScene:_gameOverScene];
     } else {
         BHJXIntroLevel3 * scene = [BHJXIntroLevel3 sceneWithSize:self.view.bounds.size];
