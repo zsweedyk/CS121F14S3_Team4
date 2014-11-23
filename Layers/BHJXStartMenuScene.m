@@ -7,35 +7,37 @@
 //
 
 #import "BHJXStartMenuScene.h"
-#import "BHJXMyScene.h"
+#import "BHJXIntroLevel1.h"
 
 @implementation BHJXStartMenuScene {
     SKSpriteNode *_background;
     SKLabelNode *_titleLabel;
-    SKLabelNode *_survival1Label;
+    SKLabelNode *_adventureLabel;
 }
 
 
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        _background = [SKSpriteNode spriteNodeWithImageNamed:@"Startmenubackground.png"];
+        _background = [SKSpriteNode spriteNodeWithImageNamed:@"StartScreen.png"];
         _background.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
         [self addChild:_background];
         
-        _titleLabel = [[SKLabelNode alloc] initWithFontNamed:@"TimesNewRomanPSMT"];
+        _titleLabel = [[SKLabelNode alloc] initWithFontNamed:@"Zapfino"];
         _titleLabel.name = @"titleLabel";
-        _titleLabel.text = @"Layers";
+        _titleLabel.text = @"LAYERS";
         _titleLabel.fontColor = [SKColor redColor];
-        _titleLabel.position = CGPointMake(self.frame.size.width/4, self.frame.size.height*0.9);
+        _titleLabel.fontSize = 40;
+        _titleLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.8);
         [self addChild:_titleLabel];
         
-        _survival1Label = [[SKLabelNode alloc] initWithFontNamed:@"TimesNewRomanPSMT"];
-        _survival1Label.name = @"survival1Label";
-        _survival1Label.text = @"Survival Mode";
-        _survival1Label.fontColor = [SKColor blackColor];
-        _survival1Label.position = CGPointMake(self.frame.size.width/4, self.frame.size.height*0.8);
-        [self addChild:_survival1Label];
+        _adventureLabel = [[SKLabelNode alloc] initWithFontNamed:@"Zapfino"];
+        _adventureLabel.name = @"AdventureLabel";
+        _adventureLabel.text = @"- Adventure Mode";
+        _adventureLabel.fontColor = [SKColor blackColor];
+        _adventureLabel.fontSize = 30;
+        _adventureLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.5);
+        [self addChild:_adventureLabel];
         
         
         
@@ -48,10 +50,10 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    if ([node.name isEqualToString:@"survival1Label"]) {
+    if ([node.name isEqualToString:@"AdventureLabel"]) {
         SKTransition *reveal = [SKTransition fadeWithDuration:3];
         
-        BHJXMyScene *scene = [BHJXMyScene sceneWithSize:self.view.bounds.size];
+        BHJXIntroLevel1 *scene = [BHJXIntroLevel1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition:reveal];
                           

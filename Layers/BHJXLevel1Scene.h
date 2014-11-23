@@ -1,5 +1,5 @@
 //
-//  BHJXMyScene.h
+//  BHJXLevel1Scene.h
 //  Layers
 //
 
@@ -8,7 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface BHJXMyScene : SKScene
+@interface BHJXLevel1Scene : SKScene<UIAlertViewDelegate>
 
 @property (nonatomic) BOOL isFingerOnDuck;
 

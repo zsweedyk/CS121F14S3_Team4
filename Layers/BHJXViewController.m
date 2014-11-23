@@ -7,7 +7,7 @@
 //
 
 #import "BHJXViewController.h"
-#import "BHJXMyScene.h"
+#import "BHJXLevel1Scene.h"
 #import "BHJXStartMenuScene.h"
 
 @implementation BHJXViewController
@@ -26,9 +26,6 @@
     
     
     if (!skView.scene) {
-        skView.showsFPS = YES;
-        skView.showsNodeCount = YES;
-        
         // Create and configure the scene.
         BHJXStartMenuScene *theScene = [BHJXStartMenuScene sceneWithSize:skView.bounds.size];
         theScene.scaleMode = SKSceneScaleModeAspectFill;
@@ -57,6 +54,11 @@
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 @end
