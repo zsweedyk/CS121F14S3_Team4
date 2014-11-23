@@ -392,7 +392,7 @@ static NSString* playerCategoryName = @"player";
     _gameOver = YES;
   
     if (!didLose) {
-        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size];
+        _gameOverScene = [[BHJXGameOverScene alloc] initWithSize:self.size score:0];
         [self.view presentScene:_gameOverScene];
     } else {
         _victoryScene = [[BHJXEndingCutscene alloc] initWithSize:self.size];
