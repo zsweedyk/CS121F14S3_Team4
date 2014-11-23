@@ -8,11 +8,18 @@
 
 #import "BHJXGameOverScene.h"
 #import "BHJXStartMenuScene.h"
+#import "BHJXLevel1Scene.h"
+#import "BHJXLevel2Scene.h"
+#import "BHJXLevel3Scene.h"
 
 @implementation BHJXGameOverScene
 
--(id)initWithSize:(CGSize)size score:(int)score {
+int _level;
+
+-(id)initWithSize:(CGSize)size level:(int)level {
     if (self = [super initWithSize:size]) {
+        
+        _level = level;
         //You Lost!
         NSString *message = @"You Lost!";
         SKLabelNode *loseLabel = [SKLabelNode labelNodeWithFontNamed:@"TimesNewRomanPSMT"];
@@ -21,14 +28,17 @@
         loseLabel.position = CGPointMake(self.size.width/2, self.size.height/1.8);
         [self addChild:loseLabel];
         
-        //Label for the achieved score
-        NSString *scoreString = [NSString stringWithFormat:@"Your score: %d", score];
-        SKLabelNode *scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"TimesNewRomanPSMT"];
-        scoreLabel.text = scoreString;
-        scoreLabel.fontSize = 50;
-        scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2);
-        [self addChild:scoreLabel];
       
+        //Button for retrying previous level
+        NSString * retryLevelmessage;
+        retryLevelmessage = @"Retry Level?";
+        SKLabelNode *retryLevelButton = [SKLabelNode labelNodeWithFontNamed:@"TimeNewRomanPSMT"];
+        retryLevelButton.text = retryLevelmessage;
+        retryLevelButton.fontSize = 50;
+        retryLevelButton.position = CGPointMake(self.size.width/2, self.size.height/2);
+        retryLevelButton.name = @"Back to Menu";
+        [self addChild:retryLevelButton];
+        
         //Button for getting back to menu
         NSString * retrymessage;
         retrymessage = @"Back to Menu";
@@ -54,6 +64,25 @@
         BHJXStartMenuScene * scene = [BHJXStartMenuScene sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
+    } else if ([node.name isEqualToString:@"Retry Level?"]) {
+        [self retryLevel: _level];
+    }
+}
+
+// Retry level that you came from
+- (void)retryLevel: (int)level {
+    if (level == 1) {
+        BHJXLevel1Scene * scene = [BHJXLevel1Scene sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene];
+    } else if (level == 2) {
+        BHJXLevel2Scene * scene = [BHJXLevel2Scene sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene];
+    } else if (level == 3) {
+        BHJXLevel3Scene * scene = [BHJXLevel3Scene sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        [self.view presentScene:scene];
     }
 }
 

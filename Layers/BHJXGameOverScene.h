@@ -10,6 +10,6 @@
 
 @interface BHJXGameOverScene : SKScene
 
--(id)initWithSize:(CGSize)size score:(int)score;
+-(id)initWithSize:(CGSize)size level:(int)level;
 
 @end
