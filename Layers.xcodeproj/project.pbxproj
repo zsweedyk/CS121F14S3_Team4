@@ -46,6 +46,8 @@
 		A460CE321A12C0CA006AD185 /* BHJXLevel3Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = A460CE311A12C0CA006AD185 /* BHJXLevel3Scene.m */; };
 		A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB319FD9DE10032EBEE /* Layer.caf */; };
 		A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */; };
+		A4A7F5801A22AB3D001D0008 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F57F1A22AB3D001D0008 /* explosion.sks */; };
+		A4A7F5821A22B09D001D0008 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F5811A22B09D001D0008 /* spark.png */; };
 		E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A619FD830400529044 /* BHJXGameOverScene.m */; };
 		E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */; };
 		E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */; };
@@ -124,6 +126,8 @@
 		A460CE311A12C0CA006AD185 /* BHJXLevel3Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXLevel3Scene.m; sourceTree = "<group>"; };
 		A48A9FB319FD9DE10032EBEE /* Layer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Layer.caf; sourceTree = "<group>"; };
 		A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_small.caf; sourceTree = "<group>"; };
+		A4A7F57F1A22AB3D001D0008 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
+		A4A7F5811A22B09D001D0008 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		E804E6A519FD830400529044 /* BHJXGameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXGameOverScene.h; sourceTree = "<group>"; };
 		E804E6A619FD830400529044 /* BHJXGameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXGameOverScene.m; sourceTree = "<group>"; };
 		E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuScene.h; sourceTree = "<group>"; };
@@ -315,6 +319,8 @@
 				E804E6A619FD830400529044 /* BHJXGameOverScene.m */,
 				E892CC051A196D3500C52332 /* BHJXVictoryScene.h */,
 				E892CC061A196D3500C52332 /* BHJXVictoryScene.m */,
+				A4A7F57F1A22AB3D001D0008 /* explosion.sks */,
+				A4A7F5811A22B09D001D0008 /* spark.png */,
 				E89C504E19EB2E9F00FF75A1 /* Images */,
 				E89C503119EB2E7800FF75A1 /* Images.xcassets */,
 				E89C501B19EB2E7800FF75A1 /* Supporting Files */,
@@ -457,6 +463,7 @@
 				819C41B61A19D20E00A0D65C /* EndScene3.png in Resources */,
 				819C41B01A19D1EC00A0D65C /* Intro3Scene2.png in Resources */,
 				8105C7ED1A132F47006C811C /* Boulder.atlas in Resources */,
+				A4A7F5821A22B09D001D0008 /* spark.png in Resources */,
 				819C41C21A19D7D100A0D65C /* Current.png in Resources */,
 				81BFAEC01A102B0100058249 /* Intro1Scene3.png in Resources */,
 				81BFAEC81A10326500058249 /* Intro1Scene7.png in Resources */,
@@ -473,6 +480,7 @@
 				81E941571A1ADBA2004BFF0C /* coreChunk.png in Resources */,
 				8105C7E91A1313C2006C811C /* Volcanobackground.png in Resources */,
 				A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */,
+				A4A7F5801A22AB3D001D0008 /* explosion.sks in Resources */,
 				8105C7EB1A1325E7006C811C /* Volcano.atlas in Resources */,
 				819C41C41A19D7E100A0D65C /* Mantle.atlas in Resources */,
 				81E941551A1ADAF9004BFF0C /* coreBackground.png in Resources */,

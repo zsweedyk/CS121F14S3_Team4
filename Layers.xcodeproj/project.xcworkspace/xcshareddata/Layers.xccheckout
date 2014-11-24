@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>0D39F43AFEC74EED8BB2D1926E3BA9E01F35A44E</key>
-		<string>https://github.com/zsweedyk/CS121F14S3_Team4</string>
+		<string>https://github.com/zsweedyk/CS121F14S3_Team4.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Layers.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/zsweedyk/CS121F14S3_Team4</string>
+	<string>https://github.com/zsweedyk/CS121F14S3_Team4.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>0D39F43AFEC74EED8BB2D1926E3BA9E01F35A44E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Take3</string>
+			<string>CS121F14S3_Team4</string>
 		</dict>
 	</array>
 </dict>

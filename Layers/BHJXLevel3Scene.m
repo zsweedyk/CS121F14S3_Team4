@@ -157,7 +157,7 @@ static NSString* playerCategoryName = @"player";
         
         //Play the background music
         [self startBackgroundMusic];
-        
+      
         //Start the game
         [self startTheGame];
       }
@@ -408,6 +408,7 @@ static NSString* playerCategoryName = @"player";
         }
         if ([playerLaser intersectsNode:_evilDuck]) {
             playerLaser.hidden = YES;
+            [self addExplosion:_evilDuck.position];
             --_evilDuckLives;
             NSLog(@"%d", _evilDuckLives);
         }
@@ -416,6 +417,22 @@ static NSString* playerCategoryName = @"player";
             [self endTheScene:NO];
         }
     }
+}
+
+
+
+- (void)addExplosion:(CGPoint)position {
+    //Add explosion
+    NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"explosion" ofType:@"sks"];
+    SKEmitterNode *explosion = [NSKeyedUnarchiver unarchiveObjectWithFile:explosionPath];
+  
+    explosion.position = position;
+    [self addChild:explosion];
+  
+    SKAction *removeExplosion = [SKAction sequence:@[[SKAction waitForDuration:1.5],
+                                                     [SKAction removeFromParent]]];
+  
+    [explosion runAction:removeExplosion];
 }
 
 
