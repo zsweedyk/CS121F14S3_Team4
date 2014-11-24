@@ -408,6 +408,9 @@ static NSString* playerCategoryName = @"player";
         }
         if ([playerLaser intersectsNode:_evilDuck]) {
             playerLaser.hidden = YES;
+            SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
+            SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+            [playerLaser runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
             [self addExplosion:_evilDuck.position];
             --_evilDuckLives;
             NSLog(@"%d", _evilDuckLives);
