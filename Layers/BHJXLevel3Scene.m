@@ -162,8 +162,8 @@ static NSString* playerCategoryName = @"player";
       
         //Start the game
         [self startTheGame];
-      }
-      return self;
+    }
+    return self;
 }
 
 
