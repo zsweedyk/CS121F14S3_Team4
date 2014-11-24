@@ -410,10 +410,12 @@ static NSString* playerCategoryName = @"player";
   
     //Multiple explosions at the end of game
     if (_finishBoss == YES) {
-        SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_large.caf" waitForCompletion:YES];
-        SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
-        [self runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
-        [self addExplosion:_evilDuck.position];
+        if (_invulnerability % 5 == 0) {
+            SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_large.caf" waitForCompletion:YES];
+            SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
+            [self runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
+            [self addExplosion:_evilDuck.position];
+        }
         _invulnerability--;
     }
   
