@@ -288,8 +288,8 @@ static int initialDistance = 500;
                 [self endTheScene:YES];
             } else {
                 if (_distance <= 0) {
-                    if (_player.position.y < self.frame.size.height + 85) {
-                        _invulnerability = 1000;
+                    if (_player.position.y < self.frame.size.height + 100) {
+                        _invulnerability = 1500;
                         _player.position = CGPointMake(_player.position.x, _player.position.y + 5);
                     } else {
                         [self endTheScene:NO];

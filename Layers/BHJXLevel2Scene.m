@@ -272,8 +272,8 @@ static int initialDistance = 500;
                 [self endTheScene:YES];
             } else {
                 if (_distance <= 0) {
-                    if (_player.position.y > -85) {
-                        _invulnerability = 1000;
+                    if (_player.position.y > -100) {
+                        _invulnerability = 2000;
                         _player.position = CGPointMake(_player.position.x, _player.position.y - 5);
                     } else {
                         [self endTheScene:NO];

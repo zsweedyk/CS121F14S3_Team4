@@ -49,6 +49,7 @@ static NSString* playerCategoryName = @"player";
     int _invulnerability;
 
     bool _gameOver;
+    bool _finishBoss;
 
     SKScene *_gameOverScene;
     SKScene *_victoryScene;
@@ -100,6 +101,7 @@ static NSString* playerCategoryName = @"player";
         _evilDuck.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_evilDuck.frame.size];
         _evilDuck.physicsBody.restitution = 0.1f;
         _evilDuck.physicsBody.friction = 0.4f;
+        _finishBoss = NO;
         // make physicsBody static
         _evilDuck.physicsBody.dynamic = NO;
     
@@ -170,7 +172,7 @@ static NSString* playerCategoryName = @"player";
 {
     //Initialize state of player and boss
     _lives = 5;
-    _evilDuckLives = 10;
+    _evilDuckLives = 5;
     _invulnerability = 0;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
@@ -363,6 +365,12 @@ static NSString* playerCategoryName = @"player";
                 _invulnerability--;
             }
         }
+      
+        //Lose the game if player loses all lives
+        if (_lives <= 0) {
+            NSLog(@"you lose");
+            [self endTheScene:YES];
+        }
         
         //Detect collisions for boulders thrown from the right hand
         for (SKSpriteNode *boulder2 in _boulders2) {
@@ -399,7 +407,16 @@ static NSString* playerCategoryName = @"player";
         NSLog(@"you lose");
         [self endTheScene:YES];
     }
-    
+  
+    //Multiple explosions at the end of game
+    if (_finishBoss == YES) {
+        SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_large.caf" waitForCompletion:YES];
+        SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
+        [self runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
+        [self addExplosion:_evilDuck.position];
+        _invulnerability--;
+    }
+  
     //Check collisions for lasers
     for (SKSpriteNode *playerLaser in _playerLasers) {
         if (playerLaser.hidden) {
@@ -407,7 +424,9 @@ static NSString* playerCategoryName = @"player";
         }
         if ([playerLaser intersectsNode:_evilDuck]) {
             playerLaser.hidden = YES;
-            if (_evilDuckLives > 0) {
+            --_evilDuckLives;
+            NSLog(@"%d", _evilDuckLives);
+            if (_evilDuckLives >= 1) {
                 SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
                 [playerLaser runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
@@ -417,17 +436,20 @@ static NSString* playerCategoryName = @"player";
                 SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
                 [playerLaser runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
                 [self addExplosion:_evilDuck.position];
-                _invulnerability = 1000;
-            }
-            --_evilDuckLives;
-            NSLog(@"%d", _evilDuckLives);
-        }
-        if (_evilDuckLives <= 0) {
-            if (_invulnerability <= 0) {
-                NSLog(@"you win");
-                [self endTheScene:NO];
+              
+                if (_finishBoss == NO) {
+                    _invulnerability = 250;
+                    _finishBoss = YES;
+                }
             }
         }
+        NSLog(@"_invulnerability: %d", _invulnerability);
+    }
+  
+    if (_invulnerability < 0) {
+        _evilDuck.hidden = YES;
+        NSLog(@"you win");
+        [self endTheScene:NO];
     }
 }
 
