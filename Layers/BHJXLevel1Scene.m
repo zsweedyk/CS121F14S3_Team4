@@ -281,13 +281,31 @@ static int initialDistance = 500;
                 _invulnerability--;
             }
             if (_lives <= 0) {
-              NSLog(@"you lose");
-              [self endTheScene:YES];
-            } else if (_distance <= 0) {
-                [self endTheScene:NO];
+                NSLog(@"you lose");
+                [self endTheScene:YES];
+            } else {
+                if (_distance <= 0) {
+                    [self endTheScene:NO];
+                }
             }
         }
     }
+}
+
+
+
+- (void)addExplosion:(CGPoint)position {
+  //Add explosion
+  NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"explosion" ofType:@"sks"];
+  SKEmitterNode *explosion = [NSKeyedUnarchiver unarchiveObjectWithFile:explosionPath];
+  
+  explosion.position = position;
+  [self addChild:explosion];
+  
+  SKAction *removeExplosion = [SKAction sequence:@[[SKAction waitForDuration:1.5],
+                                                   [SKAction removeFromParent]]];
+  
+  [explosion runAction:removeExplosion];
 }
 
 

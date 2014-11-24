@@ -267,9 +267,10 @@ static int initialDistance = 500;
             if (_lives <= 0) {
                 NSLog(@"you lose");
                 [self endTheScene:YES];
-            }
-            else if (_distance <= 0) {
-                [self endTheScene:NO];
+            } else {
+                if (_distance <= 0) {
+                    [self endTheScene:NO];
+                }
             }
         }
     }

@@ -30,8 +30,8 @@
         _adventureLabel.name = @"AdventureLabel";
         _adventureLabel.text = @"- Adventure Mode";
         _adventureLabel.fontColor = [SKColor blackColor];
-        _adventureLabel.fontSize = 30;
-        _adventureLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.5);
+        _adventureLabel.fontSize = 25;
+        _adventureLabel.position = CGPointMake(self.frame.size.width*0.66, self.frame.size.height*0.65);
         [self addChild:_adventureLabel];
         
         

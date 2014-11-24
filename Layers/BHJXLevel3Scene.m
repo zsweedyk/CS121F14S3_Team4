@@ -387,7 +387,6 @@ static NSString* playerCategoryName = @"player";
                 }
             }
             
-            
             if (_invulnerability > 0) {
                 _invulnerability--;
             }
