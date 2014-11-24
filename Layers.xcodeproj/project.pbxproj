@@ -48,6 +48,7 @@
 		A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */; };
 		A4A7F5801A22AB3D001D0008 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F57F1A22AB3D001D0008 /* explosion.sks */; };
 		A4A7F5821A22B09D001D0008 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F5811A22B09D001D0008 /* spark.png */; };
+		A4A7F5841A2337C2001D0008 /* explosion_large.caf in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F5831A2337C2001D0008 /* explosion_large.caf */; };
 		E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A619FD830400529044 /* BHJXGameOverScene.m */; };
 		E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */; };
 		E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */; };
@@ -128,6 +129,7 @@
 		A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_small.caf; sourceTree = "<group>"; };
 		A4A7F57F1A22AB3D001D0008 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		A4A7F5811A22B09D001D0008 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		A4A7F5831A2337C2001D0008 /* explosion_large.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_large.caf; sourceTree = "<group>"; };
 		E804E6A519FD830400529044 /* BHJXGameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXGameOverScene.h; sourceTree = "<group>"; };
 		E804E6A619FD830400529044 /* BHJXGameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXGameOverScene.m; sourceTree = "<group>"; };
 		E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuScene.h; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */,
+				A4A7F5831A2337C2001D0008 /* explosion_large.caf */,
 				A48A9FB319FD9DE10032EBEE /* Layer.caf */,
 				E89C501C19EB2E7800FF75A1 /* Layers-Info.plist */,
 				E89C501D19EB2E7800FF75A1 /* InfoPlist.strings */,
@@ -483,6 +486,7 @@
 				A4A7F5801A22AB3D001D0008 /* explosion.sks in Resources */,
 				8105C7EB1A1325E7006C811C /* Volcano.atlas in Resources */,
 				819C41C41A19D7E100A0D65C /* Mantle.atlas in Resources */,
+				A4A7F5841A2337C2001D0008 /* explosion_large.caf in Resources */,
 				81E941551A1ADAF9004BFF0C /* coreBackground.png in Resources */,
 				E89C503219EB2E7800FF75A1 /* Images.xcassets in Resources */,
 				819C41A81A19D1DA00A0D65C /* Intro2Scene1.png in Resources */,

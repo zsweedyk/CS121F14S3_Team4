@@ -386,7 +386,7 @@ static NSString* playerCategoryName = @"player";
                     _invulnerability = 150;
                 }
             }
-            
+          
             if (_invulnerability > 0) {
                 _invulnerability--;
             }
@@ -407,16 +407,26 @@ static NSString* playerCategoryName = @"player";
         }
         if ([playerLaser intersectsNode:_evilDuck]) {
             playerLaser.hidden = YES;
-            SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
-            SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
-            [playerLaser runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-            [self addExplosion:_evilDuck.position];
+            if (_evilDuckLives > 0) {
+                SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
+                SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
+                [playerLaser runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
+                [self addExplosion:_evilDuck.position];
+            } else {
+                SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_large.caf" waitForCompletion:YES];
+                SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
+                [playerLaser runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
+                [self addExplosion:_evilDuck.position];
+                _invulnerability = 1000;
+            }
             --_evilDuckLives;
             NSLog(@"%d", _evilDuckLives);
         }
         if (_evilDuckLives <= 0) {
-            NSLog(@"you win");
-            [self endTheScene:NO];
+            if (_invulnerability <= 0) {
+                NSLog(@"you win");
+                [self endTheScene:NO];
+            }
         }
     }
 }

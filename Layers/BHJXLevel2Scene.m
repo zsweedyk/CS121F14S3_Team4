@@ -237,7 +237,10 @@ static int initialDistance = 500;
         _distanceLabel.fontColor = [SKColor yellowColor];
         _distanceLabel.scale = 1.9;
     }
-    
+    if (_distance <= 0) {
+        [_distanceLabel setHidden:YES];
+    }
+  
     //collision detection
     if (!_gameOver) {
         //increment score
@@ -269,7 +272,12 @@ static int initialDistance = 500;
                 [self endTheScene:YES];
             } else {
                 if (_distance <= 0) {
-                    [self endTheScene:NO];
+                    if (_player.position.y > -85) {
+                        _invulnerability = 1000;
+                        _player.position = CGPointMake(_player.position.x, _player.position.y - 5);
+                    } else {
+                        [self endTheScene:NO];
+                    }
                 }
             }
         }
