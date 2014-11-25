@@ -50,6 +50,7 @@ static NSString* playerCategoryName = @"player";
 
     bool _gameOver;
     bool _finishBoss;
+    bool canShoot;
 
     SKScene *_gameOverScene;
     SKScene *_victoryScene;
@@ -147,6 +148,7 @@ static NSString* playerCategoryName = @"player";
             [_playerLasers addObject:playerLaser];
             [self addChild:playerLaser];
         }
+        canShoot = YES;
     
         //Setup the lives label
         _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
@@ -189,7 +191,7 @@ static NSString* playerCategoryName = @"player";
     self.isFingerOnDuck = YES;
   
     //Only fire a laser if the cooldown period is over
-    if (fireAtZero == 0){
+    if (fireAtZero == 0 && canShoot){
         SKSpriteNode *playerLaser = [_playerLasers objectAtIndex:_nextPlayerLaser];
         _nextPlayerLaser++;
         if (_nextPlayerLaser >= _playerLasers.count) {
@@ -441,6 +443,7 @@ static NSString* playerCategoryName = @"player";
               
                 if (_finishBoss == NO) {
                     _invulnerability = 250;
+                    canShoot = NO;
                     _finishBoss = YES;
                 }
             }
