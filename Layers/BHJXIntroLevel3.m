@@ -70,13 +70,9 @@ int _countTouches;
         
         //Show and hide the slides in order
         if (_countTouches == 0) {
-            _slide1.hidden = YES;
-            _slide2.hidden = NO;
-            _countTouches++;
+            [self transit:_slide1 and:_slide2];
         } else if (_countTouches == 1) {
-            _slide2.hidden = YES;
-            _slide3.hidden = NO;
-            _countTouches++;
+            [self transit:_slide2 and:_slide3];
         } else if (_countTouches == 2) {
             _slide3.hidden = YES;
             _slide4.hidden = NO;
@@ -94,6 +90,23 @@ int _countTouches;
             [self.view presentScene:scene transition: reveal];
         }
     }
+}
+
+
+
+// a customizable SKbutton simulation for highlight event
+- (void)transit:(SKSpriteNode *)silde1 and:(SKSpriteNode *)silde2 {
+    SKAction *changeFontSize = [SKAction runBlock:^{
+        _continueButton.fontSize = 48;
+    }];
+    SKAction *wait = [SKAction waitForDuration:0.16];
+    SKAction *transitScene = [SKAction runBlock:^{
+        silde1.hidden = YES;
+        silde2.hidden = NO;
+        _countTouches++;
+        _continueButton.fontSize = 50;
+    }];
+    [self runAction:[SKAction sequence:@[changeFontSize,wait,transitScene]]];
 }
 
 @end
