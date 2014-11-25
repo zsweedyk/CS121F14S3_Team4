@@ -103,9 +103,14 @@ int _countTouches;
             _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
             _continueButton.text = @"Start Level?";
         } else {
+            SKAction *changeFontSize = [SKAction runBlock:^{
+                _continueButton.fontSize = 48;
+            }];
+            SKAction *wait = [SKAction waitForDuration:0.36];
+            [self runAction:[SKAction sequence:@[changeFontSize,wait]]];
             
             //Start the next level
-            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.1];
             
             BHJXLevel1Scene * scene = [BHJXLevel1Scene sceneWithSize:self.view.bounds.size];
             scene.scaleMode = SKSceneScaleModeAspectFill;

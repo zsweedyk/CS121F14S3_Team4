@@ -49,13 +49,18 @@
     
     //Start the game when the player presses the button
     if ([node.name isEqualToString:@"AdventureLabel"]) {
-        _adventureLabel.fontSize = 26;
-        SKTransition *reveal = [SKTransition fadeWithDuration:3];
-        
+        SKAction *modifyFont = [SKAction runBlock:^{
+            _adventureLabel.fontSize = 23;
+            _adventureLabel.fontColor = [SKColor redColor];
+        }];
+        SKAction *wait = [SKAction waitForDuration:0.16];
         BHJXIntroLevel1 *scene = [BHJXIntroLevel1 sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
-        [self.view presentScene:scene transition:reveal];
-                          
+        
+        SKAction *transit = [SKAction runBlock:^{
+            [self.view presentScene:scene];
+        }];
+        [self runAction:[SKAction sequence:@[modifyFont,wait,transit]]];
     }
 
 }
