@@ -49,6 +49,7 @@
     
     //Start the game when the player presses the button
     if ([node.name isEqualToString:@"AdventureLabel"]) {
+        _adventureLabel.fontSize = 26;
         SKTransition *reveal = [SKTransition fadeWithDuration:3];
         
         BHJXIntroLevel1 *scene = [BHJXIntroLevel1 sceneWithSize:self.view.bounds.size];
