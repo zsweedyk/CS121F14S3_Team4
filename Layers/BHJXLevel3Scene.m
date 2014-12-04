@@ -150,7 +150,7 @@ static NSString* playerCategoryName = @"player";
         }
         canShoot = YES;
     
-        //Setup the lives label
+        //Setup the label for player lives
         _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
         _livesLabel.name = @"livesLabel";
         _livesLabel.text = [NSString stringWithFormat:@"%d", _lives];
@@ -158,6 +158,15 @@ static NSString* playerCategoryName = @"player";
         _livesLabel.position = CGPointMake(self.frame.size.width/9, self.frame.size.height * 0.9);
         _livesLabel.fontColor = [SKColor redColor];
         [self addChild:_livesLabel];
+        
+        //Setup the label for the evil duck's lives
+        _evilDuckLivesLabel = [[SKLabelNode alloc] initWithFontNamed:@"ChalkboardSE-Bold"];
+        _evilDuckLivesLabel.name = @"evilDuckLivesLabel";
+        _evilDuckLivesLabel.text = [NSString stringWithFormat:@"%d", _evilDuckLives];
+        _evilDuckLivesLabel.scale = 0.9;
+        _evilDuckLivesLabel.position = CGPointMake(_evilDuck.position.x, _evilDuck.position.y * 0.80);
+        _evilDuckLivesLabel.fontColor = [SKColor blackColor];
+        [self addChild:_evilDuckLivesLabel];
         
         //Play the background music
         [self startBackgroundMusic];
@@ -174,7 +183,7 @@ static NSString* playerCategoryName = @"player";
 {
     //Initialize state of player and boss
     _lives = 5;
-    _evilDuckLives = 5;
+    _evilDuckLives = 10;
     _invulnerability = 0;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
@@ -335,6 +344,8 @@ static NSString* playerCategoryName = @"player";
   
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
+    _evilDuckLivesLabel.text = [NSString stringWithFormat:@"%d", _evilDuckLives];
+    _evilDuckLivesLabel.position = CGPointMake(_evilDuck.position.x, _evilDuck.position.y * 0.80);
   
     //collision detection
     if (!_gameOver) {
