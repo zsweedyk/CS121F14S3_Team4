@@ -22,7 +22,7 @@
 
 
 static NSString* playerCategoryName = @"player";
-static int initialDistance = 50;
+static int initialDistance = 100;
 
 
 
@@ -52,98 +52,16 @@ static int initialDistance = 50;
 
 
 
--(id)initWithSize:(CGSize)size {
+- (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
-        
-        //Setup flickering
-        NSMutableArray *bgFlickerFrames = [NSMutableArray array];
-        SKTextureAtlas *bgAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Volcano"];
-    
-        NSMutableArray *playerFlickerFrames = [NSMutableArray array];
-        SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
-        
-        for (int i=1; i <= kNumImages; i++){
-            NSString *textureName = [NSString stringWithFormat:@"VolcanoBackground%d", i];
-            SKTexture *temp = [bgAnimatedAtlas textureNamed:textureName];
-            [bgFlickerFrames addObject:temp];
-            textureName = [NSString stringWithFormat:@"Player%d", i];
-            temp = [playerAnimatedAtlas textureNamed:textureName];
-            [playerFlickerFrames addObject:temp];
-        }
-        _playerFlickerFrames = playerFlickerFrames;
-        _backgroundFlickerFrames = bgFlickerFrames;
-        
-        SKTexture *temp = _backgroundFlickerFrames[0];
-        
-        
-        //Initialize scrolling background
-        _background1 = [SKSpriteNode spriteNodeWithTexture:temp];
-        _background1.anchorPoint = CGPointZero;
-        _background1.position = CGPointMake(0, 0);
-        [self addChild:_background1];
-        
-        _background2 = [SKSpriteNode spriteNodeWithTexture:temp];
-        _background2.anchorPoint = CGPointZero;
-        _background2.position = CGPointMake(0, _background2.size.height-1);
-        [self addChild:_background2];
-        
-        
-        //Create player and place at bottom of screen
-        temp = _playerFlickerFrames[0];
-        _player = [SKSpriteNode spriteNodeWithTexture:temp];
-        _player.name = playerCategoryName;
-        _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
-        [self addChild:_player];
-        
-        _player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_player.frame.size];
-        _player.physicsBody.restitution = 0.1f;
-        _player.physicsBody.friction = 0.4f;
-        // make physicsBody static
-        _player.physicsBody.dynamic = NO;
-        
-        
-        //Setup the boulders
-        _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
-        for (int i = 0; i < kNumBoulders; ++i) {
-            SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder1.png"];
-            boulder.hidden = YES;
-            [boulder setXScale:0.5];
-            [boulder setYScale:0.5];
-            [_boulders addObject:boulder];
-            [self addChild:boulder];
-        }
-        _nextBoulderSpawn = 0;
-        for (SKSpriteNode *boulder in _boulders) {
-            boulder.hidden = YES;
-        }
-        
-        
-        //Setup the lives label
-        _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
-        _livesLabel.name = @"livesLabel";
-        _livesLabel.text = [NSString stringWithFormat:@"%d", _lives];
-        _livesLabel.scale = 0.9;
-        _livesLabel.position = CGPointMake(self.frame.size.width/9, self.frame.size.height * 0.9);
-        _livesLabel.fontColor = [SKColor redColor];
-        [self addChild:_livesLabel];
-        
-        
-        //Setup the score label
-        _distanceLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
-        _distanceLabel.name = @"scoreLabel";
-        _distanceLabel.text = [NSString stringWithFormat:@"%d", _distance];
-        _distanceLabel.scale = 0.9;
-        _distanceLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
-        _distanceLabel.fontColor = [SKColor redColor];
-        [self addChild:_distanceLabel];
-      
-        
-        //Play the background music
+        [self initFlickering];
+        [self initBackground];
+        [self initPlayer];
+        [self initBoulders];
+        [self initLabels];
         [self startBackgroundMusic];
         
-        
-        //Start the game
         [self startTheGame];
     }
     return self;
@@ -382,4 +300,104 @@ static int initialDistance = 50;
 
 
 
+//Setup the flickering of player and background
+- (void)initFlickering {
+    //Setup flickering
+    NSMutableArray *bgFlickerFrames = [NSMutableArray array];
+    SKTextureAtlas *bgAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Volcano"];
+    
+    NSMutableArray *playerFlickerFrames = [NSMutableArray array];
+    SKTextureAtlas *playerAnimatedAtlas = [SKTextureAtlas atlasNamed:@"Player"];
+    
+    for (int i=1; i <= kNumImages; i++){
+        NSString *textureName = [NSString stringWithFormat:@"VolcanoBackground%d", i];
+        SKTexture *temp = [bgAnimatedAtlas textureNamed:textureName];
+        [bgFlickerFrames addObject:temp];
+        textureName = [NSString stringWithFormat:@"Player%d", i];
+        temp = [playerAnimatedAtlas textureNamed:textureName];
+        [playerFlickerFrames addObject:temp];
+    }
+    _playerFlickerFrames = playerFlickerFrames;
+    _backgroundFlickerFrames = bgFlickerFrames;
+}
+
+
+
+//Initialize the background
+- (void)initBackground {
+    SKTexture *temp = _backgroundFlickerFrames[0];
+    
+    
+    //Initialize scrolling background
+    _background1 = [SKSpriteNode spriteNodeWithTexture:temp];
+    _background1.anchorPoint = CGPointZero;
+    _background1.position = CGPointMake(0, 0);
+    [self addChild:_background1];
+    
+    _background2 = [SKSpriteNode spriteNodeWithTexture:temp];
+    _background2.anchorPoint = CGPointZero;
+    _background2.position = CGPointMake(0, _background2.size.height-1);
+    [self addChild:_background2];
+}
+
+
+
+//Initialize the player
+- (void)initPlayer {
+    //Create player and place at bottom of screen
+    SKTexture *temp = _playerFlickerFrames[0];
+    _player = [SKSpriteNode spriteNodeWithTexture:temp];
+    _player.name = playerCategoryName;
+    _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
+    [self addChild:_player];
+    
+    _player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_player.frame.size];
+    _player.physicsBody.restitution = 0.1f;
+    _player.physicsBody.friction = 0.4f;
+    // make physicsBody static
+    _player.physicsBody.dynamic = NO;
+}
+
+
+
+// Initialize the boulders
+- (void)initBoulders {
+    _boulders = [[NSMutableArray alloc] initWithCapacity:kNumBoulders];
+    for (int i = 0; i < kNumBoulders; ++i) {
+        SKSpriteNode *boulder = [SKSpriteNode spriteNodeWithImageNamed:@"Boulder1.png"];
+        boulder.hidden = YES;
+        [boulder setXScale:0.5];
+        [boulder setYScale:0.5];
+        [_boulders addObject:boulder];
+        [self addChild:boulder];
+    }
+    _nextBoulderSpawn = 0;
+    for (SKSpriteNode *boulder in _boulders) {
+        boulder.hidden = YES;
+    }
+}
+
+
+
+// Initialize the labels
+- (void)initLabels {
+    //Setup the lives label
+    _livesLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+    _livesLabel.name = @"livesLabel";
+    _livesLabel.text = [NSString stringWithFormat:@"%d", _lives];
+    _livesLabel.scale = 0.9;
+    _livesLabel.position = CGPointMake(self.frame.size.width/9, self.frame.size.height * 0.9);
+    _livesLabel.fontColor = [SKColor redColor];
+    [self addChild:_livesLabel];
+    
+    
+    //Setup the score label
+    _distanceLabel = [[SKLabelNode alloc] initWithFontNamed:@"Futura-CondensedMedium"];
+    _distanceLabel.name = @"scoreLabel";
+    _distanceLabel.text = [NSString stringWithFormat:@"%d", _distance];
+    _distanceLabel.scale = 0.9;
+    _distanceLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
+    _distanceLabel.fontColor = [SKColor redColor];
+    [self addChild:_distanceLabel];
+}
 @end
