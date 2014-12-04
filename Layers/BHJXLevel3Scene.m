@@ -27,6 +27,8 @@ static NSString* playerCategoryName = @"player";
     SKSpriteNode *_background;
     SKSpriteNode *_evilDuck;
     
+    SKLabelNode *_evilDuckLivesLabel;
+    
     SKLabelNode *_livesLabel;
     SKLabelNode *_scoreLabel;
     
