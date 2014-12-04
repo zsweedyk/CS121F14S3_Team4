@@ -22,7 +22,7 @@
 
 
 static NSString* playerCategoryName = @"player";
-static int initialDistance = 100;
+static int initialDistance = 750;
 
 
 
@@ -82,6 +82,20 @@ static int initialDistance = 100;
 
 
 
+- (void)update:(NSTimeInterval)currentTime {
+    
+    [self scrollBackground];
+    [self boulderSpawn];
+    [self updateLabels];
+    
+    //Only do collision detection if the level is not over
+    if (!_gameOver) {
+        [self collisionDetection];
+    }
+}
+
+
+
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     //Called when a touch begins
     self.isFingerOnDuck = YES;
@@ -113,109 +127,6 @@ static int initialDistance = 100;
 
 - (float)randomValueBetween:(float)low andValue:(float)high {
     return (((float) arc4random() / 0xFFFFFFFFu) * (high - low)) + low;
-}
-
-
-
--(void)update:(NSTimeInterval)currentTime {
-    //Set the background to be scrolling
-    _background1.position = CGPointMake(_background1.position.x, _background1.position.y-4);
-    _background2.position = CGPointMake(_background2.position.x, _background2.position.y-4);
-    if (_background1.position.y < -_background1.size.height){
-        _background1.position = CGPointMake(_background1.position.x, _background2.position.y + _background2.size.height);
-    }
-    if (_background2.position.y < -_background2.size.height) {
-        _background2.position = CGPointMake(_background2.position.x, _background1.position.y + _background1.size.height);
-    }
-    
-    
-    //Falling boulders
-    double curTime = CACurrentMediaTime();
-    if (curTime > _nextBoulderSpawn) {
-        float randSecs = [self randomValueBetween:0.20 andValue:1.0];
-        _nextBoulderSpawn = randSecs + curTime;
-
-        float randX = [self randomValueBetween:0.0 andValue:self.frame.size.width];
-        float randDuration = [self randomValueBetween:2.0 andValue:10.0];
-        
-        SKSpriteNode *boulder = [_boulders objectAtIndex:_nextBoulder];
-        _nextBoulder++;
-        
-        if (_nextBoulder >= _boulders.count) {
-            _nextBoulder = 0;
-        }
-        
-        [boulder removeAllActions];
-        boulder.position = CGPointMake(randX, self.frame.size.height+boulder.size.height/2);
-        boulder.hidden = NO;
-        
-        CGPoint location = CGPointMake(randX, -self.frame.size.height-boulder.size.height);
-        
-        SKAction *moveAction = [SKAction moveTo:location duration:randDuration];
-        SKAction *doneAction = [SKAction runBlock:(dispatch_block_t)^() {
-            //NSLog(@"Animation Completed");
-            boulder.hidden = YES;
-        }];
-        
-        SKAction *moveBoulderActionWithDone = [SKAction sequence:@[moveAction, doneAction ]];
-        [boulder runAction:moveBoulderActionWithDone withKey:@"boulderMoving"];
-    }
-    
-    
-    //Update lives and distance labels
-    _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
-    _distanceLabel.text = [NSString stringWithFormat:@"Distance to Top: %d", _distance];
-    if (_distance <= initialDistance*0.2) {
-        _distanceLabel.fontColor = [SKColor yellowColor];
-        _distanceLabel.scale = 1.9;
-    }
-    if (_distance <= 0) {
-        [_distanceLabel setHidden:YES];
-    }
-    
-    
-    //collision detection
-    if (!_gameOver) {
-        //decrement distance
-        _distance--;
-        for (SKSpriteNode *boulder in _boulders) {
-            if (boulder.hidden) {
-                continue;
-            }
-            if (_invulnerability == 0) {
-                if ([_player intersectsNode:boulder]) {
-                    boulder.hidden = YES;
-                    SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
-                                                           [SKAction fadeInWithDuration:0.1]]];
-                    SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
-                    [_player runAction:blinkForTime];
-                    SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
-                    SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
-                    [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                    NSLog(@"a hit!");
-                    _lives--;
-                    _invulnerability = 150;
-                }
-            }
-            //Ensure that for a short while after being hit, the player cannot be hit
-            if (_invulnerability > 0) {
-                _invulnerability--;
-            }
-            if (_lives <= 0) {
-                NSLog(@"you lose");
-                [self endTheScene:YES];
-            } else {
-                if (_distance <= 0) {
-                    if (_player.position.y < self.frame.size.height + 100) {
-                        _invulnerability = 1500;
-                        _player.position = CGPointMake(_player.position.x, _player.position.y + 5);
-                    } else {
-                        [self endTheScene:NO];
-                    }
-                }
-            }
-        }
-    }
 }
 
 
@@ -399,5 +310,118 @@ static int initialDistance = 100;
     _distanceLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
     _distanceLabel.fontColor = [SKColor redColor];
     [self addChild:_distanceLabel];
+}
+
+
+
+//Scroll the background
+- (void)scrollBackground {
+    _background1.position = CGPointMake(_background1.position.x, _background1.position.y-4);
+    _background2.position = CGPointMake(_background2.position.x, _background2.position.y-4);
+    if (_background1.position.y < -_background1.size.height){
+        _background1.position = CGPointMake(_background1.position.x, _background2.position.y + _background2.size.height);
+    }
+    if (_background2.position.y < -_background2.size.height) {
+        _background2.position = CGPointMake(_background2.position.x, _background1.position.y + _background1.size.height);
+    }
+    
+}
+
+
+
+//Spawn the boulders
+- (void)boulderSpawn {
+    double curTime = CACurrentMediaTime();
+    if (curTime > _nextBoulderSpawn) {
+        float randSecs = [self randomValueBetween:0.20 andValue:1.0];
+        _nextBoulderSpawn = randSecs + curTime;
+        
+        float randX = [self randomValueBetween:0.0 andValue:self.frame.size.width];
+        float randDuration = [self randomValueBetween:2.0 andValue:10.0];
+        
+        SKSpriteNode *boulder = [_boulders objectAtIndex:_nextBoulder];
+        _nextBoulder++;
+        
+        if (_nextBoulder >= _boulders.count) {
+            _nextBoulder = 0;
+        }
+        
+        [boulder removeAllActions];
+        boulder.position = CGPointMake(randX, self.frame.size.height+boulder.size.height/2);
+        boulder.hidden = NO;
+        
+        CGPoint location = CGPointMake(randX, -self.frame.size.height-boulder.size.height);
+        
+        SKAction *moveAction = [SKAction moveTo:location duration:randDuration];
+        SKAction *doneAction = [SKAction runBlock:(dispatch_block_t)^() {
+            //NSLog(@"Animation Completed");
+            boulder.hidden = YES;
+        }];
+        
+        SKAction *moveBoulderActionWithDone = [SKAction sequence:@[moveAction, doneAction ]];
+        [boulder runAction:moveBoulderActionWithDone withKey:@"boulderMoving"];
+    }
+}
+
+
+
+//Update the labels
+- (void)updateLabels {
+    //Update lives and distance labels
+    _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
+    _distanceLabel.text = [NSString stringWithFormat:@"Distance to Top: %d", _distance];
+    if (_distance <= initialDistance*0.2) {
+        _distanceLabel.fontColor = [SKColor yellowColor];
+        _distanceLabel.scale = 1.9;
+    }
+    if (_distance <= 0) {
+        [_distanceLabel setHidden:YES];
+    }
+    
+    //Decrement distance
+    _distance--;
+}
+
+
+
+//Deal with collision detection
+- (void)collisionDetection {
+    for (SKSpriteNode *boulder in _boulders) {
+        if (boulder.hidden) {
+            continue;
+        }
+        if (_invulnerability == 0) {
+            if ([_player intersectsNode:boulder]) {
+                boulder.hidden = YES;
+                SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
+                                                       [SKAction fadeInWithDuration:0.1]]];
+                SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
+                [_player runAction:blinkForTime];
+                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
+                SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+                [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
+                NSLog(@"a hit!");
+                _lives--;
+                _invulnerability = 150;
+            }
+        }
+        //Ensure that for a short while after being hit, the player cannot be hit
+        if (_invulnerability > 0) {
+            _invulnerability--;
+        }
+        if (_lives <= 0) {
+            NSLog(@"you lose");
+            [self endTheScene:YES];
+        } else {
+            if (_distance <= 0) {
+                if (_player.position.y < self.frame.size.height + 100) {
+                    _invulnerability = 1500;
+                    _player.position = CGPointMake(_player.position.x, _player.position.y + 5);
+                } else {
+                    [self endTheScene:NO];
+                }
+            }
+        }
+    }
 }
 @end
