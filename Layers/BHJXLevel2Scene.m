@@ -154,38 +154,39 @@ static int initialDistance = 50;
 
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
-    /* Called when a touch begins */
+    //Called when a touch begins
     self.isFingerOnDuck = YES;
 }
 
 
 
 -(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-    
+    //Response to touch
     if (self.isFingerOnDuck) {
-        //Get touch location
         UITouch* touch = [touches anyObject];
         CGPoint touchLocation = [touch locationInNode:self];
         CGPoint previousLocation = [touch previousLocationInNode:self];
-        //Get node for player
         SKSpriteNode* duck = (SKSpriteNode*)[self childNodeWithName: playerCategoryName];
-        //Calculate new position along x for player
         int playerX = duck.position.x + (touchLocation.x - previousLocation.x);
-        //Limit x so that the player will not leave the screen to left or right
         playerX = MAX(playerX, duck.size.width/2);
         playerX = MIN(playerX, self.size.width - duck.size.width/2);
-        //Update position of player
         duck.position = CGPointMake(playerX, duck.position.y);
     }
 }
+
+
 
 -(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
     self.isFingerOnDuck = NO;
 }
 
+
+
 - (float)randomValueBetween:(float)low andValue:(float)high {
     return (((float) arc4random() / 0xFFFFFFFFu) * (high - low)) + low;
 }
+
+
 
 -(void)update:(NSTimeInterval)currentTime {
     //Set the background to be scrolling
@@ -197,6 +198,7 @@ static int initialDistance = 50;
     if (_background2.position.y > _background2.size.height) {
         _background2.position = CGPointMake(_background2.position.x, _background1.position.y - _background1.size.height);
     }
+    
     
     //Falling boulders
     double curTime = CACurrentMediaTime();
@@ -230,6 +232,7 @@ static int initialDistance = 50;
         [boulder runAction:moveBoulderActionWithDone withKey:@"boulderMoving"];
     }
     
+    
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
     _distanceLabel.text = [NSString stringWithFormat:@"Distance to Core: %d", _distance];
@@ -243,7 +246,7 @@ static int initialDistance = 50;
   
     //collision detection
     if (!_gameOver) {
-        //increment score
+        //decrement distance
         _distance--;
         for (SKSpriteNode *boulder in _boulders) {
             if (boulder.hidden) {
@@ -284,6 +287,8 @@ static int initialDistance = 50;
     }
 }
 
+
+
 - (void)endTheScene:(BOOL)didLose {
     if (_gameOver) {
         return;
@@ -304,6 +309,8 @@ static int initialDistance = 50;
     }
 }
 
+
+
 - (void)startBackgroundMusic
 {
     NSError *err;
@@ -321,6 +328,8 @@ static int initialDistance = 50;
     [_backgroundAudioPlayer play];
 }
 
+
+
 -(void)flickering
 {
     //This is our general runAction method to make our player flicker.
@@ -331,6 +340,7 @@ static int initialDistance = 50;
                                               restore:YES]] withKey:@"flickeringInPlacePlayer"];
     return;
 }
+
 
 
 @end
