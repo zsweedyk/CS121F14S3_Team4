@@ -22,7 +22,7 @@
 
 
 static NSString* playerCategoryName = @"player";
-static int initialDistance = 750;
+static int initialDistance = 300;
 
 
 
