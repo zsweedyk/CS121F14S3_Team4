@@ -49,7 +49,7 @@ int _level;
         SKLabelNode *retryButton = [SKLabelNode labelNodeWithFontNamed:@"TimeNewRomanPSMT"];
         retryButton.text = retrymessage;
         retryButton.fontSize = 50;
-        retryButton.position = CGPointMake(self.size.width/2, self.size.height/1.6);
+        retryButton.position = CGPointMake(self.size.width/2, self.size.height/2.3);
          retryButton.name = @"Back to Menu";
         [self addChild:retryButton];
 
