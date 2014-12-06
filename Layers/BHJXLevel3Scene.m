@@ -265,6 +265,8 @@ static NSString* playerCategoryName = @"player";
     return;
 }
 
+
+
 - (void)initFlickering {
     //Setup flickering
     NSMutableArray *playerFlickerFrames = [NSMutableArray array];
@@ -278,12 +280,16 @@ static NSString* playerCategoryName = @"player";
     _playerFlickerFrames = playerFlickerFrames;
 }
 
+
+
 - (void)initBackground {
     //Initialize background
     _background = [SKSpriteNode spriteNodeWithImageNamed:@"coreBackground.png"];
     _background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:_background];
 }
+
+
 
 - (void)initPlayer {
     //Create player and place at bottom of screen
@@ -300,6 +306,8 @@ static NSString* playerCategoryName = @"player";
     _player.physicsBody.dynamic = NO;
 }
 
+
+
 - (void)initEvilDuck {
     //Create evil duck (boss) and place at top of screen
     _evilDuck = [[SKSpriteNode alloc] initWithImageNamed:@"EvilDuck.png"];
@@ -312,6 +320,8 @@ static NSString* playerCategoryName = @"player";
     // make physicsBody static
     _evilDuck.physicsBody.dynamic = NO;
 }
+
+
 
 - (void)initBoulders {
     //Setup the boulders for left hand
@@ -349,6 +359,8 @@ static NSString* playerCategoryName = @"player";
     }
 }
 
+
+
 - (void)initLasers {
     //Setup the lasers
     _playerLasers = [[NSMutableArray alloc] initWithCapacity:kNumLasers];
@@ -360,6 +372,8 @@ static NSString* playerCategoryName = @"player";
     }
     canShoot = YES;
 }
+
+
 
 - (void)initLabels {
     //Setup the label for player lives
@@ -380,6 +394,8 @@ static NSString* playerCategoryName = @"player";
     _evilDuckLivesLabel.fontColor = [SKColor blackColor];
     [self addChild:_evilDuckLivesLabel];
 }
+
+
 
 - (void)boulderSpawn {
     //Falling boulders
@@ -438,12 +454,16 @@ static NSString* playerCategoryName = @"player";
     }
 }
 
+
+
 - (void)updateLabels {
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
     _evilDuckLivesLabel.text = [NSString stringWithFormat:@"%d", _evilDuckLives];
     _evilDuckLivesLabel.position = CGPointMake(_evilDuck.position.x, _evilDuck.position.y * 0.80);
 }
+
+
 
 - (void)evilDuckMovement {
     //update the position of evilDuck to follow the player
@@ -457,6 +477,8 @@ static NSString* playerCategoryName = @"player";
         _evilDuck.position = CGPointMake(_evilDuck.position.x - 5, _evilDuck.position.y);
     }
 }
+
+
 
 - (void)playerCollisionDetection {
     //collision detection
@@ -532,6 +554,8 @@ static NSString* playerCategoryName = @"player";
     }
 }
 
+
+
 -(void)evilDuckCollisionDetection {
     //Check collisions for lasers
     for (SKSpriteNode *playerLaser in _playerLasers) {
@@ -555,7 +579,7 @@ static NSString* playerCategoryName = @"player";
                 
                 if (_finishBoss == NO) {
                     _invulnerability = 250;
-                    canShoot = NO;
+                    canShoot = NO;  //Forbid the player to shoot the evilduck after its live becomes 0 to prevent memory leak
                     _finishBoss = YES;
                 }
             }

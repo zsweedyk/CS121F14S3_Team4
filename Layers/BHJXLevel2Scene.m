@@ -181,6 +181,8 @@ static int initialDistance = 300;
     return;
 }
 
+
+
 - (void)initFlickering {
     //Setup flickering
     NSMutableArray *playerFlickerFrames = [NSMutableArray array];
@@ -193,6 +195,8 @@ static int initialDistance = 300;
     }
     _playerFlickerFrames = playerFlickerFrames;
 }
+
+
 
 - (void)initBackground {
     //Initialize scrolling background
@@ -207,6 +211,8 @@ static int initialDistance = 300;
     [self addChild:_background2];
 }
 
+
+
 - (void)initPlayer {
     //Create player and place at bottom of screen
     SKTexture *temp = _playerFlickerFrames[0];
@@ -220,6 +226,8 @@ static int initialDistance = 300;
     // make physicsBody static
     _player.physicsBody.dynamic = NO;
 }
+
+
 
 - (void)initBoulders {
     //Setup the boulders
@@ -237,6 +245,8 @@ static int initialDistance = 300;
         boulder.hidden = YES;
     }
 }
+
+
 
 - (void)initLabels {
     //Setup the lives label
@@ -259,6 +269,8 @@ static int initialDistance = 300;
     [self addChild:_distanceLabel];
 }
 
+
+
 - (void)scrollBackground {
     //Set the background to be scrolling
     _background1.position = CGPointMake(_background1.position.x, _background1.position.y+4);
@@ -270,6 +282,8 @@ static int initialDistance = 300;
         _background2.position = CGPointMake(_background2.position.x, _background1.position.y - _background1.size.height);
     }
 }
+
+
 
 - (void)boulderSpawn {
     //Falling boulders
@@ -305,6 +319,8 @@ static int initialDistance = 300;
     }
 }
 
+
+
 - (void)updateLabels {
     //Update lives and score labels
     _livesLabel.text = [NSString stringWithFormat:@"Lives: %d", _lives];
@@ -320,6 +336,8 @@ static int initialDistance = 300;
     //Decrement distance
     _distance--;
 }
+
+
 
 //Deal with collision detection
 - (void)collisionDetection {
