@@ -481,71 +481,57 @@ static NSString* playerCategoryName = @"player";
 
 
 - (void)playerCollisionDetection {
-    //collision detection
-    if (!_gameOver) {
-        
-        //Detect collisions for boulders thrown from the left hand
-        for (SKSpriteNode *boulder1 in _boulders1) {
-            if (boulder1.hidden) {
-                continue;
-            }
-            
-            //Only hit player if it is not invulnerable
-            if (_invulnerability == 0) {
-                if ([_player intersectsNode:boulder1]) {
-                    boulder1.hidden = YES;
-                    SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
-                                                           [SKAction fadeInWithDuration:0.1]]];
-                    SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
-                    [_player runAction:blinkForTime];
-                    SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
-                    SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
-                    [boulder1 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                    NSLog(@"a hit!");
-                    _lives--;
-                    _invulnerability = 150;
-                }
-            }
-            
-            //Player gets closer to being able to be hit if it is still cooling down from last hit
-            if (_invulnerability > 0) {
-                _invulnerability--;
-            }
+    
+    //Detect collisions for boulders thrown from the left hand
+    for (SKSpriteNode *boulder1 in _boulders1) {
+        if (boulder1.hidden) {
+            continue;
         }
         
-        //Lose the game if player loses all lives
-        if (_lives <= 0) {
-            NSLog(@"you lose");
-            [self endTheScene:YES];
+        //Only hit player if it is not invulnerable
+        if (_invulnerability == 0) {
+            if ([_player intersectsNode:boulder1]) {
+                boulder1.hidden = YES;
+                SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
+                                                       [SKAction fadeInWithDuration:0.1]]];
+                SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
+                [_player runAction:blinkForTime];
+                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
+                SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+                [boulder1 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
+                NSLog(@"a hit!");
+                _lives--;
+                _invulnerability = 30;
+            }
+        }
+    }
+    
+    //Detect collisions for boulders thrown from the right hand
+    for (SKSpriteNode *boulder2 in _boulders2) {
+        if (boulder2.hidden) {
+            continue;
         }
         
-        //Detect collisions for boulders thrown from the right hand
-        for (SKSpriteNode *boulder2 in _boulders2) {
-            if (boulder2.hidden) {
-                continue;
-            }
-            
-            //Only hit player if it is not invulnerable
-            if (_invulnerability == 0) {
-                if ([_player intersectsNode:boulder2]) {
-                    boulder2.hidden = YES;
-                    SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
-                                                           [SKAction fadeInWithDuration:0.1]]];
-                    SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
-                    [_player runAction:blinkForTime];
-                    SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
-                    SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
-                    [boulder2 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                    NSLog(@"a hit!");
-                    _lives--;
-                    _invulnerability = 150;
-                }
-            }
-            
-            if (_invulnerability > 0) {
-                _invulnerability--;
+        //Only hit player if it is not invulnerable
+        if (_invulnerability == 0) {
+            if ([_player intersectsNode:boulder2]) {
+                boulder2.hidden = YES;
+                SKAction *blink = [SKAction sequence:@[[SKAction fadeOutWithDuration:0.1],
+                                                       [SKAction fadeInWithDuration:0.1]]];
+                SKAction *blinkForTime = [SKAction repeatAction:blink count:4];
+                [_player runAction:blinkForTime];
+                SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
+                SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
+                [boulder2 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
+                NSLog(@"a hit!");
+                _lives--;
+                _invulnerability = 30;
             }
         }
+    }
+    
+    if (_invulnerability > 0) {
+        _invulnerability--;
     }
     //Lose the game if player loses all lives
     if (_lives <= 0) {
