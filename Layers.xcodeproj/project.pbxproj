@@ -44,6 +44,7 @@
 		81E941551A1ADAF9004BFF0C /* coreBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E941541A1ADAF9004BFF0C /* coreBackground.png */; };
 		81E941571A1ADBA2004BFF0C /* coreChunk.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E941561A1ADBA2004BFF0C /* coreChunk.png */; };
 		A460CE321A12C0CA006AD185 /* BHJXLevel3Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = A460CE311A12C0CA006AD185 /* BHJXLevel3Scene.m */; };
+		A47CAD6F1A351D11008BC5C6 /* BHJXInfoScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A47CAD6E1A351D11008BC5C6 /* BHJXInfoScene.m */; };
 		A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB319FD9DE10032EBEE /* Layer.caf */; };
 		A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */; };
 		A4A7F5801A22AB3D001D0008 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F57F1A22AB3D001D0008 /* explosion.sks */; };
@@ -125,6 +126,8 @@
 		81E941561A1ADBA2004BFF0C /* coreChunk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coreChunk.png; sourceTree = "<group>"; };
 		A460CE301A12C0CA006AD185 /* BHJXLevel3Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXLevel3Scene.h; sourceTree = "<group>"; };
 		A460CE311A12C0CA006AD185 /* BHJXLevel3Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXLevel3Scene.m; sourceTree = "<group>"; };
+		A47CAD6D1A351D11008BC5C6 /* BHJXInfoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXInfoScene.h; sourceTree = "<group>"; };
+		A47CAD6E1A351D11008BC5C6 /* BHJXInfoScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXInfoScene.m; sourceTree = "<group>"; };
 		A48A9FB319FD9DE10032EBEE /* Layer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Layer.caf; sourceTree = "<group>"; };
 		A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_small.caf; sourceTree = "<group>"; };
 		A4A7F57F1A22AB3D001D0008 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
@@ -315,6 +318,8 @@
 				E89C502619EB2E7800FF75A1 /* Main.storyboard */,
 				E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */,
 				E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */,
+				A47CAD6D1A351D11008BC5C6 /* BHJXInfoScene.h */,
+				A47CAD6E1A351D11008BC5C6 /* BHJXInfoScene.m */,
 				E89C502919EB2E7800FF75A1 /* BHJXViewController.h */,
 				E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */,
 				E804E6A519FD830400529044 /* BHJXGameOverScene.h */,
@@ -529,6 +534,7 @@
 				E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */,
 				A460CE321A12C0CA006AD185 /* BHJXLevel3Scene.m in Sources */,
 				819C419B1A19D16100A0D65C /* BHJXIntroLevel2.m in Sources */,
+				A47CAD6F1A351D11008BC5C6 /* BHJXInfoScene.m in Sources */,
 				E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */,
 				81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */,
 				E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */,
