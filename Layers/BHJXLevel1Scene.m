@@ -152,6 +152,7 @@ static int initialDistance = 300;
 
 
 - (void)endTheScene:(BOOL)didLose {
+    [self stopMonitoringAcceleration];
     if (_gameOver) {
         return;
     }
