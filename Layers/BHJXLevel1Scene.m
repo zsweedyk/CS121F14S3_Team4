@@ -12,7 +12,7 @@
 #import "BHJXGameOverScene.h"
 #import "BHJXIntroLevel2.h"
 @import AVFoundation;
-
+@import CoreMotion;
 
 
 //Number of boulders in array
@@ -48,6 +48,7 @@ static int initialDistance = 300;
     
     SKScene *_gameOverScene;
     AVAudioPlayer *_backgroundAudioPlayer;
+    CMMotionManager *_motionManager;
 }
 
 
@@ -78,6 +79,8 @@ static int initialDistance = 300;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
     [self flickering];
+    [self startMonitoringAcceleration];
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
 }
 
 
@@ -87,6 +90,7 @@ static int initialDistance = 300;
     [self scrollBackground];
     [self boulderSpawn];
     [self updateLabels];
+    [self updateShipPositionFromMotionManager];
     
     //Only do collision detection if the level is not over
     if (!_gameOver) {
@@ -211,6 +215,32 @@ static int initialDistance = 300;
 
 
 
+- (void)startMonitoringAcceleration
+{
+    if (_motionManager.accelerometerAvailable) {
+        [_motionManager startAccelerometerUpdates];
+        NSLog(@"accelerometer updates on...");
+    }
+}
+
+- (void)stopMonitoringAcceleration
+{
+    if (_motionManager.accelerometerAvailable && _motionManager.accelerometerActive) {
+        [_motionManager stopAccelerometerUpdates];
+        NSLog(@"accelerometer updates off...");
+    }
+}
+
+- (void)updateShipPositionFromMotionManager
+{
+    CMAccelerometerData* data = _motionManager.accelerometerData;
+    if (fabs(data.acceleration.x) > 0.2) {
+        [_player.physicsBody applyForce:CGVectorMake(40.0 * data.acceleration.x, 0)];
+    }
+}
+
+
+
 //Setup the flickering of player and background
 - (void)initFlickering {
     //Setup flickering
@@ -266,7 +296,11 @@ static int initialDistance = 300;
     _player.physicsBody.restitution = 0.1f;
     _player.physicsBody.friction = 0.4f;
     // make physicsBody static
-    _player.physicsBody.dynamic = NO;
+    _player.physicsBody.dynamic = YES;
+    _player.physicsBody.affectedByGravity = NO;
+    _player.physicsBody.mass = 0.02;
+    
+    _motionManager = [[CMMotionManager alloc] init];
 }
 
 
