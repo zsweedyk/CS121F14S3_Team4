@@ -22,7 +22,7 @@
 
 
 static NSString* playerCategoryName = @"player";
-static int initialDistance = 300;
+static int initialDistance = 500;
 
 
 
@@ -299,7 +299,7 @@ static int initialDistance = 300;
     // make physicsBody static
     _player.physicsBody.dynamic = YES;
     _player.physicsBody.affectedByGravity = NO;
-    _player.physicsBody.mass = 0.02;
+    _player.physicsBody.mass = 0.01;
     
     _motionManager = [[CMMotionManager alloc] init];
 }
@@ -445,10 +445,12 @@ static int initialDistance = 300;
             _invulnerability--;
         }
         if (_lives <= 0) {
+            _player.physicsBody.dynamic = NO;
             NSLog(@"you lose");
             [self endTheScene:YES];
         } else {
             if (_distance <= 0) {
+                _player.physicsBody.dynamic = NO;
                 if (_player.position.y < self.frame.size.height + 100) {
                     _invulnerability = 1500;
                     _player.position = CGPointMake(_player.position.x, _player.position.y + 5);
