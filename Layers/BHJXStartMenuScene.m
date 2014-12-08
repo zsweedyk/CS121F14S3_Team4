@@ -14,6 +14,7 @@
     SKSpriteNode *_background;
     SKLabelNode *_titleLabel;
     SKLabelNode *_adventureLabel;
+    SKLabelNode *_informationLabel;
 }
 
 
@@ -35,7 +36,14 @@
         _adventureLabel.position = CGPointMake(self.frame.size.width*0.66, self.frame.size.height*0.65);
         [self addChild:_adventureLabel];
         
-        
+        //Load the button for the information
+        _informationLabel = [[SKLabelNode alloc] initWithFontNamed:@"Zapfino"];
+        _informationLabel.name = @"InformationLabel";
+        _informationLabel.text = @"- Information";
+        _informationLabel.fontColor = [SKColor blackColor];
+        _informationLabel.fontSize = 22;
+        _informationLabel.position = CGPointMake(self.frame.size.width*0.66, self.frame.size.height*0.55);
+        [self addChild:_informationLabel];
         
     }
     return self;
@@ -51,8 +59,21 @@
     //Start the game when the player presses the button
     if ([node.name isEqualToString:@"AdventureLabel"]) {
         SKAction *modifyFont = [SKAction runBlock:^{
-            _adventureLabel.fontSize = 23;
+            _adventureLabel.fontSize = 22;
             _adventureLabel.fontColor = [SKColor redColor];
+        }];
+        SKAction *wait = [SKAction waitForDuration:0.16];
+        BHJXIntroLevel1 *scene = [BHJXIntroLevel1 sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        SKAction *transit = [SKAction runBlock:^{
+            [self.view presentScene:scene];
+        }];
+        [self runAction:[SKAction sequence:@[modifyFont,wait,transit]]];
+    } else if ([node.name isEqualToString:@"InformationLabel"]) {
+        SKAction *modifyFont = [SKAction runBlock:^{
+            _informationLabel.fontSize = 20;
+            _informationLabel.fontColor = [SKColor redColor];
         }];
         SKAction *wait = [SKAction waitForDuration:0.16];
         BHJXIntroLevel1 *scene = [BHJXIntroLevel1 sceneWithSize:self.view.bounds.size];
