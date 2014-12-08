@@ -12,6 +12,7 @@
 #import "BHJXGameOverScene.h"
 #import "BHJXIntroLevel3.h"
 @import AVFoundation;
+@import CoreMotion;
 
 
 
@@ -47,6 +48,7 @@ static int initialDistance = 300;
     
     SKScene *_gameOverScene;
     AVAudioPlayer *_backgroundAudioPlayer;
+    CMMotionManager *_motionManager;
 }
 
 
@@ -77,6 +79,8 @@ static int initialDistance = 300;
     _player.hidden = NO;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*1.84);
     [self flickering];
+    [self startMonitoringAcceleration];
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
 }
 
 
@@ -85,40 +89,13 @@ static int initialDistance = 300;
     [self scrollBackground];
     [self boulderSpawn];
     [self updateLabels];
+    [self updatePlayerPositionFromMotionManager];
     
     //Only do collision detection if the level is not over
     if (!_gameOver) {
         [self collisionDetection];
     }
-}
-
-
-
--(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
-    //Called when a touch begins
-    self.isFingerOnDuck = YES;
-}
-
-
-
--(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-    //Response to touch
-    if (self.isFingerOnDuck) {
-        UITouch* touch = [touches anyObject];
-        CGPoint touchLocation = [touch locationInNode:self];
-        CGPoint previousLocation = [touch previousLocationInNode:self];
-        SKSpriteNode* duck = (SKSpriteNode*)[self childNodeWithName: playerCategoryName];
-        int playerX = duck.position.x + (touchLocation.x - previousLocation.x);
-        playerX = MAX(playerX, duck.size.width/2);
-        playerX = MIN(playerX, self.size.width - duck.size.width/2);
-        duck.position = CGPointMake(playerX, duck.position.y);
-    }
-}
-
-
-
--(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
-    self.isFingerOnDuck = NO;
+    
 }
 
 
@@ -183,6 +160,30 @@ static int initialDistance = 300;
 
 
 
+- (void)startMonitoringAcceleration
+{
+    if (_motionManager.accelerometerAvailable) {
+        [_motionManager startAccelerometerUpdates];
+    }
+}
+
+- (void)stopMonitoringAcceleration
+{
+    if (_motionManager.accelerometerAvailable && _motionManager.accelerometerActive) {
+        [_motionManager stopAccelerometerUpdates];
+    }
+}
+
+- (void)updatePlayerPositionFromMotionManager
+{
+    CMAccelerometerData* data = _motionManager.accelerometerData;
+    if (fabs(data.acceleration.x) > 0.2) {
+        [_player.physicsBody applyForce:CGVectorMake(40.0 * data.acceleration.x, 0)];
+    }
+}
+
+
+
 - (void)initFlickering {
     //Setup flickering
     NSMutableArray *playerFlickerFrames = [NSMutableArray array];
@@ -224,7 +225,11 @@ static int initialDistance = 300;
     _player.physicsBody.restitution = 0.1f;
     _player.physicsBody.friction = 0.4f;
     // make physicsBody static
-    _player.physicsBody.dynamic = NO;
+    _player.physicsBody.dynamic = YES;
+    _player.physicsBody.affectedByGravity = NO;
+    _player.physicsBody.mass = 0.01;
+    
+    _motionManager = [[CMMotionManager alloc] init];
 }
 
 
@@ -310,7 +315,6 @@ static int initialDistance = 300;
         
         SKAction *moveAction = [SKAction moveTo:location duration:randDuration];
         SKAction *doneAction = [SKAction runBlock:(dispatch_block_t)^() {
-            //NSLog(@"Animation Completed");
             boulder.hidden = YES;
         }];
         
@@ -355,7 +359,6 @@ static int initialDistance = 300;
                 SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
                 [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
                 _lives--;
                 _invulnerability = 150;
             }
@@ -364,10 +367,10 @@ static int initialDistance = 300;
             _invulnerability--;
         }
         if (_lives <= 0) {
-            NSLog(@"you lose");
             [self endTheScene:YES];
         } else {
             if (_distance <= 0) {
+                _player.physicsBody.dynamic = NO;
                 if (_player.position.y > -100) {
                     _invulnerability = 2000;
                     _player.position = CGPointMake(_player.position.x, _player.position.y - 5);

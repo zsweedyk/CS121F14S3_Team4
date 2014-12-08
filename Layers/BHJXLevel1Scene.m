@@ -220,7 +220,6 @@ static int initialDistance = 500;
 {
     if (_motionManager.accelerometerAvailable) {
         [_motionManager startAccelerometerUpdates];
-        NSLog(@"accelerometer updates on...");
     }
 }
 
@@ -228,7 +227,6 @@ static int initialDistance = 500;
 {
     if (_motionManager.accelerometerAvailable && _motionManager.accelerometerActive) {
         [_motionManager stopAccelerometerUpdates];
-        NSLog(@"accelerometer updates off...");
     }
 }
 
@@ -389,7 +387,6 @@ static int initialDistance = 500;
         
         SKAction *moveAction = [SKAction moveTo:location duration:randDuration];
         SKAction *doneAction = [SKAction runBlock:(dispatch_block_t)^() {
-            //NSLog(@"Animation Completed");
             boulder.hidden = YES;
         }];
         
@@ -435,7 +432,6 @@ static int initialDistance = 500;
                 SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
                 [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
                 _lives--;
                 _invulnerability = 150;
             }
@@ -446,7 +442,6 @@ static int initialDistance = 500;
         }
         if (_lives <= 0) {
             _player.physicsBody.dynamic = NO;
-            NSLog(@"you lose");
             [self endTheScene:YES];
         } else {
             if (_distance <= 0) {

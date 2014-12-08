@@ -10,6 +10,7 @@
 #import "BHJXGameOverScene.h"
 #import "BHJXEndingCutscene.h"
 @import AVFoundation;
+@import CoreMotion;
 
 //Boulder and laser array sizes
 #define kNumBoulders 10
@@ -56,6 +57,7 @@ static NSString* playerCategoryName = @"player";
     SKScene *_gameOverScene;
     SKScene *_victoryScene;
     AVAudioPlayer *_backgroundAudioPlayer;
+    CMMotionManager *_motionManager;
 }
 
 
@@ -91,6 +93,8 @@ static NSString* playerCategoryName = @"player";
         laser.hidden = YES;
     }
     [self flickering];
+    [self startMonitoringAcceleration];
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
 }
 
 
@@ -99,6 +103,7 @@ static NSString* playerCategoryName = @"player";
     
     [self boulderSpawn];
     [self updateLabels];
+    [self updatePlayerPositionFromMotionManager];
     
     // Duck will get closer to being able to fire if it can't
     if (fireAtZero > 0){
@@ -128,7 +133,6 @@ static NSString* playerCategoryName = @"player";
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     /* Called when a touch begins */
-    self.isFingerOnDuck = YES;
   
     //Only fire a laser if the cooldown period is over
     if (fireAtZero == 0 && canShoot){
@@ -162,32 +166,6 @@ static NSString* playerCategoryName = @"player";
     
 }
 
-
-
--(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-    
-    if (self.isFingerOnDuck) {
-        //Get touch location
-        UITouch* touch = [touches anyObject];
-        CGPoint touchLocation = [touch locationInNode:self];
-        CGPoint previousLocation = [touch previousLocationInNode:self];
-        //Get node for player
-        SKSpriteNode* duck = (SKSpriteNode*)[self childNodeWithName: playerCategoryName];
-        //Calculate new position along x for player
-        int playerX = duck.position.x + (touchLocation.x - previousLocation.x);
-        //Limit x so that the player will not leave the screen to left or right
-        playerX = MAX(playerX, duck.size.width/2);
-        playerX = MIN(playerX, self.size.width - duck.size.width/2);
-        //Update position of player
-        duck.position = CGPointMake(playerX, duck.position.y);
-    }
-}
-
-
-
--(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
-    self.isFingerOnDuck = NO;
-}
 
 
 //Generate a random value
@@ -267,6 +245,34 @@ static NSString* playerCategoryName = @"player";
 
 
 
+- (void)startMonitoringAcceleration
+{
+    if (_motionManager.accelerometerAvailable) {
+        [_motionManager startAccelerometerUpdates];
+    }
+}
+
+
+
+- (void)stopMonitoringAcceleration
+{
+    if (_motionManager.accelerometerAvailable && _motionManager.accelerometerActive) {
+        [_motionManager stopAccelerometerUpdates];
+    }
+}
+
+
+
+- (void)updatePlayerPositionFromMotionManager
+{
+    CMAccelerometerData* data = _motionManager.accelerometerData;
+    if (fabs(data.acceleration.x) > 0.2) {
+        [_player.physicsBody applyForce:CGVectorMake(40.0 * data.acceleration.x, 0)];
+    }
+}
+
+
+
 - (void)initFlickering {
     //Setup flickering
     NSMutableArray *playerFlickerFrames = [NSMutableArray array];
@@ -299,11 +305,16 @@ static NSString* playerCategoryName = @"player";
     _player.name = playerCategoryName;
     _player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)*0.1);
     [self addChild:_player];
+    
     _player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_player.frame.size];
     _player.physicsBody.restitution = 0.1f;
     _player.physicsBody.friction = 0.4f;
-    // make physicsBody static
-    _player.physicsBody.dynamic = NO;
+
+    _player.physicsBody.dynamic = YES;
+    _player.physicsBody.affectedByGravity = NO;
+    _player.physicsBody.mass = 0.01;
+    
+    _motionManager = [[CMMotionManager alloc] init];
 }
 
 
@@ -499,7 +510,6 @@ static NSString* playerCategoryName = @"player";
                 SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
                 [boulder1 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
                 _lives--;
                 _invulnerability = 30;
             }
@@ -523,7 +533,6 @@ static NSString* playerCategoryName = @"player";
                 SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
                 [boulder2 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
                 _lives--;
                 _invulnerability = 30;
             }
@@ -535,7 +544,7 @@ static NSString* playerCategoryName = @"player";
     }
     //Lose the game if player loses all lives
     if (_lives <= 0) {
-        NSLog(@"you lose");
+        _player.physicsBody.dynamic = NO;
         [self endTheScene:YES];
     }
 }
@@ -551,13 +560,13 @@ static NSString* playerCategoryName = @"player";
         if ([playerLaser intersectsNode:_evilDuck]) {
             playerLaser.hidden = YES;
             --_evilDuckLives;
-            NSLog(@"%d", _evilDuckLives);
             if (_evilDuckLives >= 1) {
                 SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
                 [playerLaser runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
                 [self addExplosion:_evilDuck.position];
             } else {
+                _player.physicsBody.dynamic = NO;
                 SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_large.caf" waitForCompletion:YES];
                 SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
                 [playerLaser runAction:moveLazerActionWithDone withKey:@"hitBoulder"];
