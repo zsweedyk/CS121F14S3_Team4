@@ -8,6 +8,7 @@
 
 #import "BHJXStartMenuScene.h"
 #import "BHJXIntroLevel1.h"
+#import "BHJXInfoScene.h"
 
 
 @implementation BHJXStartMenuScene {
@@ -76,7 +77,7 @@
             _informationLabel.fontColor = [SKColor redColor];
         }];
         SKAction *wait = [SKAction waitForDuration:0.16];
-        BHJXIntroLevel1 *scene = [BHJXIntroLevel1 sceneWithSize:self.view.bounds.size];
+        BHJXInfoScene *scene = [BHJXInfoScene sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         
         SKAction *transit = [SKAction runBlock:^{
