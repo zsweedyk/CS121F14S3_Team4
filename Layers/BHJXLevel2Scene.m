@@ -89,11 +89,13 @@ static int initialDistance = 300;
     [self scrollBackground];
     [self boulderSpawn];
     [self updateLabels];
+    [self updatePlayerPositionFromMotionManager];
     
     //Only do collision detection if the level is not over
     if (!_gameOver) {
         [self collisionDetection];
     }
+    
 }
 
 
@@ -162,7 +164,6 @@ static int initialDistance = 300;
 {
     if (_motionManager.accelerometerAvailable) {
         [_motionManager startAccelerometerUpdates];
-        NSLog(@"accelerometer updates on...");
     }
 }
 
@@ -170,11 +171,10 @@ static int initialDistance = 300;
 {
     if (_motionManager.accelerometerAvailable && _motionManager.accelerometerActive) {
         [_motionManager stopAccelerometerUpdates];
-        NSLog(@"accelerometer updates off...");
     }
 }
 
-- (void)updateShipPositionFromMotionManager
+- (void)updatePlayerPositionFromMotionManager
 {
     CMAccelerometerData* data = _motionManager.accelerometerData;
     if (fabs(data.acceleration.x) > 0.2) {
@@ -315,7 +315,6 @@ static int initialDistance = 300;
         
         SKAction *moveAction = [SKAction moveTo:location duration:randDuration];
         SKAction *doneAction = [SKAction runBlock:(dispatch_block_t)^() {
-            //NSLog(@"Animation Completed");
             boulder.hidden = YES;
         }];
         
@@ -360,7 +359,6 @@ static int initialDistance = 300;
                 SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
                 [boulder runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
                 _lives--;
                 _invulnerability = 150;
             }
@@ -369,7 +367,6 @@ static int initialDistance = 300;
             _invulnerability--;
         }
         if (_lives <= 0) {
-            NSLog(@"you lose");
             [self endTheScene:YES];
         } else {
             if (_distance <= 0) {

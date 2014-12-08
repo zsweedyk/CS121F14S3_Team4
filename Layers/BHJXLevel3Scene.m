@@ -103,6 +103,7 @@ static NSString* playerCategoryName = @"player";
     
     [self boulderSpawn];
     [self updateLabels];
+    [self updatePlayerPositionFromMotionManager];
     
     // Duck will get closer to being able to fire if it can't
     if (fireAtZero > 0){
@@ -248,7 +249,6 @@ static NSString* playerCategoryName = @"player";
 {
     if (_motionManager.accelerometerAvailable) {
         [_motionManager startAccelerometerUpdates];
-        NSLog(@"accelerometer updates on...");
     }
 }
 
@@ -258,13 +258,12 @@ static NSString* playerCategoryName = @"player";
 {
     if (_motionManager.accelerometerAvailable && _motionManager.accelerometerActive) {
         [_motionManager stopAccelerometerUpdates];
-        NSLog(@"accelerometer updates off...");
     }
 }
 
 
 
-- (void)updateShipPositionFromMotionManager
+- (void)updatePlayerPositionFromMotionManager
 {
     CMAccelerometerData* data = _motionManager.accelerometerData;
     if (fabs(data.acceleration.x) > 0.2) {
@@ -511,7 +510,6 @@ static NSString* playerCategoryName = @"player";
                 SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
                 [boulder1 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
                 _lives--;
                 _invulnerability = 30;
             }
@@ -535,7 +533,6 @@ static NSString* playerCategoryName = @"player";
                 SKAction *hitBoulderSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveBoulderActionWithDone = [SKAction sequence:@[hitBoulderSound]];
                 [boulder2 runAction:moveBoulderActionWithDone withKey:@"hitBoulder"];
-                NSLog(@"a hit!");
                 _lives--;
                 _invulnerability = 30;
             }
@@ -548,7 +545,6 @@ static NSString* playerCategoryName = @"player";
     //Lose the game if player loses all lives
     if (_lives <= 0) {
         _player.physicsBody.dynamic = NO;
-        NSLog(@"you lose");
         [self endTheScene:YES];
     }
 }
@@ -564,7 +560,6 @@ static NSString* playerCategoryName = @"player";
         if ([playerLaser intersectsNode:_evilDuck]) {
             playerLaser.hidden = YES;
             --_evilDuckLives;
-            NSLog(@"%d", _evilDuckLives);
             if (_evilDuckLives >= 1) {
                 SKAction *hitLazerSound = [SKAction playSoundFileNamed:@"explosion_small.caf" waitForCompletion:YES];
                 SKAction *moveLazerActionWithDone = [SKAction sequence:@[hitLazerSound]];
