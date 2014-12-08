@@ -41,7 +41,7 @@
     //Back to the main menue when the player presses the button
     if ([node.name isEqualToString:@"BackToMenuLabel"]) {
         SKAction *modifyFont = [SKAction runBlock:^{
-            _backToMenuLabel.fontSize = 22;
+            _backToMenuLabel.fontSize = 23;
             _backToMenuLabel.fontColor = [SKColor redColor];
         }];
         SKAction *wait = [SKAction waitForDuration:0.16];
