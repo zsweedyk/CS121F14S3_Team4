@@ -11,6 +11,8 @@
 
 @implementation BHJXInfoScene {
     SKLabelNode *_backToMenuLabel;
+    SKLabelNode *_authorLabel;
+    SKLabelNode *_author1Label;
 }
 
 
@@ -24,8 +26,25 @@
         _backToMenuLabel.text = @"Back to Menue";
         _backToMenuLabel.fontColor = [SKColor whiteColor];
         _backToMenuLabel.fontSize = 25;
-        _backToMenuLabel.position = CGPointMake(self.frame.size.width*0.50, self.frame.size.height*0.65);
+        _backToMenuLabel.position = CGPointMake(self.frame.size.width*0.50, self.frame.size.height*0.30);
         [self addChild:_backToMenuLabel];
+        
+        //Information of the game
+        _authorLabel = [[SKLabelNode alloc] initWithFontNamed:@"Georgia"];
+        _authorLabel.name = @"Information";
+        _authorLabel.text = @"Developers:";
+        _authorLabel.fontColor = [SKColor whiteColor];
+        _authorLabel.fontSize = 20;
+        _authorLabel.position = CGPointMake(self.frame.size.width*0.26, self.frame.size.height*0.75);
+        [self addChild:_authorLabel];
+        
+        _author1Label = [[SKLabelNode alloc] initWithFontNamed:@"Georgia"];
+        _author1Label.name = @"Information";
+        _author1Label.text = @"Ben Leader, Hannah Long, John Park, Xiaotian Wang";
+        _author1Label.fontColor = [SKColor whiteColor];
+        _author1Label.fontSize = 20;
+        _author1Label.position = CGPointMake(self.frame.size.width*0.50, self.frame.size.height*0.70);
+        [self addChild:_author1Label];
         
     }
     return self;
