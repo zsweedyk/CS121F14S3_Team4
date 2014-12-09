@@ -86,7 +86,8 @@ int _countTouches;
                 _continueButton.fontSize = 48;
             }];
             SKAction *wait = [SKAction waitForDuration:0.36];
-            [self runAction:[SKAction sequence:@[changeFontSize,wait]]];
+            SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+            [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait]]];
             
             //Start the next level
             SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
@@ -112,7 +113,10 @@ int _countTouches;
         _countTouches++;
         _continueButton.fontSize = 50;
     }];
-    [self runAction:[SKAction sequence:@[changeFontSize,wait,transitScene]]];
+    
+    SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+    
+    [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait,transitScene]]];
 }
 
 @end

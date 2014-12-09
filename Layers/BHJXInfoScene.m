@@ -97,7 +97,10 @@
         SKAction *transit = [SKAction runBlock:^{
             [self.view presentScene:scene];
         }];
-        [self runAction:[SKAction sequence:@[modifyFont,wait,transit]]];
+        
+        SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+        
+        [self runAction:[SKAction sequence:@[modifyFont,buttonSound,wait,transit]]];
     }
 }
 

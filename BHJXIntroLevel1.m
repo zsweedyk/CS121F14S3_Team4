@@ -95,19 +95,31 @@ int _countTouches;
         } else if (_countTouches == 4) {
             [self transit:_slide5 and:_slide6];
         } else if (_countTouches == 5) {
-            _slide6.hidden = YES;
-            _slide7.hidden = NO;
-            _countTouches++;
+
+            SKAction *changeFontSize = [SKAction runBlock:^{
+                _continueButton.fontSize = 48;
+            }];
+            SKAction *wait = [SKAction waitForDuration:0.16];
+            SKAction *transitScene = [SKAction runBlock:^{
+                _slide6.hidden = YES;
+                _slide7.hidden = NO;
+                _countTouches++;
+                _continueButton.fontSize = 50;
+                _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
+                _continueButton.text = @"Start Level?";
+            }];
             
-            //change position of continue button so players don't accidentally start next level
-            _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
-            _continueButton.text = @"Start Level?";
+            SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+            
+            [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait,transitScene]]];
+            
         } else {
             SKAction *changeFontSize = [SKAction runBlock:^{
                 _continueButton.fontSize = 48;
             }];
             SKAction *wait = [SKAction waitForDuration:0.36];
-            [self runAction:[SKAction sequence:@[changeFontSize,wait]]];
+            SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+            [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait]]];
             
             //Start the next level
             SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.1];
@@ -132,7 +144,10 @@ int _countTouches;
         _countTouches++;
         _continueButton.fontSize = 50;
     }];
-    [self runAction:[SKAction sequence:@[changeFontSize,wait,transitScene]]];
+    
+    SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+    
+    [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait,transitScene]]];
 }
 
 
