@@ -18,6 +18,8 @@ SKSpriteNode *_slide3;
 SKSpriteNode *_slide4;
 int _countTouches;
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //Initialize touch counter to 0
@@ -57,6 +59,8 @@ int _countTouches;
     return self;
 }
 
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
@@ -64,21 +68,37 @@ int _countTouches;
     
     if ([node.name isEqualToString:@"Continue"]) {
         
+        //Show and hide the slides in order
         if (_countTouches == 0) {
-            _slide1.hidden = YES;
-            _slide2.hidden = NO;
-            _countTouches++;
+            [self transit:_slide1 and:_slide2];
         } else if (_countTouches == 1) {
-            _slide2.hidden = YES;
-            _slide3.hidden = NO;
-            _countTouches++;
+            [self transit:_slide2 and:_slide3];
         } else if (_countTouches == 2) {
-            _slide3.hidden = YES;
-            _slide4.hidden = NO;
-            _countTouches++;
-            _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
-            _continueButton.text = @"Start Level?";
+            SKAction *changeFontSize = [SKAction runBlock:^{
+                _continueButton.fontSize = 48;
+            }];
+            SKAction *wait = [SKAction waitForDuration:0.16];
+            SKAction *transitScene = [SKAction runBlock:^{
+                _slide3.hidden = YES;
+                _slide4.hidden = NO;
+                _countTouches++;
+                _continueButton.fontSize = 50;
+                _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
+                _continueButton.text = @"Start Level?";
+            }];
+            
+            SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+            
+            [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait,transitScene]]];
         } else {
+            SKAction *changeFontSize = [SKAction runBlock:^{
+                _continueButton.fontSize = 48;
+            }];
+            SKAction *wait = [SKAction waitForDuration:0.36];
+            SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+            [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait]]];
+            
+            //Start the next level
             SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
             
             BHJXLevel3Scene * scene = [BHJXLevel3Scene sceneWithSize:self.view.bounds.size];
@@ -86,6 +106,26 @@ int _countTouches;
             [self.view presentScene:scene transition: reveal];
         }
     }
+}
+
+
+
+// a customizable SKbutton simulation for highlight event
+- (void)transit:(SKSpriteNode *)silde1 and:(SKSpriteNode *)silde2 {
+    SKAction *changeFontSize = [SKAction runBlock:^{
+        _continueButton.fontSize = 48;
+    }];
+    SKAction *wait = [SKAction waitForDuration:0.16];
+    SKAction *transitScene = [SKAction runBlock:^{
+        silde1.hidden = YES;
+        silde2.hidden = NO;
+        _countTouches++;
+        _continueButton.fontSize = 50;
+    }];
+    
+    SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+    
+    [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait,transitScene]]];
 }
 
 @end

@@ -10,4 +10,6 @@
 
 @interface BHJXIntroLevel2 : SKScene
 
+- (void)transit:(SKSpriteNode *)silde1 and:(SKSpriteNode *)silde2;
+
 @end

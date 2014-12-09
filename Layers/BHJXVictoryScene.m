@@ -11,6 +11,8 @@
 
 @implementation BHJXVictoryScene
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //You won!
@@ -35,11 +37,14 @@
     return self;
 }
 
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
+    //Return to menu if menu button is pressed
     if ([node.name isEqualToString:@"Back to Menu"]) {
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         

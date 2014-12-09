@@ -44,9 +44,13 @@
 		81E941551A1ADAF9004BFF0C /* coreBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E941541A1ADAF9004BFF0C /* coreBackground.png */; };
 		81E941571A1ADBA2004BFF0C /* coreChunk.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E941561A1ADBA2004BFF0C /* coreChunk.png */; };
 		A460CE321A12C0CA006AD185 /* BHJXLevel3Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = A460CE311A12C0CA006AD185 /* BHJXLevel3Scene.m */; };
+		A47CAD6F1A351D11008BC5C6 /* BHJXInfoScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A47CAD6E1A351D11008BC5C6 /* BHJXInfoScene.m */; };
+		A47CAD711A375F8F008BC5C6 /* 010dj031.caf in Resources */ = {isa = PBXBuildFile; fileRef = A47CAD701A375F8F008BC5C6 /* 010dj031.caf */; };
 		A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB319FD9DE10032EBEE /* Layer.caf */; };
 		A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */ = {isa = PBXBuildFile; fileRef = A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */; };
-		E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */; };
+		A4A7F5801A22AB3D001D0008 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F57F1A22AB3D001D0008 /* explosion.sks */; };
+		A4A7F5821A22B09D001D0008 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F5811A22B09D001D0008 /* spark.png */; };
+		A4A7F5841A2337C2001D0008 /* explosion_large.caf in Resources */ = {isa = PBXBuildFile; fileRef = A4A7F5831A2337C2001D0008 /* explosion_large.caf */; };
 		E804E6A719FD830400529044 /* BHJXGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A619FD830400529044 /* BHJXGameOverScene.m */; };
 		E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */; };
 		E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = E81E2ADC1A102B0600733BC2 /* BHJXLevel2Scene.m */; };
@@ -123,10 +127,14 @@
 		81E941561A1ADBA2004BFF0C /* coreChunk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coreChunk.png; sourceTree = "<group>"; };
 		A460CE301A12C0CA006AD185 /* BHJXLevel3Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXLevel3Scene.h; sourceTree = "<group>"; };
 		A460CE311A12C0CA006AD185 /* BHJXLevel3Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXLevel3Scene.m; sourceTree = "<group>"; };
+		A47CAD6D1A351D11008BC5C6 /* BHJXInfoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXInfoScene.h; sourceTree = "<group>"; };
+		A47CAD6E1A351D11008BC5C6 /* BHJXInfoScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXInfoScene.m; sourceTree = "<group>"; };
+		A47CAD701A375F8F008BC5C6 /* 010dj031.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 010dj031.caf; sourceTree = "<group>"; };
 		A48A9FB319FD9DE10032EBEE /* Layer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Layer.caf; sourceTree = "<group>"; };
 		A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_small.caf; sourceTree = "<group>"; };
-		E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuViewController.h; sourceTree = "<group>"; };
-		E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXStartMenuViewController.m; sourceTree = "<group>"; };
+		A4A7F57F1A22AB3D001D0008 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
+		A4A7F5811A22B09D001D0008 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		A4A7F5831A2337C2001D0008 /* explosion_large.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion_large.caf; sourceTree = "<group>"; };
 		E804E6A519FD830400529044 /* BHJXGameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXGameOverScene.h; sourceTree = "<group>"; };
 		E804E6A619FD830400529044 /* BHJXGameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHJXGameOverScene.m; sourceTree = "<group>"; };
 		E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHJXStartMenuScene.h; sourceTree = "<group>"; };
@@ -312,14 +320,16 @@
 				E89C502619EB2E7800FF75A1 /* Main.storyboard */,
 				E804E6A819FD8BBF00529044 /* BHJXStartMenuScene.h */,
 				E804E6A919FD8BBF00529044 /* BHJXStartMenuScene.m */,
+				A47CAD6D1A351D11008BC5C6 /* BHJXInfoScene.h */,
+				A47CAD6E1A351D11008BC5C6 /* BHJXInfoScene.m */,
 				E89C502919EB2E7800FF75A1 /* BHJXViewController.h */,
 				E89C502A19EB2E7800FF75A1 /* BHJXViewController.m */,
 				E804E6A519FD830400529044 /* BHJXGameOverScene.h */,
 				E804E6A619FD830400529044 /* BHJXGameOverScene.m */,
 				E892CC051A196D3500C52332 /* BHJXVictoryScene.h */,
 				E892CC061A196D3500C52332 /* BHJXVictoryScene.m */,
-				E80493FF19F7491800A1A129 /* BHJXStartMenuViewController.h */,
-				E804940019F7491800A1A129 /* BHJXStartMenuViewController.m */,
+				A4A7F57F1A22AB3D001D0008 /* explosion.sks */,
+				A4A7F5811A22B09D001D0008 /* spark.png */,
 				E89C504E19EB2E9F00FF75A1 /* Images */,
 				E89C503119EB2E7800FF75A1 /* Images.xcassets */,
 				E89C501B19EB2E7800FF75A1 /* Supporting Files */,
@@ -330,7 +340,9 @@
 		E89C501B19EB2E7800FF75A1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A47CAD701A375F8F008BC5C6 /* 010dj031.caf */,
 				A48A9FB519FD9EAB0032EBEE /* explosion_small.caf */,
+				A4A7F5831A2337C2001D0008 /* explosion_large.caf */,
 				A48A9FB319FD9DE10032EBEE /* Layer.caf */,
 				E89C501C19EB2E7800FF75A1 /* Layers-Info.plist */,
 				E89C501D19EB2E7800FF75A1 /* InfoPlist.strings */,
@@ -462,6 +474,7 @@
 				819C41B61A19D20E00A0D65C /* EndScene3.png in Resources */,
 				819C41B01A19D1EC00A0D65C /* Intro3Scene2.png in Resources */,
 				8105C7ED1A132F47006C811C /* Boulder.atlas in Resources */,
+				A4A7F5821A22B09D001D0008 /* spark.png in Resources */,
 				819C41C21A19D7D100A0D65C /* Current.png in Resources */,
 				81BFAEC01A102B0100058249 /* Intro1Scene3.png in Resources */,
 				81BFAEC81A10326500058249 /* Intro1Scene7.png in Resources */,
@@ -478,11 +491,14 @@
 				81E941571A1ADBA2004BFF0C /* coreChunk.png in Resources */,
 				8105C7E91A1313C2006C811C /* Volcanobackground.png in Resources */,
 				A48A9FB419FD9DE10032EBEE /* Layer.caf in Resources */,
+				A4A7F5801A22AB3D001D0008 /* explosion.sks in Resources */,
 				8105C7EB1A1325E7006C811C /* Volcano.atlas in Resources */,
 				819C41C41A19D7E100A0D65C /* Mantle.atlas in Resources */,
+				A4A7F5841A2337C2001D0008 /* explosion_large.caf in Resources */,
 				81E941551A1ADAF9004BFF0C /* coreBackground.png in Resources */,
 				E89C503219EB2E7800FF75A1 /* Images.xcassets in Resources */,
 				819C41A81A19D1DA00A0D65C /* Intro2Scene1.png in Resources */,
+				A47CAD711A375F8F008BC5C6 /* 010dj031.caf in Resources */,
 				81E9414F1A1AD17A004BFF0C /* laser.png in Resources */,
 				A48A9FB619FD9EAB0032EBEE /* explosion_small.caf in Resources */,
 				E89C502819EB2E7800FF75A1 /* Main.storyboard in Resources */,
@@ -522,7 +538,7 @@
 				E89C502B19EB2E7800FF75A1 /* BHJXViewController.m in Sources */,
 				A460CE321A12C0CA006AD185 /* BHJXLevel3Scene.m in Sources */,
 				819C419B1A19D16100A0D65C /* BHJXIntroLevel2.m in Sources */,
-				E804940119F7491800A1A129 /* BHJXStartMenuViewController.m in Sources */,
+				A47CAD6F1A351D11008BC5C6 /* BHJXInfoScene.m in Sources */,
 				E81E2ADD1A102B0600733BC2 /* BHJXLevel2Scene.m in Sources */,
 				81BFAEB91A1005D300058249 /* BHJXIntroLevel1.m in Sources */,
 				E804E6AA19FD8BBF00529044 /* BHJXStartMenuScene.m in Sources */,

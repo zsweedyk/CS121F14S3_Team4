@@ -21,6 +21,8 @@ SKSpriteNode *_slide6;
 SKSpriteNode *_slide7;
 int _countTouches;
 
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //Initialize touch counter to 0
@@ -72,6 +74,8 @@ int _countTouches;
     return self;
 }
 
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
@@ -79,40 +83,71 @@ int _countTouches;
     
     if ([node.name isEqualToString:@"Continue"]) {
         
+        //Show and hide the slides in order
         if (_countTouches == 0) {
-            _slide1.hidden = YES;
-            _slide2.hidden = NO;
-            _countTouches++;
+            [self transit:_slide1 and:_slide2];
         } else if (_countTouches == 1) {
-            _slide2.hidden = YES;
-            _slide3.hidden = NO;
-            _countTouches++;
+            [self transit:_slide2 and:_slide3];
         } else if (_countTouches == 2) {
-            _slide3.hidden = YES;
-            _slide4.hidden = NO;
-            _countTouches++;
+            [self transit:_slide3 and:_slide4];
         } else if (_countTouches == 3) {
-            _slide4.hidden = YES;
-            _slide5.hidden = NO;
-            _countTouches++;
+            [self transit:_slide4 and:_slide5];
         } else if (_countTouches == 4) {
-            _slide5.hidden = YES;
-            _slide6.hidden = NO;
-            _countTouches++;
+            [self transit:_slide5 and:_slide6];
         } else if (_countTouches == 5) {
-            _slide6.hidden = YES;
-            _slide7.hidden = NO;
-            _countTouches++;
-            _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
-            _continueButton.text = @"Start Level?";
+
+            SKAction *changeFontSize = [SKAction runBlock:^{
+                _continueButton.fontSize = 48;
+            }];
+            SKAction *wait = [SKAction waitForDuration:0.16];
+            SKAction *transitScene = [SKAction runBlock:^{
+                _slide6.hidden = YES;
+                _slide7.hidden = NO;
+                _countTouches++;
+                _continueButton.fontSize = 50;
+                _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
+                _continueButton.text = @"Start Level?";
+            }];
+            
+            SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+            
+            [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait,transitScene]]];
+            
         } else {
-            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+            SKAction *changeFontSize = [SKAction runBlock:^{
+                _continueButton.fontSize = 48;
+            }];
+            SKAction *wait = [SKAction waitForDuration:0.36];
+            SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+            [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait]]];
+            
+            //Start the next level
+            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.1];
             
             BHJXLevel1Scene * scene = [BHJXLevel1Scene sceneWithSize:self.view.bounds.size];
             scene.scaleMode = SKSceneScaleModeAspectFill;
             [self.view presentScene:scene transition: reveal];
         }
     }
+}
+
+
+// a customizable SKbutton simulation for highlight event
+- (void)transit:(SKSpriteNode *)silde1 and:(SKSpriteNode *)silde2 {
+    SKAction *changeFontSize = [SKAction runBlock:^{
+        _continueButton.fontSize = 48;
+    }];
+    SKAction *wait = [SKAction waitForDuration:0.16];
+    SKAction *transitScene = [SKAction runBlock:^{
+        silde1.hidden = YES;
+        silde2.hidden = NO;
+        _countTouches++;
+        _continueButton.fontSize = 50;
+    }];
+    
+    SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+    
+    [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait,transitScene]]];
 }
 
 
