@@ -13,6 +13,9 @@
     SKLabelNode *_backToMenuLabel;
     SKLabelNode *_authorLabel;
     SKLabelNode *_author1Label;
+    SKLabelNode *_author2Label;
+    SKLabelNode *_author3Label;
+    SKLabelNode *_author4Label;
 }
 
 
@@ -23,7 +26,7 @@
         //Load the button to go back to main menu
         _backToMenuLabel = [[SKLabelNode alloc] initWithFontNamed:@"Zapfino"];
         _backToMenuLabel.name = @"BackToMenuLabel";
-        _backToMenuLabel.text = @"Back to Menue";
+        _backToMenuLabel.text = @"Back to Menu";
         _backToMenuLabel.fontColor = [SKColor whiteColor];
         _backToMenuLabel.fontSize = 25;
         _backToMenuLabel.position = CGPointMake(self.frame.size.width*0.50, self.frame.size.height*0.30);
@@ -45,6 +48,30 @@
         _author1Label.fontSize = 20;
         _author1Label.position = CGPointMake(self.frame.size.width*0.50, self.frame.size.height*0.70);
         [self addChild:_author1Label];
+        
+        _author2Label = [[SKLabelNode alloc] initWithFontNamed:@"Georgia"];
+        _author2Label.name = @"Information";
+        _author2Label.text = @"Developed as part of CS121 at Harvey Mudd College";
+        _author2Label.fontColor = [SKColor whiteColor];
+        _author2Label.fontSize = 20;
+        _author2Label.position = CGPointMake(self.frame.size.width*0.48, self.frame.size.height*0.60);
+        [self addChild:_author2Label];
+        
+        _author3Label = [[SKLabelNode alloc] initWithFontNamed:@"Georgia"];
+        _author3Label.name = @"Information";
+        _author3Label.text = @"as part of the Games Network";
+        _author3Label.fontColor = [SKColor whiteColor];
+        _author3Label.fontSize = 20;
+        _author3Label.position = CGPointMake(self.frame.size.width*0.36, self.frame.size.height*0.55);
+        [self addChild:_author3Label];
+        
+        _author4Label = [[SKLabelNode alloc] initWithFontNamed:@"Georgia"];
+        _author4Label.name = @"Information";
+        _author4Label.text = @"funded by NSF Grant #1042472";
+        _author4Label.fontColor = [SKColor whiteColor];
+        _author4Label.fontSize = 20;
+        _author4Label.position = CGPointMake(self.frame.size.width*0.37, self.frame.size.height*0.50);
+        [self addChild:_author4Label];
         
     }
     return self;

@@ -100,35 +100,6 @@ static int initialDistance = 750;
 
 
 
--(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
-    //Called when a touch begins
-    self.isFingerOnDuck = YES;
-}
-
-
-
--(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-    //Response to touch
-    if (self.isFingerOnDuck) {
-        UITouch* touch = [touches anyObject];
-        CGPoint touchLocation = [touch locationInNode:self];
-        CGPoint previousLocation = [touch previousLocationInNode:self];
-        SKSpriteNode* duck = (SKSpriteNode*)[self childNodeWithName: playerCategoryName];
-        int playerX = duck.position.x + (touchLocation.x - previousLocation.x);
-        playerX = MAX(playerX, duck.size.width/2);
-        playerX = MIN(playerX, self.size.width - duck.size.width/2);
-        duck.position = CGPointMake(playerX, duck.position.y);
-    }
-}
-
-
-
--(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
-    self.isFingerOnDuck = NO;
-}
-
-
-
 - (float)randomValueBetween:(float)low andValue:(float)high {
     return (((float) arc4random() / 0xFFFFFFFFu) * (high - low)) + low;
 }
