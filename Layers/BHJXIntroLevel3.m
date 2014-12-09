@@ -74,13 +74,22 @@ int _countTouches;
         } else if (_countTouches == 1) {
             [self transit:_slide2 and:_slide3];
         } else if (_countTouches == 2) {
-            _slide3.hidden = YES;
-            _slide4.hidden = NO;
-            _countTouches++;
+            SKAction *changeFontSize = [SKAction runBlock:^{
+                _continueButton.fontSize = 48;
+            }];
+            SKAction *wait = [SKAction waitForDuration:0.16];
+            SKAction *transitScene = [SKAction runBlock:^{
+                _slide3.hidden = YES;
+                _slide4.hidden = NO;
+                _countTouches++;
+                _continueButton.fontSize = 50;
+                _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
+                _continueButton.text = @"Start Level?";
+            }];
             
-            //change position of continue button so players don't accidentally start next level
-            _continueButton.position = CGPointMake(self.size.width/2, self.size.height/3);
-            _continueButton.text = @"Start Level?";
+            SKAction *buttonSound = [SKAction playSoundFileNamed:@"010dj031.caf" waitForCompletion:YES];
+            
+            [self runAction:[SKAction sequence:@[changeFontSize,buttonSound,wait,transitScene]]];
         } else {
             SKAction *changeFontSize = [SKAction runBlock:^{
                 _continueButton.fontSize = 48;
